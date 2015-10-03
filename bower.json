@@ -18,6 +18,7 @@
     "bourbon": "~4.2.3",
     "modernizr": "~2.8.3",
     "textures": "*",
-    "sheetrock": "jquery-sheetrock#~1.0.0"
+    "sheetrock": "jquery-sheetrock#~1.0.0",
+    "handlebars": "~4.0.3"
   }
 }
