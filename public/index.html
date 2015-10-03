@@ -8,21 +8,96 @@
     <link href="css/styles.css" rel="stylesheet" media="screen">
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/sheetrock/dist/sheetrock.min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <style>
+    #tabla {
+        font-size: 0.7em;
+        float: right;
+    }
+    
+    #grafico {
+        width: 400px;
+        height: 300px;
+        border: 1px solid black;
+    }
+    
+    tr td:nth-child(2) {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    
+    td {
+        border-top: 1px dotted #CCCCCC;
+    }
+    #consola{
+      position: fixed;
+      bottom: 0px;
+      right: 0px;
+      background-color:#CCCCCC;
+    }
+    </style>
 </head>
 
 <body>
     <table id="tabla"></table>
+    <div id="grafico"></div>
+    <div id="consola">--</div>
+
     <script>
+    // Abstract: En document.ready carga datos y los pone en un csv
     var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
 
-    // cargo spreadsheet.
-    $('#tabla').sheetrock({
-        url: spreadSheet,
-        query: "select A,B,C"
+    // Abstract: D3 magic
+    // Param: @Object = datos CSV  
+    function dibujoGrafico(data){
+      $("#consola").html("Dibujando grafico...");
+
+
+
+
+
+
+      $("#consola").html("Listo...");
+      $("#consola").hide("slow");
+    } 
+
+    // Abstract: convierte un objeto de datos a CSV  
+    // Param: @String; @Object, @Object  
+    var cargoDatosEnArray = function(error, options, response) {
+        if (!error) {
+          var datosCSV = "";
+          $("#consola").html("cargando datos.")
+            jQuery.each(response.rows, function(index, value) {
+                dataString = value.cells.Partido + "," + value.cells.Hogares + "," + value.cells.Población;
+                datosCSV += dataString + "\n";
+            });
+        }else{
+          $("#consola").html("No se cargaron los datos. Intente nuevamente.")
+          return false;
+        }
+        dibujoGrafico(datosCSV);        
+    };
+
+    // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
+    // llama por callback a una funcion que pasa esos datos a CSV
+    // Param: @String = ID de la tabla  
+    function cargaDatos(elemento){
+      $(elemento).sheetrock({
+          url: spreadSheet,
+          query: "select A,B,C",
+          callback: cargoDatosEnArray
+      });
+    }
+
+
+    $( document ).ready(function() {
+      cargaDatos("#tabla");
     });
     </script>
 
+
     <script>
+    // Abstract: Google analytics
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
