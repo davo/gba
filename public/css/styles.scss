@@ -132,8 +132,7 @@ body, html {
 
 #grafico {
   width: 100%;
-  height: 300px;
-  border: 1px solid black;
+  height: 100%;
 }
 
 tr td:nth-child(2) {
@@ -153,4 +152,23 @@ td {
   bottom:0px;
   right: 0px;
   background-color:#CCCCCC;
+}
+
+// D3 styles
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
 }
