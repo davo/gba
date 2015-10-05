@@ -41,6 +41,21 @@
 	float: left;
 	width: 20%;
 	padding: .75em;
+	background-color: #444;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.salud {
+	border-bottom: 5px solid red;
+}
+
+.educacion {
+	border-bottom: 5px solid red;
+}
+
+.infraestructura {
+	border-bottom: 5px solid red;
 }
 
 .no-touch .grid__sizer,
@@ -98,22 +113,27 @@
 .meta {
 	position: relative;
 	margin: 10px 0 0;
-	padding: 0 60px 0 0;
+	padding: 0;
 	text-align: left;
 }
 
-.meta__brand {
-	font-size: .85em;
+.meta__key {
+	font-size: .6em;
 	font-weight: bold;
 	display: block;
 	color: #595b64;
+	text-transform: uppercase;
+	text-align: right;
+	float: right;
+	background-color: #eaeaea;
+	padding: .3em;
 }
 
 .meta__title {
 	font-size: .95em;
 	font-weight: bold;
 	margin: 0;
-	padding: .4em 0 .1em;
+	padding: 0 0 .1em;
 }
 
 .meta__price {
@@ -123,6 +143,11 @@
 	top: .45em;
 	right: .25em;
 	color: #595b64;
+}
+
+.content {
+	position: relative;
+	text-align: left;
 }
 
 /* Action style */

@@ -19,16 +19,25 @@
 	<script src="js/modernizr.custom.js"></script>
 	<script type="text/javascript" src="../../components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="../../components/sheetrock/dist/sheetrock.min.js"></script>
-	<script type="text/javascript" src="../../components/handlebars/handlebars.min.js"></script>
+	<script type="text/javascript" src="../../components/handlebars/lodash.min.js"></script>
 </head>
 <body>
+	<!-- Bottom bar with filter and cart info -->
 	<div class="bar">
 		<div class="filter">
-			<span class="filter__label">Filtrar: </span>
-			<button class="action filter__item filter__item--selected" data-filter="*">Ver todos</button>
-			<button class="action filter__item" data-filter=".salud"><i class="icon icon--shirt"></i><span class="action__text">Salud</span></button>
-			<button class="action filter__item" data-filter=".educacion"><i class="icon icon--dress"></i><span class="action__text">Educacion</span></button>
+			<span class="filter__label">Filter: </span>
+			<button class="action filter__item filter__item--selected" data-filter="*">All</button>
+			<button class="action filter__item" data-filter=".jackets"><i class="icon icon--jacket"></i><span class="action__text">Jackets</span></button>
+			<button class="action filter__item" data-filter=".shirts"><i class="icon icon--shirt"></i><span class="action__text">Shirts</span></button>
+			<button class="action filter__item" data-filter=".dresses"><i class="icon icon--dress"></i><span class="action__text">Dresses</span></button>
+			<button class="action filter__item" data-filter=".trousers"><i class="icon icon--trousers"></i><span class="action__text">Trousers</span></button>
+			<button class="action filter__item" data-filter=".shoes"><i class="icon icon--shoe"></i><span class="action__text">Shoes</span></button>
 		</div>
+		<button class="cart">
+			<i class="cart__icon fa fa-shopping-cart"></i>
+			<span class="text-hidden">Shopping cart</span>
+			<span class="cart__count">0</span>
+		</button>
 	</div>
 	<!-- Main view -->
 	<div class="view">
@@ -41,17 +50,18 @@
 			<!-- Grid items -->
 			<div id="grid">
 				<script id="card-template" type="text/x-handlebars-template">
-					<div class="grid__item {{cells.eje_key}}">
+					<div class="grid__item shirts">
+						<div class="slider">
+							<div class="slider__item"><img src="images/shirt.png" alt="Dummy" /></div>
+							<div class="slider__item"><img src="images/shirt.png" alt="Dummy" /></div>
+							<div class="slider__item"><img src="images/shirt.png" alt="Dummy" /></div>
+						</div>
 						<div class="meta">
-							<span class="meta__key">{{cells.eje}}</span>
-							<h3 class="meta__title">{{cells.titulo}}</h3>
+							<h3 class="meta__title">Dummy Product</h3>
+							<span class="meta__brand">Dummy Brand</span>
+							<span class="meta__price">$99</span>
 						</div>
-						<div class="content">
-							<p>{{cells.contenido}}</p>
-						</div>
-						<!--div class="slider">
-							<div class="slider__item"></div>
-						</div-->
+						<button class="action action--button action--buy"><i class="fa fa-shopping-cart"></i><span class="text-hidden">Add to cart</span></button>
 					</div>
 				</script>
 			</div>

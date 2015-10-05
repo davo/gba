@@ -72,10 +72,10 @@
 			// isotope instance
 			iso,
 			// filter ctrls
-			filterCtrls = [].slice.call(document.querySelectorAll('.filter > button')),
+			filterCtrls = [].slice.call(document.querySelectorAll('.filter > button'));
 			// cart
-			cart = document.querySelector('.cart'),
-			cartItems = cart.querySelector('.cart__count');
+			// cart = document.querySelector('.cart'),
+			// cartItems = cart.querySelector('.cart__count');
 
 		function init() {
 			// preload images
@@ -104,7 +104,7 @@
 
 		function initIsotope() {
 			iso = new Isotope( grid, {
-				isResizeBound: false,
+				isResizeBound: true,
 				itemSelector: '.grid__item',
 				percentPosition: true,
 				masonry: {
@@ -135,9 +135,9 @@
 			}, 50));
 
 			// add to cart
-			[].slice.call(grid.querySelectorAll('.grid__item')).forEach(function(item) {
-				item.querySelector('.action--buy').addEventListener('click', addToCart);
-			});
+			// [].slice.call(grid.querySelectorAll('.grid__item')).forEach(function(item) {
+			// 	item.querySelector('.action--buy').addEventListener('click', addToCart);
+			// });
 		}
 
 		function addToCart() {
