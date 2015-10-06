@@ -1,25 +1,16 @@
-// Abstract: En document.ready carga datos y los pone en un csv
+// Abstract: En document.ready carga datos y los pone en un array
 var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
 
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
 function dibujoGrafico(datos) {
     $("#consola").html("Dibujando grafico...");
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var dataset = cambioDataset(datos);
 
-/*
-    for (var i = 1; i < datos.length - 1; i++) {
-        var newNumber1 = +datos[i][1]; // Math.floor(Math.random() * maxRange);
-        var newNumber2 = +datos[i][2]; // Math.floor(Math.random() * maxRange);
-        var newNumber3 = +datos[i][0]; // Math.floor(Math.random() * maxRange);
-        dataset.push([newNumber1, newNumber2, newNumber3]);
-    }
-*/
 
-    var canvas_width = $(window).width();
-    var canvas_height = $(window).height();
+    var canvas_width = $(window).width() - 100;
+    var canvas_height = $(window).height() - 100;
     var padding = 100;
 
     var xScale = d3.scale.linear()
@@ -49,7 +40,6 @@ function dibujoGrafico(datos) {
         .attr("width", canvas_width)
         .attr("height", canvas_height)
 
-    // Create Circles
     svg.selectAll("circle")
         .data(dataset)
         .enter()
@@ -124,9 +114,6 @@ function dibujoGrafico(datos) {
                 .call(yAxis);
         });
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
     $("#consola").html("Listo...");
     $("#consola").slideUp("slow");
@@ -146,7 +133,7 @@ var cargoDatosEnArray = function(error, options, response) {
 };
 
 // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
-// llama por callback a una funcion que pasa esos datos a CSV
+// llama por callback a una funcion que pasa esos datos a un array
 // Param: @String = ID de la tabla  
 function cargaDatos() {
     sheetrock({
@@ -156,20 +143,21 @@ function cargaDatos() {
     })
 }
 
-$(document).ready(function() {
-    cargaDatos();
-});
-
-
+// Abstract: Cambio el array de datos a dibujar en el gráfico
+// dependiendo los valores que estan en el select
+// Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var valores = $("#cambiador").val();
 
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
-        var newNumber1 = +datos[i][valores.split("-")[0]]; // Math.floor(Math.random() * maxRange);
-        var newNumber2 = +datos[i][valores.split("-")[1]]; // Math.floor(Math.random() * maxRange);
-        var newNumber3 = +datos[i][0]; // Math.floor(Math.random() * maxRange);
-        array_de_datos.push([newNumber1, newNumber2, newNumber3]);
+        var newNumber1 = +datos[i][valores.split("-")[0]];
+        var newNumber2 = +datos[i][valores.split("-")[1]];
+        array_de_datos.push([newNumber1, newNumber2]);
     }
     return array_de_datos;
 }
+
+$(document).ready(function() {
+    cargaDatos();
+});
