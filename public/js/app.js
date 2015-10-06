@@ -3,99 +3,128 @@ var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSi
 
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
-function dibujoGrafico(datosCSV) {
+function dibujoGrafico(datos) {
     $("#consola").html("Dibujando grafico...");
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    var dataset = cambioDataset(datos);
 
-var xValue = function(d) { return d.Poblacion;}, // data -> value
-    xScale = d3.scale.linear().range([0, width]), // value -> display
-    xMap = function(d) { return xScale(xValue(d));}, // data -> display
-    xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+/*
+    for (var i = 1; i < datos.length - 1; i++) {
+        var newNumber1 = +datos[i][1]; // Math.floor(Math.random() * maxRange);
+        var newNumber2 = +datos[i][2]; // Math.floor(Math.random() * maxRange);
+        var newNumber3 = +datos[i][0]; // Math.floor(Math.random() * maxRange);
+        dataset.push([newNumber1, newNumber2, newNumber3]);
+    }
+*/
 
-var yValue = function(d) { return d["Hogares"];}, // data -> value
-    yScale = d3.scale.linear().range([height, 0]), // value -> display
-    yMap = function(d) { return yScale(yValue(d));}, // data -> display
-    yAxis = d3.svg.axis().scale(yScale).orient("left");
+    var canvas_width = $(window).width();
+    var canvas_height = $(window).height();
+    var padding = 100;
 
-var cValue = function(d) { return d.Hogares;},
-    color = d3.scale.category20();
+    var xScale = d3.scale.linear()
+        .domain([0, d3.max(dataset, function(d) {
+            return d[0];
+        })])
+        .range([padding, canvas_width - padding * 2]);
 
-// add the graph canvas to the body of the webpage
-var svg = d3.select("#grafico").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var yScale = d3.scale.linear()
+        .domain([0, d3.max(dataset, function(d) {
+            return d[1];
+        })])
+        .range([canvas_height - padding, padding]);
 
-// add the tooltip area to the webpage
-var tooltip = d3.select("#grafico").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom")
+        .ticks(5);
 
-// load data
-d3.csv("data/dataPartidoHogaresPoblacion.csv", function(error, data) {
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left")
+        .ticks(5);
 
-  // change string (from CSV) into number format
-  data.forEach(function(d) {
-    d.Poblacion = +d.Poblacion;
-    d.Hogares = +d.Hogares;
-  });
+    var svg = d3.select("#grafico")
+        .append("svg")
+        .attr("width", canvas_width)
+        .attr("height", canvas_height)
 
-  // don't want dots overlapping axis, so add in buffer to data domain
-  xScale.domain([0, d3.max(data, xValue)+100]);
-  yScale.domain([0, d3.max(data, yValue)+100]);
+    // Create Circles
+    svg.selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) {
+            return xScale(d[0]);
+        })
+        .attr("cy", function(d) {
+            return yScale(d[1]);
+        })
+        .attr("r", 2);
 
-  // x-axis
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("x", width)
-      .attr("y", -6)
-      .style("text-anchor", "end")
-      .text("Poblacion");
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (canvas_height - padding) + ")")
+        .call(xAxis);
 
-  // y-axis
-  svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Hogares");
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + padding + ",0)")
+        .call(yAxis);
 
-  // draw dots
-  svg.selectAll(".dot")
-      .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 3.5)
-      .attr("cx", xMap)
-      .attr("cy", yMap)
-      .style("fill", function(d) { return color(cValue(d));}) 
-      .on("mouseover", function(d) {
-          tooltip.transition()
-               .duration(200)
-               .style("opacity", .9);
-          tooltip.html(d["Partido"])
-               .style("left", (d3.event.pageX + 5) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
-      })
-      .on("mouseout", function(d) {
-          tooltip.transition()
-               .duration(500)
-               .style("opacity", 0);
-      });
+    d3.select("#cambiador")
+        .on("change", function() {
+            var numValues = dataset.length;
+            var maxRange = Math.random() * 1000;
+            dataset = cambioDataset(datos);
 
-});
+            xScale.domain([0, d3.max(dataset, function(d) {
+                return d[0];
+            })]);
+            yScale.domain([0, d3.max(dataset, function(d) {
+                return d[1];
+            })]);
+
+            svg.selectAll("circle")
+                .data(dataset)
+                .transition()
+                .duration(500)
+                .each("start", function() {
+                    d3.select(this)
+                        .attr("opacity", "0.5")
+                        .attr("r", 10);
+                })
+                .delay(function(d, i) {
+                    return i / dataset.length * 10;
+                })
+                .ease("variable") //  'circle', 'elastic', 'bounce', 'linear', 'variable'
+                .attr("cx", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("cy", function(d) {
+                    return yScale(d[1]);
+                })
+
+            .each("end", function() {
+                d3.select(this)
+                    .transition()
+                    .duration(200)
+                    .attr("opacity", "1")
+                    .attr("r", 2);
+            });
+
+            svg.select(".x.axis")
+                .transition()
+                .duration(1000)
+                .call(xAxis);
+
+            svg.select(".y.axis")
+                .transition()
+                .duration(100)
+                .call(yAxis);
+        });
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -107,28 +136,40 @@ d3.csv("data/dataPartidoHogaresPoblacion.csv", function(error, data) {
 // Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
     if (!error) {
-        var datosCSV = "";
+        var datos = [];
         $("#consola").html("cargando datos.")
         jQuery.each(response.rows, function(index, value) {
-            dataString = value.cells.Partido + "," + value.cells.Hogares + "," + value.cells.Poblacion;
-            datosCSV += dataString + "\n";
+            datos.push([value.cells.Partido, value.cells.Hogares, value.cells.Poblacion, value.cells.Hogares, value.cells.Superficie ]);
         });
     }
-    dibujoGrafico(datosCSV);
+    dibujoGrafico(datos);
 };
 
 // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
 // llama por callback a una funcion que pasa esos datos a CSV
 // Param: @String = ID de la tabla  
-function cargaDatos(elemento) {
-
+function cargaDatos() {
     sheetrock({
         url: spreadSheet,
-        query: "select A,B,C",
+        query: "select A,B,C,D,E",
         callback: cargoDatosEnArray
     })
 }
 
 $(document).ready(function() {
-    cargaDatos("#tabla");
+    cargaDatos();
 });
+
+
+function cambioDataset(datos) {
+    var valores = $("#cambiador").val();
+
+    var array_de_datos = [];
+    for (var i = 1; i < datos.length - 1; i++) {
+        var newNumber1 = +datos[i][valores.split("-")[0]]; // Math.floor(Math.random() * maxRange);
+        var newNumber2 = +datos[i][valores.split("-")[1]]; // Math.floor(Math.random() * maxRange);
+        var newNumber3 = +datos[i][0]; // Math.floor(Math.random() * maxRange);
+        array_de_datos.push([newNumber1, newNumber2, newNumber3]);
+    }
+    return array_de_datos;
+}
