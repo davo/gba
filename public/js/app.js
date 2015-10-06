@@ -4,8 +4,6 @@ var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSi
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
 function dibujoGrafico(datos) {
-    $("#consola").html("Dibujando grafico...");
-
     var dataset = cambioDataset(datos);
 
 
@@ -115,8 +113,8 @@ function dibujoGrafico(datos) {
         });
 
 
-    $("#consola").html("Listo...");
-    $("#consola").slideUp("slow");
+    $("#consola").html("");
+    $("#consola").slideUp("fast");
 }
 
 // Abstract: convierte un objeto de datos a CSV  
@@ -124,9 +122,12 @@ function dibujoGrafico(datos) {
 var cargoDatosEnArray = function(error, options, response) {
     if (!error) {
         var datos = [];
-        $("#consola").html("cargando datos.")
         jQuery.each(response.rows, function(index, value) {
-            datos.push([value.cells.Partido, value.cells.Hogares, value.cells.Poblacion, value.cells.Hogares, value.cells.Superficie ]);
+            datos.push([value.cells.Partido,
+                        value.cells.Poblacion,
+                        value.cells.Hogares,
+                        value.cells.Superficie,
+                        value.cells.Establecimientos ]);
         });
     }
     dibujoGrafico(datos);

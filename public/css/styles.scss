@@ -149,7 +149,6 @@ td {
 #menu{
   position: fixed;
   width: 100%;
-  z-index: 999;
   text-align: center;
 } 
 
@@ -157,13 +156,15 @@ td {
 
 
 #consola{
-  text-align: right;
+  z-index: 999;
+  text-align: center;
   position: fixed;
-  height: 50px;
+  height: 100%;
   width: 100%;
   bottom:0px;
   right: 0px;
-  background-color:#CCCCCC;
+  color: #ffffff;
+  background: rgba(0,0,0,0.8) url("img/loader.gif") no-repeat center center;
 }
 
 // D3 styles
