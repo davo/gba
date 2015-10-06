@@ -41,21 +41,21 @@
 	float: left;
 	width: 20%;
 	padding: .75em;
-	background-color: #444;
+	background-color: #201E2A;
 	margin-right: 20px;
 	margin-bottom: 20px;
 }
 
 .salud {
-	border-bottom: 5px solid red;
+	border-bottom: 5px solid #8DDB78;
 }
 
 .educacion {
-	border-bottom: 5px solid red;
+	border-bottom: 5px solid #F6828C;
 }
 
 .infraestructura {
-	border-bottom: 5px solid red;
+	border-bottom: 5px solid #9179E4;
 }
 
 .no-touch .grid__sizer,
