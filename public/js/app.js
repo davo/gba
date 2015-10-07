@@ -1,15 +1,14 @@
 // Abstract: En document.ready carga datos y los pone en un array
 var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
-
+var hayDatos = false; 
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
 function dibujoGrafico(datos) {
     var dataset = cambioDataset(datos);
-
-
-    var canvas_width = $(window).width() - 100;
-    var canvas_height = $(window).height() - 100;
-    var padding = 100;
+    var radio = 5;
+    var canvas_width = $("#grafico").width();
+    var canvas_height = $("#grafico").height();
+    var padding = 50;
 
     var xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
@@ -48,7 +47,7 @@ function dibujoGrafico(datos) {
         .attr("cy", function(d) {
             return yScale(d[1]);
         })
-        .attr("r", 2);
+        .attr("r", radio);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -62,8 +61,7 @@ function dibujoGrafico(datos) {
 
     d3.select("#cambiador")
         .on("change", function() {
-            var numValues = dataset.length;
-            var maxRange = Math.random() * 1000;
+
             dataset = cambioDataset(datos);
 
             xScale.domain([0, d3.max(dataset, function(d) {
@@ -79,8 +77,7 @@ function dibujoGrafico(datos) {
                 .duration(500)
                 .each("start", function() {
                     d3.select(this)
-                        .attr("opacity", "0.5")
-                        .attr("r", 10);
+                        .attr("opacity", "0.5");
                 })
                 .delay(function(d, i) {
                     return i / dataset.length * 10;
@@ -98,30 +95,32 @@ function dibujoGrafico(datos) {
                     .transition()
                     .duration(200)
                     .attr("opacity", "1")
-                    .attr("r", 2);
+                    .attr("r", radio);
             });
 
             svg.select(".x.axis")
                 .transition()
-                .duration(1000)
+                .duration(800)
                 .call(xAxis);
 
             svg.select(".y.axis")
                 .transition()
-                .duration(100)
+                .duration(800)
                 .call(yAxis);
         });
 
-
-    $("#consola").html("");
-    $("#consola").slideUp("fast");
+    if (!hayDatos){
+        $("#grafico").prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
+    }
+        $("#consola").html("");
+        $("#consola").slideUp("fast");
 }
 
 // Abstract: convierte un objeto de datos a CSV  
 // Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
+    var datos = [];
     if (!error) {
-        var datos = [];
         jQuery.each(response.rows, function(index, value) {
             datos.push([value.cells.Partido,
                         value.cells.Poblacion,
@@ -129,7 +128,24 @@ var cargoDatosEnArray = function(error, options, response) {
                         value.cells.Superficie,
                         value.cells.Establecimientos ]);
         });
+        hayDatos = true;
+    }else{
+
+        //lleno con datos falsos
+        for (var i = 0; i < 30; i++){
+            var linea = [];
+            for (var p = 0; p < 5; p++){
+                if (p === 0){
+                    linea.push("Partido " + i);            
+                }else{
+                    linea.push((Math.random()*100).toFixed() + 30);          
+                }
+            }
+            datos.push(linea);
+        };
     }
+
+
     dibujoGrafico(datos);
 };
 
@@ -137,7 +153,8 @@ var cargoDatosEnArray = function(error, options, response) {
 // llama por callback a una funcion que pasa esos datos a un array
 // Param: @String = ID de la tabla  
 function cargaDatos() {
-    sheetrock({
+
+    var archivo = sheetrock({
         url: spreadSheet,
         query: "select A,B,C,D,E",
         callback: cargoDatosEnArray
@@ -162,3 +179,13 @@ function cambioDataset(datos) {
 $(document).ready(function() {
     cargaDatos();
 });
+
+
+$(window).on("resize" , function(){
+    responsiveSVG ();
+});
+
+function responsiveSVG (){
+    $("svg").width( $("#grafico").width() );
+    $("svg").height( $("#grafico").height() );
+}
