@@ -20,8 +20,8 @@
     "textures": "*",
     "sheetrock": "jquery-sheetrock#~1.0.0",
     "handlebars": "~4.0.3",
-    "lodash": "~3.10.1",
     "isotope": "~2.2.2",
-    "flickity": "~1.1.1"
+    "flickity": "~1.1.1",
+    "classie": "~1.0.1"
   }
 }

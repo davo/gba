@@ -9,11 +9,50 @@
     <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="components/sheetrock/dist/sheetrock.min.js"></script>
     <script type="text/javascript" src="components/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="components/isotope/dist/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="components/flickity/dist/flickity.pkgd.min.js"></script>
 </head>
 
 <body>
-    
+<div class="bar">
+    <div class="filter">
+        <span class="filter__label">Filtrar: </span>
+        <button class="action filter__item filter__item--selected" data-filter="*">Ver todos</button>
+        <button class="action filter__item" data-filter=".salud"><i class="icon icon--shirt"></i><span class="action__text">Salud</span></button>
+        <button class="action filter__item" data-filter=".educacion"><i class="icon icon--dress"></i><span class="action__text">Educacion</span></button>
+    </div>
+</div>
+<!-- Main view -->
+<div class="view">
+    <!-- Grid -->
+    <section class="grid grid--loading">
+        <!-- Loader -->
+        <img class="grid__loader" src="images/grid.svg" width="60" alt="Loader image" />
+        <!-- Grid sizer for a fluid Isotope (Masonry) layout -->
+        <div class="grid__sizer"></div>
+        <!-- Grid items -->
+        <div id="grid">
+            <script id="card-template" type="text/x-handlebars-template">
+                <div class="grid__item {{cells.eje_key}}">
+                    <div class="meta">
+                        <span class="meta__key">{{cells.eje}}</span>
+                        <h3 class="meta__title">{{cells.titulo}}</h3>
+                    </div>
+                    <div class="content">
+                        <p>{{cells.contenido}}</p>
+                    </div>
+                    <!--div class="slider">
+                        <div class="slider__item"></div>
+                    </div-->
+                </div>
+            </script>
+        </div>
+    </section>
+    <!-- /grid-->
+</div>
 
+<!-- /view -->    
+    <script src="js/app.js"></script>
     <script>
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
