@@ -12,23 +12,6 @@
 
 	'use strict';
 
-
-
-	var CardTemplate = Handlebars.compile($('#card-template').html());
-
-
-	var spreadSheet = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=0';
-
-	// cargo spreadsheet.
-	$('#grid').sheetrock({
-	    url: spreadSheet,
-	    query: "select *",
-	    rowHandler : CardTemplate,
-	    callback: done
-	});
-
-
-
 	var support = { animations : Modernizr.cssanimations },
 		animEndEventNames = { 'WebkitAnimation' : 'webkitAnimationEnd', 'OAnimation' : 'oAnimationEnd', 'msAnimation' : 'MSAnimationEnd', 'animation' : 'animationend' },
 		animEndEventName = animEndEventNames[ Modernizr.prefixed( 'animation' ) ],
@@ -61,100 +44,97 @@
 		};
 	}
 
-	
-	function done () {
-		// sliders - flickity
-		var sliders = [].slice.call(document.querySelectorAll('.slider')),
-			// array where the flickity instances are going to be stored
-			flkties = [],
-			// grid element
-			grid = document.querySelector('.grid'),
-			// isotope instance
-			iso,
-			// filter ctrls
-			filterCtrls = [].slice.call(document.querySelectorAll('.filter > button'));
-			// cart
-			// cart = document.querySelector('.cart'),
-			// cartItems = cart.querySelector('.cart__count');
+	// sliders - flickity
+	var sliders = [].slice.call(document.querySelectorAll('.slider')),
+		// array where the flickity instances are going to be stored
+		flkties = [],
+		// grid element
+		grid = document.querySelector('.grid'),
+		// isotope instance
+		iso,
+		// filter ctrls
+		filterCtrls = [].slice.call(document.querySelectorAll('.filter > button')),
+		// cart
+		cart = document.querySelector('.cart'),
+		cartItems = cart.querySelector('.cart__count');
 
-		function init() {
-			// preload images
-			imagesLoaded(grid, function() {
-				initFlickity();
-				initIsotope();
-				initEvents();
-				classie.remove(grid, 'grid--loading');
-			});
-		}
-
-		function initFlickity() {
-			sliders.forEach(function(slider){
-				var flkty = new Flickity(slider, {
-					prevNextButtons: false,
-					wrapAround: true,
-					cellAlign: 'left',
-					contain: true,
-					resize: false
-				});
-
-				// store flickity instances
-				flkties.push(flkty);
-			});
-		}
-
-		function initIsotope() {
-			iso = new Isotope( grid, {
-				isResizeBound: true,
-				itemSelector: '.grid__item',
-				percentPosition: true,
-				masonry: {
-					// use outer width of grid-sizer for columnWidth
-					columnWidth: '.grid__sizer'
-				},
-				transitionDuration: '0.6s'
-			});
-		}
-
-		function initEvents() {
-			filterCtrls.forEach(function(filterCtrl) {
-				filterCtrl.addEventListener('click', function() {
-					classie.remove(filterCtrl.parentNode.querySelector('.filter__item--selected'), 'filter__item--selected');
-					classie.add(filterCtrl, 'filter__item--selected');
-					iso.arrange({
-						filter: filterCtrl.getAttribute('data-filter')
-					});
-					recalcFlickities();
-					iso.layout();
-				});
-			});
-
-			// window resize / recalculate sizes for both flickity and isotope/masonry layouts
-			window.addEventListener('resize', throttle(function(ev) {
-				recalcFlickities()
-				iso.layout();
-			}, 50));
-
-			// add to cart
-			// [].slice.call(grid.querySelectorAll('.grid__item')).forEach(function(item) {
-			// 	item.querySelector('.action--buy').addEventListener('click', addToCart);
-			// });
-		}
-
-		function addToCart() {
-			classie.add(cart, 'cart--animate');
-			setTimeout(function() {cartItems.innerHTML = Number(cartItems.innerHTML) + 1;}, 200);
-			onEndAnimation(cartItems, function() {
-				classie.remove(cart, 'cart--animate');
-			});
-		}
-
-		function recalcFlickities() {
-			for(var i = 0, len = flkties.length; i < len; ++i) {
-				flkties[i].resize();
-			}
-		}
-	  	init();
+	function init() {
+		// preload images
+		imagesLoaded(grid, function() {
+			initFlickity();
+			initIsotope();
+			initEvents();
+			classie.remove(grid, 'grid--loading');
+		});
 	}
-	
+
+	function initFlickity() {
+		sliders.forEach(function(slider){
+			var flkty = new Flickity(slider, {
+				prevNextButtons: false,
+				wrapAround: true,
+				cellAlign: 'left',
+				contain: true,
+				resize: false
+			});
+
+			// store flickity instances
+			flkties.push(flkty);
+		});
+	}
+
+	function initIsotope() {
+		iso = new Isotope( grid, {
+			isResizeBound: false,
+			itemSelector: '.grid__item',
+			percentPosition: true,
+			masonry: {
+				// use outer width of grid-sizer for columnWidth
+				columnWidth: '.grid__sizer'
+			},
+			transitionDuration: '0.6s'
+		});
+	}
+
+	function initEvents() {
+		filterCtrls.forEach(function(filterCtrl) {
+			filterCtrl.addEventListener('click', function() {
+				classie.remove(filterCtrl.parentNode.querySelector('.filter__item--selected'), 'filter__item--selected');
+				classie.add(filterCtrl, 'filter__item--selected');
+				iso.arrange({
+					filter: filterCtrl.getAttribute('data-filter')
+				});
+				recalcFlickities();
+				iso.layout();
+			});
+		});
+
+		// window resize / recalculate sizes for both flickity and isotope/masonry layouts
+		window.addEventListener('resize', throttle(function(ev) {
+			recalcFlickities()
+			iso.layout();
+		}, 50));
+
+		// add to cart
+		[].slice.call(grid.querySelectorAll('.grid__item')).forEach(function(item) {
+			item.querySelector('.action--buy').addEventListener('click', addToCart);
+		});
+	}
+
+	function addToCart() {
+		classie.add(cart, 'cart--animate');
+		setTimeout(function() {cartItems.innerHTML = Number(cartItems.innerHTML) + 1;}, 200);
+		onEndAnimation(cartItems, function() {
+			classie.remove(cart, 'cart--animate');
+		});
+	}
+
+	function recalcFlickities() {
+		for(var i = 0, len = flkties.length; i < len; ++i) {
+			flkties[i].resize();
+		}
+	}
+
+	init();
 
 })(window);

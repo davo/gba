@@ -31,22 +31,24 @@
         <!-- Grid sizer for a fluid Isotope (Masonry) layout -->
         <div class="grid__sizer"></div>
         <!-- Grid items -->
-        <div id="grid">
+        
+            
             <script id="card-template" type="text/x-handlebars-template">
                 <div class="grid__item {{cells.eje_key}}">
                     <div class="meta">
-                        <span class="meta__key">{{cells.eje}}</span>
                         <h3 class="meta__title">{{cells.titulo}}</h3>
                     </div>
-                    <div class="content">
-                        <p>{{cells.contenido}}</p>
+                    <div class="slider">
+                        <div class="slider__item">
+                            <div class="content">
+                                <p>{{cells.contenido}}</p>
+                            </div>
+                        </div>
                     </div>
-                    <!--div class="slider">
-                        <div class="slider__item"></div>
-                    </div-->
+                    <span class="meta__key">{{cells.eje}}</span>
                 </div>
             </script>
-        </div>
+
     </section>
     <!-- /grid-->
 </div>
