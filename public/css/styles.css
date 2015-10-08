@@ -3659,6 +3659,10 @@ td {
   font-family: sans-serif;
   font-size: 11px; }
 
+#mapa {
+  fill: #ffffff;
+  stroke: black; }
+
 .invisible {
   display: none; }
 

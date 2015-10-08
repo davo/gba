@@ -4,8 +4,6 @@ var hayDatos = false;
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
 function dibujoGrafico(datos) {
-    cargaMapa();
-
     var dataset = cambioDataset(datos);
     var radio = 5;
     var canvas_width = $("#grafico").width();
@@ -151,9 +149,7 @@ var cargoDatosEnArray = function(error, options, response) {
             datos.push(linea);
         };
     }
-
-
-    dibujoGrafico(datos);
+    dibujoGrafico(datos)   
 };
 
 // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
@@ -220,6 +216,7 @@ function cargaMapa() {
             .datum(topojson.feature(gba, gba.objects.conurbano))
             .attr("d", path);
     });
+    return true;
 }
 
 
@@ -231,6 +228,7 @@ $(window).on("resize", function() {
 
 $(document).ready(function() {
     cargaDatos();
+    cargaMapa();
 });
 
 $("#verMapa").click(function() {
