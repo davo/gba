@@ -34,8 +34,10 @@ function dibujoGrafico(datos) {
 
     var svg = d3.select("#grafico")
         .append("svg")
-        .attr("width", canvas_width)
-        .attr("height", canvas_height)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr('viewBox','0 0 '+Math.max(canvas_width,canvas_height) +' '+Math.min(canvas_width,canvas_height) )
+        .attr('preserveAspectRatio','xMinYMin');
 
     svg.selectAll("circle")
         .data(dataset)
@@ -48,6 +50,11 @@ function dibujoGrafico(datos) {
             return yScale(d[1]);
         })
         .attr("r", radio);
+
+
+
+
+
 
     svg.append("g")
         .attr("class", "x axis")
