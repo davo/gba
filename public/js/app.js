@@ -197,7 +197,7 @@ function cargaMapa() {
 
     var projection = d3.geo.mercator()
         .center([-58.40000, -34.58900])
-        .scale(28000)
+        .scale(15000)
         .translate([width / 2, height / 2]);
 
     var path = d3.geo.path()
@@ -210,16 +210,30 @@ function cargaMapa() {
         .attr('preserveAspectRatio', 'xMinYMin');
 
     d3.json("data/gba.json", function(error, gba) {
-        svg.append("path")
-            .attr("id","mapa")
-            .attr("class","invisible")
+
+        var data = topojson.feature(gba, gba.objects.conurbano).features;
+
+        var g = svg.append("g").attr("id","mapa").attr("class","invisible");
+
+        g.selectAll("path")
+            .data(data)
+            .enter()
+            .append("path")
+            .attr("d", path)
             .datum(topojson.feature(gba, gba.objects.conurbano))
-            .attr("d", path);
+            .attr("value", function(d,i){return d.features[i].properties["distrito"]})
+            .on("mouseover", function(d,i) {
+                $("#info").html(d.features[i].properties["distrito"]);
+            })
+            .on("mouseout", function(d,i) {
+                $("#info").html("");
+            });
+
     });
     return true;
 }
 
-
+var chota;
 
 //listeners
 $(window).on("resize", function() {
@@ -234,11 +248,13 @@ $(document).ready(function() {
 $("#verMapa").click(function() {
     if ( $(this).prop('checked') ){
         $("#mapa").attr("class","visible");
+        $("#info").attr("class","visible");
         $("#cambiador").attr("class","invisible");
         $("#xAxis").attr("class", "x axis invisible");
         $("#yAxis").attr("class", "y axis invisible");
     }else{
         $("#mapa").attr("class","invisible")
+        $("#info").attr("class","invisible");
         $("#cambiador").attr("class","visible");
         $("#xAxis").attr("class", "x axis visible");
         $("#yAxis").attr("class", "y axis visible");

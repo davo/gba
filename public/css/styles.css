@@ -3660,8 +3660,9 @@ td {
   font-size: 11px; }
 
 #mapa {
-  fill: #ffffff;
-  stroke: black; }
+  fill: #c0c0c0;
+  stroke: #ffffff;
+  opacity: 0.5; }
 
 .invisible {
   display: none; }
