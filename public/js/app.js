@@ -2,10 +2,12 @@
 var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
 var hayDatos = false;
 var datos = [];
-var xScale, yScale, svg, dataset,xAxis,yAxis;
+var centroides = [];
+var xScale, yScale, svg, dataset, xAxis, yAxis, path;
 var radio = 5;
-// Abstract: D3 magic
-// Param: @Object = datos CSV  
+
+// Abstract: Crea el scatterplot
+// Param: @Array = datos  
 function dibujoGrafico(datos) {
     dataset = cambioDataset(datos);
     var canvas_width = $("#grafico").width();
@@ -52,12 +54,14 @@ function dibujoGrafico(datos) {
             return yScale(d[1]);
         })
         .attr("r", radio)
-        .attr("value", function (d){return d[2]})
+        .attr("value", function(d) {
+            return d[2]
+        })
         .on("mouseover", function(d) {
             $("#info").html(d[2]);
         })
         .on("mouseout", function() {
-                $("#info").html("");
+            $("#info").html("");
         });
 
     svg.append("g")
@@ -84,53 +88,84 @@ function dibujoGrafico(datos) {
     $("#consola").slideUp("fast");
 }
 
+// Abstract: Mueve puntos del grafico al centroide del mapa
+function dataToMap() {
+    svg.selectAll("circle")
+        .data(dataset)
+        .transition()
+        .duration(500)
+        .each("start", function() {
+            d3.select(this)
+                .attr("opacity", "0.5");
+        })
+        .delay(function(d, i) {
+            return i / dataset.length * 10;
+        })
+        .ease("variable")
 
-function updateData(){
-            dataset = cambioDataset(datos);
+        //sacar centroides y mover en funcion de eso.
+        .attr("cx", function (d){ return centroides[centroides.indexOf(d[2])-1][0]})
+        .attr("cy", function (d){ return centroides[centroides.indexOf(d[2])-1][1]})
 
-            xScale.domain([0, d3.max(dataset, function(d) {
-                return d[0];
-            })]);
-            yScale.domain([0, d3.max(dataset, function(d) {
-                return d[1];
-            })]);
+    .each("end", function() {
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr("opacity", "0.5")
+            .attr("r", radio + 7);
+    });
+};
 
-            svg.selectAll("circle")
-                .data(dataset)
-                .transition()
-                .duration(500)
-                .each("start", function() {
-                    d3.select(this)
-                        .attr("opacity", "0.5");
-                })
-                .delay(function(d, i) {
-                    return i / dataset.length * 10;
-                })
-                .ease("variable")
-                .attr("cx", function(d) {
-                    return xScale(d[0]);
-                })
-                .attr("cy", function(d) {
-                    return yScale(d[1]);
-                })
 
-            .each("end", function() {
-                d3.select(this)
-                    .transition()
-                    .duration(200)
-                    .attr("opacity", "1")
-                    .attr("r", radio);
-            });
 
-            svg.select(".x.axis")
-                .transition()
-                .duration(800)
-                .call(xAxis);
+// Abstract: Cambia la posicion de los puntos del scatterplot
+// al value del select que esté seleccionado
+function updateData() {
+    dataset = cambioDataset(datos);
 
-            svg.select(".y.axis")
-                .transition()
-                .duration(800)
-                .call(yAxis);
+    xScale.domain([0, d3.max(dataset, function(d) {
+        return d[0];
+    })]);
+    yScale.domain([0, d3.max(dataset, function(d) {
+        return d[1];
+    })]);
+
+    svg.selectAll("circle")
+        .data(dataset)
+        .transition()
+        .duration(500)
+        .each("start", function() {
+            d3.select(this)
+                .attr("opacity", "0.5");
+        })
+        .delay(function(d, i) {
+            return i / dataset.length * 10;
+        })
+        .ease("variable")
+        .attr("cx", function(d) {
+            return xScale(d[0]);
+        })
+        .attr("cy", function(d) {
+            return yScale(d[1]);
+        })
+
+    .each("end", function() {
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr("opacity", "1")
+            .attr("r", radio);
+    });
+
+    svg.select(".x.axis")
+        .transition()
+        .duration(800)
+        .call(xAxis);
+
+    svg.select(".y.axis")
+        .transition()
+        .duration(800)
+        .call(yAxis);
 
 };
 // Abstract: convierte un objeto de datos a CSV  
@@ -161,14 +196,13 @@ var cargoDatosEnArray = function(error, options, response) {
             datos.push(linea);
         };
     }
-    dibujoGrafico(datos)   
+    dibujoGrafico(datos)
 };
 
 // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
 // llama por callback a una funcion que pasa esos datos a un array
 // Param: @String = ID de la tabla  
 function cargaDatos() {
-
     var archivo = sheetrock({
         url: spreadSheet,
         query: "select A,B,C,D,E",
@@ -181,7 +215,6 @@ function cargaDatos() {
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var valores = $("#cambiador").val();
-
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
         var newNumber1 = +datos[i][valores.split("-")[0]];
@@ -211,7 +244,7 @@ function cargaMapa() {
         .scale(15000)
         .translate([width / 2, height / 2]);
 
-    var path = d3.geo.path()
+    path = d3.geo.path()
         .projection(projection);
 
     var svg = d3.select("#grafico").append("svg")
@@ -224,7 +257,7 @@ function cargaMapa() {
 
         var data = topojson.feature(gba, gba.objects.conurbano).features;
 
-        var g = svg.append("g").attr("id","mapa").attr("class","invisible");
+        var g = svg.append("g").attr("id", "mapa").attr("class", "invisible");
 
         g.selectAll("path")
             .data(data)
@@ -232,19 +265,32 @@ function cargaMapa() {
             .append("path")
             .attr("d", path)
             .datum(topojson.feature(gba, gba.objects.conurbano))
-            .attr("value", function(d,i){return d.features[i].properties["distrito"]})
-            .on("mouseover", function(d,i) {
+            .attr("value", function(d, i) {
+                return d.features[i].properties["distrito"]
+            })
+            .on("mouseover", function(d, i) {
                 $("#info").html(d.features[i].properties["distrito"]);
             })
             .on("mouseout", function() {
                 $("#info").html("");
             });
+            
 
+    calculoCentroide(data);
     });
     return true;
 }
 
-var chota;
+function calculoCentroide(data) {
+    var paths = d3.selectAll("#grafico path")
+        .data(data);
+    paths
+        .each(function(d, i) {
+            centroides.push( path.centroid(data[i].geometry) , data[i].properties.distrito );
+        });
+}
+
+
 
 //listeners
 $(window).on("resize", function() {
@@ -257,16 +303,18 @@ $(document).ready(function() {
 });
 
 $("#verMapa").click(function() {
-    if ( $(this).prop('checked') ){
-        $("#mapa").attr("class","visible");
-        $("#cambiador").attr("class","invisible");
+    if ($(this).prop('checked')) {
+        $("#mapa").attr("class", "visible");
+        $("#cambiador").attr("class", "invisible");
         $("#xAxis").attr("class", "x axis invisible");
         $("#yAxis").attr("class", "y axis invisible");
-    }else{
-        $("#mapa").attr("class","invisible")
-        $("#cambiador").attr("class","visible");
+        dataToMap();
+    } else {
+        $("#mapa").attr("class", "invisible")
+        $("#cambiador").attr("class", "visible");
         $("#xAxis").attr("class", "x axis visible");
         $("#yAxis").attr("class", "y axis visible");
+        updateData(); // vuelven los circulos a scatterplot
     }
 
 });
