@@ -240,7 +240,7 @@ function cargaMapa() {
         height = $("#grafico").height();
 
     var projection = d3.geo.mercator()
-        .center([-58.40000, -34.58900])
+        .center([-58.40000, -34.50500])
         .scale(15000)
         .translate([width / 2, height / 2]);
 
@@ -281,6 +281,7 @@ function cargaMapa() {
     return true;
 }
 
+// Abstract: dado un array de paths saca el centroide
 function calculoCentroide(data) {
     var paths = d3.selectAll("#grafico path")
         .data(data);
@@ -290,18 +291,12 @@ function calculoCentroide(data) {
         });
 }
 
-
-
 //listeners
 $(window).on("resize", function() {
     responsiveSVG();
 });
 
-$(document).ready(function() {
-    cargaDatos();
-    cargaMapa();
-});
-
+// listener de checkbox
 $("#verMapa").click(function() {
     if ($(this).prop('checked')) {
         $("#mapa").attr("class", "visible");
@@ -317,4 +312,9 @@ $("#verMapa").click(function() {
         updateData(); // vuelven los circulos a scatterplot
     }
 
+});
+
+$(document).ready(function() {
+    cargaDatos();
+    cargaMapa();
 });
