@@ -1,38 +1,40 @@
 // Abstract: En document.ready carga datos y los pone en un array
 var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
 var hayDatos = false;
+var datos = [];
+var xScale, yScale, svg, dataset,xAxis,yAxis;
+var radio = 5;
 // Abstract: D3 magic
 // Param: @Object = datos CSV  
 function dibujoGrafico(datos) {
-    var dataset = cambioDataset(datos);
-    var radio = 5;
+    dataset = cambioDataset(datos);
     var canvas_width = $("#grafico").width();
     var canvas_height = $("#grafico").height();
     var padding = 50;
 
-    var xScale = d3.scale.linear()
+    xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
             return d[0];
         })])
         .range([padding, canvas_width - padding]);
 
-    var yScale = d3.scale.linear()
+    yScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
             return d[1];
         })])
         .range([canvas_height - padding, padding]);
 
-    var xAxis = d3.svg.axis()
+    xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
         .ticks(5);
 
-    var yAxis = d3.svg.axis()
+    yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
         .ticks(5);
 
-    var svg = d3.select("svg")
+    svg = d3.select("svg")
         .append("g")
         .attr("width", "100%")
         .attr("height", "100%")
@@ -49,7 +51,14 @@ function dibujoGrafico(datos) {
         .attr("cy", function(d) {
             return yScale(d[1]);
         })
-        .attr("r", radio);
+        .attr("r", radio)
+        .attr("value", function (d){return d[2]})
+        .on("mouseover", function(d) {
+            $("#info").html(d[2]);
+        })
+        .on("mouseout", function() {
+                $("#info").html("");
+        });
 
     svg.append("g")
         .attr("class", "x axis")
@@ -65,7 +74,18 @@ function dibujoGrafico(datos) {
 
     d3.select("#cambiador")
         .on("change", function() {
+            updateData();
+        });
 
+    if (!hayDatos) {
+        $("#grafico").prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
+    }
+    $("#consola").html("");
+    $("#consola").slideUp("fast");
+}
+
+
+function updateData(){
             dataset = cambioDataset(datos);
 
             xScale.domain([0, d3.max(dataset, function(d) {
@@ -86,7 +106,7 @@ function dibujoGrafico(datos) {
                 .delay(function(d, i) {
                     return i / dataset.length * 10;
                 })
-                .ease("variable") //  'circle', 'elastic', 'bounce', 'linear', 'variable'
+                .ease("variable")
                 .attr("cx", function(d) {
                     return xScale(d[0]);
                 })
@@ -111,19 +131,11 @@ function dibujoGrafico(datos) {
                 .transition()
                 .duration(800)
                 .call(yAxis);
-        });
 
-    if (!hayDatos) {
-        $("#grafico").prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
-    }
-    $("#consola").html("");
-    $("#consola").slideUp("fast");
-}
-
+};
 // Abstract: convierte un objeto de datos a CSV  
 // Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
-    var datos = [];
     if (!error) {
         jQuery.each(response.rows, function(index, value) {
             datos.push([value.cells.Partido,
@@ -174,12 +186,11 @@ function cambioDataset(datos) {
     for (var i = 1; i < datos.length - 1; i++) {
         var newNumber1 = +datos[i][valores.split("-")[0]];
         var newNumber2 = +datos[i][valores.split("-")[1]];
-        var newNumber3 = +datos[i][0];
+        var newNumber3 = datos[i][0];
         array_de_datos.push([newNumber1, newNumber2, newNumber3]);
     }
     return array_de_datos;
 }
-
 
 // Abstract: Cambia el ancho y alto del svg del gráfico
 // Esto no tiene mucho sentido si el div que
@@ -225,7 +236,7 @@ function cargaMapa() {
             .on("mouseover", function(d,i) {
                 $("#info").html(d.features[i].properties["distrito"]);
             })
-            .on("mouseout", function(d,i) {
+            .on("mouseout", function() {
                 $("#info").html("");
             });
 
@@ -248,13 +259,11 @@ $(document).ready(function() {
 $("#verMapa").click(function() {
     if ( $(this).prop('checked') ){
         $("#mapa").attr("class","visible");
-        $("#info").attr("class","visible");
         $("#cambiador").attr("class","invisible");
         $("#xAxis").attr("class", "x axis invisible");
         $("#yAxis").attr("class", "y axis invisible");
     }else{
         $("#mapa").attr("class","invisible")
-        $("#info").attr("class","invisible");
         $("#cambiador").attr("class","visible");
         $("#xAxis").attr("class", "x axis visible");
         $("#yAxis").attr("class", "y axis visible");

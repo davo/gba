@@ -3650,6 +3650,10 @@ td {
   width: 500px;
   height: 400px; }
 
+#info {
+  text-align: center;
+  width: 100%; }
+
 .axis path, .axis line {
   fill: none;
   stroke: black;
