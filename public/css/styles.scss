@@ -153,6 +153,7 @@ td {
   top: 25px;
   width: 100%;
   text-align: center;
+  line-height: 30px;
 } 
 
 #consola{
@@ -172,12 +173,29 @@ td {
   background-color: #fafafa;
   border: 1px solid #eaeaea;
   margin: 100px auto;
-  height: 50%;
-  width: 50%;
+  padding: 0;
+  width: 500px;
+  height: 400px;
 }
 
-.axis path,
-.axis line {
+#info{
+  text-align: center;
+  width: 500px;
+  position: fixed;
+}
+
+.circulo{
+  fill: white;
+  stroke: black;
+ }
+
+.circuloDim{
+  fill: white;
+  stroke: black;
+  opacity:0.3;
+}
+
+.axis path , .axis line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges;
@@ -186,4 +204,22 @@ td {
 .axis text {
   font-family: sans-serif;
   font-size: 11px;
+}
+
+#mapa{
+  fill: #c0c0c0;
+  stroke: #ffffff;
+  opacity: 0.5;
+}
+
+
+.invisible{
+  display: none;
+}
+.visible{
+  display: inline-block;
+}
+
+.resaltada{
+  fill: #996666;
 }
