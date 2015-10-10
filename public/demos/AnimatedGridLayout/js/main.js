@@ -10,14 +10,16 @@
  */
 (function() {
 
-	var CardTemplate = Handlebars.compile($('#card-template').html());
+	var CardTemplate = Handlebars.compile($('#card-template').html()),
+		StoryTemplate = Handlebars.compile($('#story-template').html());
 
 
-	var spreadSheet = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=0';
+	var cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
+		stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563';
 
-	// cargo spreadsheet.
-	$('#grid').sheetrock({
-	    url: spreadSheet,
+
+	$('.grid').sheetrock({
+	    url: cards,
 	    query: "select *",
 	    rowHandler : CardTemplate,
 	    callback: init
@@ -48,8 +50,7 @@
 		sidebarEl = document.getElementById('theSidebar'),
 		gridItemsContainer = gridEl.querySelector('section.grid'),
 		contentItemsContainer = gridEl.querySelector('section.content'),
-		gridItems = gridItemsContainer.querySelectorAll('.grid__item'),
-		contentItems = contentItemsContainer.querySelectorAll('.content__item'),
+		gridItems, contentItems,
 		closeCtrl = contentItemsContainer.querySelector('.close-button'),
 		current = -1,
 		lockScroll = false, xscroll, yscroll,
@@ -78,13 +79,36 @@
 	function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
 	function init() {
-		initEvents();
+
+		$('.scroll-wrap').sheetrock({
+			url: stories,
+			query: "select *",
+		    rowHandler : StoryTemplate,
+		    callback: initEvents
+		});
 	}
 
+	// setTimeout(function() { init(); }, 1500);
+
+
 	function initEvents() {
+
+		// console.log(gridItems);
+
+		gridItems = gridItemsContainer.querySelectorAll('.grid__item');
+		contentItems = contentItemsContainer.querySelectorAll('.content__item');
+
+
+
+		
+
 		[].slice.call(gridItems).forEach(function(item, pos) {
+
+
+			console.log(pos);
 			// grid item click event
 			item.addEventListener('click', function(ev) {
+
 				ev.preventDefault();
 				if(isAnimating || current === pos) {
 					return false;
@@ -135,6 +159,7 @@
 	}
 
 	function loadContent(item) {
+		console.log(this);
 		// add expanding element/placeholder 
 		var dummy = document.createElement('div');
 		dummy.className = 'placeholder';
