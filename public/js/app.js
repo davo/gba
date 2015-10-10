@@ -5,13 +5,14 @@ var datos = [];
 var centroides = [];
 var xScale, yScale, svg, dataset, xAxis, yAxis, path, temp;
 var radio = 5;
+var divDeVizualizacion = "#grafico";
 
 // Abstract: Crea el scatterplot
 // Param: @Array = datos  
 function dibujoGrafico(datos) {
     dataset = cambioDataset(datos);
-    var canvas_width = $("#grafico").width();
-    var canvas_height = $("#grafico").height();
+    var canvas_width = $(divDeVizualizacion).width();
+    var canvas_height = $(divDeVizualizacion).height();
     var padding = 50;
 
     xScale = d3.scale.linear()
@@ -83,7 +84,7 @@ function dibujoGrafico(datos) {
         });
 
     if (!hayDatos) {
-        $("#grafico").prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
+        $(divDeVizualizacion).prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
     }
     $("#consola").html("");
     $("#consola").slideUp("fast");
@@ -105,10 +106,10 @@ function dataToMap() {
 
     //sacar centroides y mover en funcion de eso.
     .attr("cx", function(d) {
-            return centroides[centroides.indexOf(d[0])-1][0];
+            return centroides[centroides.indexOf(d[0]) - 1][0];
         })
         .attr("cy", function(d) {
-            return centroides[centroides.indexOf(d[0])-1][1];
+            return centroides[centroides.indexOf(d[0]) - 1][1];
         })
 
     .each("end", function() {
@@ -139,23 +140,21 @@ function updateData() {
         .duration(500)
         .each("start", function() {
             d3.select(this)
-                .attr ("class",function (d,i){
-                                    var filtro;
-                                    try {
-                                        filtro = $("#cambiador option:selected").attr("filtro");
-                                        filtro = filtro.split(",");
-                                            for (var i = 0; i < filtro.length; i++){
-                                                if ( !filtro[i].indexOf(d[0]) ){
-                                                    return "circulo";
-                                                }
-
-                                            }    
-                                    }
-                                    catch(err){
-                                        return "circulo";
-                                    }
-                                    return "circuloDim";
-                            });
+                .attr("class", function(d, i) {
+                    var filtro;
+                    try {
+                        filtro = $("#cambiador option:selected").attr("filtro");
+                        filtro = filtro.split(",");
+                        for (var i = 0; i < filtro.length; i++) {
+                            if (!filtro[i].indexOf(d[0])) {
+                                return "circulo";
+                            }
+                        }
+                    } catch (err) {
+                        return "circulo";
+                    }
+                    return "circuloDim";
+                });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -252,15 +251,15 @@ function cambioDataset(datos) {
 // Esto no tiene mucho sentido si el div que
 // lo contiene es de ancho y alto fijos.
 function responsiveSVG() {
-    $("svg").width($("#grafico").width());
-    $("svg").height($("#grafico").height());
+    $("svg").width($(divDeVizualizacion).width());
+    $("svg").height($(divDeVizualizacion).height());
 }
 
 
 // Abstract: carga el mapa en el div de mapa.
 function cargaMapa() {
-    var width = $("#grafico").width(),
-        height = $("#grafico").height();
+    var width = $(divDeVizualizacion).width(),
+        height = $(divDeVizualizacion).height();
 
     var projection = d3.geo.mercator()
         .center([-58.40000, -34.50500])
@@ -270,7 +269,7 @@ function cargaMapa() {
     path = d3.geo.path()
         .projection(projection);
 
-    var svg = d3.select("#grafico").append("svg")
+    var svg = d3.select(divDeVizualizacion).append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
         .attr('viewBox', '0 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
@@ -306,7 +305,7 @@ function cargaMapa() {
 
 // Abstract: dado un array de paths saca el centroide
 function calculoCentroide(data) {
-    var paths = d3.selectAll("#grafico path")
+    var paths = d3.selectAll(divDeVizualizacion + " path")
         .data(data);
     paths
         .each(function(d, i) {
