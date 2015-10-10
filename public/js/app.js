@@ -1,5 +1,5 @@
 // Abstract: En document.ready carga datos y los pone en un array
-var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSipP0DsOzwTBiAF6lZTys6MA/edit#gid=509195421';
+var spreadSheet = 'https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=509195421';
 var hayDatos = false;
 var datos = [];
 var centroides = [];
@@ -16,13 +16,13 @@ function dibujoGrafico(datos) {
 
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
-            return d[0];
+            return d[1];
         })])
         .range([padding, canvas_width - padding]);
 
     yScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
-            return d[1];
+            return d[2];
         })])
         .range([canvas_height - padding, padding]);
 
@@ -47,19 +47,19 @@ function dibujoGrafico(datos) {
         .data(dataset)
         .enter()
         .append("circle")
-        .attr ("class","circulo")
+        .attr("class", "circulo")
         .attr("cx", function(d) {
-            return xScale(d[0]);
+            return xScale(d[1]);
         })
         .attr("cy", function(d) {
-            return yScale(d[1]);
+            return yScale(d[2]);
         })
         .attr("r", radio)
         .attr("value", function(d) {
             return d[2]
         })
         .on("mouseover", function(d) {
-            $("#info").html(d[2]);
+            $("#info").html(d[0]);
         })
         .on("mouseout", function() {
             $("#info").html("");
@@ -104,9 +104,13 @@ function dataToMap() {
         })
         .ease("variable")
 
-        //sacar centroides y mover en funcion de eso.
-        .attr("cx", function (d){ return centroides[centroides.indexOf(d[2])-1][0]})
-        .attr("cy", function (d){ return centroides[centroides.indexOf(d[2])-1][1]})
+    //sacar centroides y mover en funcion de eso.
+    .attr("cx", function(d) {
+            return centroides[centroides.indexOf(d[0])-1][0];
+        })
+        .attr("cy", function(d) {
+            return centroides[centroides.indexOf(d[0])-1][1];
+        })
 
     .each("end", function() {
         d3.select(this)
@@ -125,10 +129,10 @@ function updateData() {
     dataset = cambioDataset(datos);
 
     xScale.domain([0, d3.max(dataset, function(d) {
-        return d[0];
+        return d[1];
     })]);
     yScale.domain([0, d3.max(dataset, function(d) {
-        return d[1];
+        return d[2];
     })]);
 
     svg.selectAll("circle")
@@ -144,10 +148,10 @@ function updateData() {
         })
         .ease("variable")
         .attr("cx", function(d) {
-            return xScale(d[0]);
+            return xScale(d[1]);
         })
         .attr("cy", function(d) {
-            return yScale(d[1]);
+            return yScale(d[2]);
         })
 
     .each("end", function() {
@@ -174,12 +178,17 @@ function updateData() {
 var cargoDatosEnArray = function(error, options, response) {
     if (!error) {
         jQuery.each(response.rows, function(index, value) {
-            datos.push([value.cells.Partido,
+            // las propiedades de las celdas son los titulos del spreadsheet
+            // y son case sensitive (no usar espacios ni caracteres raros)
+            var fila = [
+                value.cells.Partido,
                 value.cells.Poblacion,
                 value.cells.Hogares,
                 value.cells.Superficie,
-                value.cells.Establecimientos
-            ]);
+                value.cells.Establecimientos,
+                value.cells.Camas
+            ];
+            datos.push(fila);
         });
         hayDatos = true;
     } else {
@@ -187,7 +196,7 @@ var cargoDatosEnArray = function(error, options, response) {
         //lleno con datos falsos
         for (var i = 0; i < 30; i++) {
             var linea = [];
-            for (var p = 0; p < 5; p++) {
+            for (var p = 0; p < 6; p++) {
                 if (p === 0) {
                     linea.push("Partido " + i);
                 } else {
@@ -197,7 +206,7 @@ var cargoDatosEnArray = function(error, options, response) {
             datos.push(linea);
         };
     }
-    dibujoGrafico(datos)
+    dibujoGrafico(datos);
 };
 
 // Abstract: Cargo datos de un spreadsheet, dibuja la tabla y
@@ -206,7 +215,7 @@ var cargoDatosEnArray = function(error, options, response) {
 function cargaDatos() {
     var archivo = sheetrock({
         url: spreadSheet,
-        query: "select A,B,C,D,E",
+        query: "select A,B,C,D,E,F",
         callback: cargoDatosEnArray
     })
 }
@@ -218,10 +227,10 @@ function cambioDataset(datos) {
     var valores = $("#cambiador").val();
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
-        var newNumber1 = +datos[i][valores.split("-")[0]];
-        var newNumber2 = +datos[i][valores.split("-")[1]];
-        var newNumber3 = datos[i][0];
-        array_de_datos.push([newNumber1, newNumber2, newNumber3]);
+        var dato1 = +datos[i][valores.split("-")[0]];
+        var dato2 = +datos[i][valores.split("-")[1]];
+        var nombrePartido = datos[i][0];
+        array_de_datos.push([nombrePartido, dato1, dato2]);
     }
     return array_de_datos;
 }
@@ -275,9 +284,9 @@ function cargaMapa() {
             .on("mouseout", function() {
                 $("#info").html("");
             });
-            
 
-    calculoCentroide(data);
+
+        calculoCentroide(data);
     });
     return true;
 }
@@ -288,7 +297,7 @@ function calculoCentroide(data) {
         .data(data);
     paths
         .each(function(d, i) {
-            centroides.push( path.centroid(data[i].geometry) , data[i].properties.distrito );
+            centroides.push(path.centroid(data[i].geometry), data[i].properties.distrito);
         });
 }
 
