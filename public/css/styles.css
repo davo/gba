@@ -241,20 +241,49 @@ button:focus {
       transform: translateY(7px); }
 
 /* Filter/dropdown dummy on the right */
-.filter {
-  text-align: right;
-  font-size: 0.75em;
-  margin-left: auto; }
+.bar {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.75em 5em;
+  text-align: center;
+  background: #191a1b;
+  -webkit-transform: translate3d(0, 0, 0);
+  /* Fix for Chrome flicker on Mac ...party like we're in 2012! */ }
 
-.dropdown {
+.flexbox .filter {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+/* Filter */
+.filter__label {
+  font-size: .85em;
+  display: inline-block;
+  margin: 0 2%;
   font-weight: bold;
-  margin-left: 5px;
-  cursor: pointer;
-  color: #81c483; }
-  .dropdown::after {
-    content: '\25BC';
-    margin-left: 2px;
-    font-size: 80%; }
+  color: #393A3F; }
+
+.filter__item {
+  font-weight: bold;
+  margin: 0 2%;
+  padding: .1em;
+  vertical-align: middle;
+  color: #a3a3b3;
+  border-bottom: 2px solid transparent; }
+
+.filter__item--selected {
+  color: #5c5edc;
+  border-color: #5c5edc; }
+
+.filter__item .icon {
+  font-size: 1.75em;
+  display: none; }
 
 /* Grid item */
 .grid__item {
@@ -777,7 +806,3 @@ button:focus {
       height: 50px;
       pointer-events: none;
       z-index: -1; } }
-
-@media screen and (max-height: 580px) {
-  body #cdawrap {
-    display: none; } }

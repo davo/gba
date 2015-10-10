@@ -58,7 +58,11 @@
       lockScroll = false, xscroll, yscroll,
       isAnimating = false,
       menuCtrl = document.getElementById('menu-toggle'),
-      menuCloseCtrl = sidebarEl.querySelector('.close-button');
+      menuCloseCtrl = sidebarEl.querySelector('.close-button'),
+      // Isotope instance
+      iso,
+      // filter ctrls
+      filterCtrls = [].slice.call(document.querySelectorAll('.filter > button'));
 
     /**
      * gets the viewport width and height
@@ -88,19 +92,46 @@
           rowHandler : StoryTemplate,
           callback: initEvents
       });
+      iso = new Isotope( gridItemsContainer, {
+        isResizeBound: true,
+        itemSelector: '.grid__item',
+        percentPosition: true,
+        // masonry: {
+        //   // use outer width of grid-sizer for columnWidth
+        //   columnWidth: '.grid__sizer'
+        // },
+        transitionDuration: '0.6s'
+      });
     }
 
     // setTimeout(function() { init(); }, 1500);
 
+    function initIsotope() {
+
+    }
 
     function initEvents() {
 
       // console.log(gridItems);
 
+      console.log(iso);
+
       gridItems = gridItemsContainer.querySelectorAll('.grid__item');
       contentItems = contentItemsContainer.querySelectorAll('.content__item');
 
 
+      filterCtrls.forEach(function(filterCtrl) {
+
+        filterCtrl.addEventListener('click', function() {
+          classie.remove(filterCtrl.parentNode.querySelector('.filter__item--selected'), 'filter__item--selected');
+          classie.add(filterCtrl, 'filter__item--selected');
+          console.log(this);
+          iso.arrange({
+            filter: filterCtrl.getAttribute('data-filter')
+          });
+          iso.layout();
+        });
+      });
 
       
 
@@ -160,8 +191,10 @@
       });
     }
 
+
+
     function loadContent(item) {
-      console.log(this);
+      
       // add expanding element/placeholder 
       var dummy = document.createElement('div');
       dummy.className = 'placeholder';
