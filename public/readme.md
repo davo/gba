@@ -10,6 +10,7 @@ Todos los datos del spreadsheet deben respetar la siguiente estructura
   - Los datos de tipo número entero no deben tener separadores de miles
   - Los nombres de los Partidos/Distritos deben respetarse mayúsculas y minúsculas con el mismo criterio de la lista a continuación y no contener espacios en el inicio ni al final.
 
+```sh
 
     Almirante Brown
     Avellaneda 
@@ -35,6 +36,7 @@ Todos los datos del spreadsheet deben respetar la siguiente estructura
     Tigre 
     Tres de febrero 
     Vicente López 
+```
 
 ### Version
 0.0.1
