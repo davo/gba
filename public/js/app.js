@@ -146,7 +146,7 @@ function updateData() {
                         filtro = $("#cambiador option:selected").attr("filtro");
                         filtro = filtro.split(",");
                         for (var i = 0; i < filtro.length; i++) {
-                            if (!filtro[i].indexOf(d[0])) {
+                            if (!filtro[i].trim().indexOf(d[0])) {
                                 return "circulo";
                             }
                         }
