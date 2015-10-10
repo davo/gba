@@ -47,6 +47,21 @@
 							<span class="dropdown">Popular</span>
 						</div>
 					</header>
+					<script id="card-template" type="text/x-handlebars-template">
+						<a class="grid__item {{cells.eje_key}}" href="#">
+							<h2 class="title title--preview">{{cells.titulo}}</h2>
+							<div class="loader"></div>
+							<span class="category">{{cells.eje}}</span>
+							<div class="content">
+								<p>{{cells.contenido}}</p>
+							</div>
+							<div class="meta meta--preview">
+								<img class="meta__avatar" src="img/authors/1.png" alt="author01" /> 
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+							</div>
+						</a>
+					</script>
 					<a class="grid__item" href="#">
 						<h2 class="title title--preview">On Humans &amp; other Beings</h2>
 						<div class="loader"></div>

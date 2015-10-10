@@ -10,6 +10,19 @@
  */
 (function() {
 
+	var CardTemplate = Handlebars.compile($('#card-template').html());
+
+
+	var spreadSheet = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=0';
+
+	// cargo spreadsheet.
+	$('#grid').sheetrock({
+	    url: spreadSheet,
+	    query: "select *",
+	    rowHandler : CardTemplate,
+	    callback: init
+	});
+
 	var bodyEl = document.body,
 		docElem = window.document.documentElement,
 		support = { transitions: Modernizr.csstransitions },
@@ -206,6 +219,5 @@
 		window.scrollTo(xscroll, yscroll);
 	}
 
-	init();
-
+	
 })();
