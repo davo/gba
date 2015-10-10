@@ -3,7 +3,7 @@ var spreadSheet = 'https://docs.google.com/spreadsheets/d/1pi5u6PG25dNusoMDY_zSi
 var hayDatos = false;
 var datos = [];
 var centroides = [];
-var xScale, yScale, svg, dataset, xAxis, yAxis, path;
+var xScale, yScale, svg, dataset, xAxis, yAxis, path, temp;
 var radio = 5;
 
 // Abstract: Crea el scatterplot
@@ -47,6 +47,7 @@ function dibujoGrafico(datos) {
         .data(dataset)
         .enter()
         .append("circle")
+        .attr ("class","circulo")
         .attr("cx", function(d) {
             return xScale(d[0]);
         })
@@ -269,7 +270,7 @@ function cargaMapa() {
                 return d.features[i].properties["distrito"]
             })
             .on("mouseover", function(d, i) {
-                $("#info").html(d.features[i].properties["distrito"]);
+                $("#info").html(d.properties.distrito);
             })
             .on("mouseout", function() {
                 $("#info").html("");

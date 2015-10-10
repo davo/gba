@@ -3652,7 +3652,12 @@ td {
 
 #info {
   text-align: center;
-  width: 100%; }
+  width: 500px;
+  position: fixed; }
+
+.circulo {
+  fill: white;
+  stroke: black; }
 
 .axis path, .axis line {
   fill: none;

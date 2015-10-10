@@ -180,8 +180,15 @@ td {
 
 #info{
   text-align: center;
-  width: 100%;
+  width: 500px;
+  position: fixed;
 }
+
+.circulo{
+  fill: white;
+  stroke: black;
+ }
+
 .axis path , .axis line {
   fill: none;
   stroke: black;
@@ -198,6 +205,7 @@ td {
   stroke: #ffffff;
   opacity: 0.5;
 }
+
 
 .invisible{
   display: none;
