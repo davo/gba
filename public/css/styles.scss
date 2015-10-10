@@ -189,6 +189,12 @@ td {
   stroke: black;
  }
 
+.circuloDim{
+  fill: white;
+  stroke: black;
+  opacity:0.3;
+}
+
 .axis path , .axis line {
   fill: none;
   stroke: black;
@@ -212,4 +218,8 @@ td {
 }
 .visible{
   display: inline-block;
+}
+
+.resaltada{
+  fill: #996666;
 }

@@ -96,8 +96,7 @@ function dataToMap() {
         .transition()
         .duration(500)
         .each("start", function() {
-            d3.select(this)
-                .attr("opacity", "0.5");
+            d3.select(this);
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -116,7 +115,6 @@ function dataToMap() {
         d3.select(this)
             .transition()
             .duration(200)
-            .attr("opacity", "0.5")
             .attr("r", radio + 7);
     });
 };
@@ -141,7 +139,23 @@ function updateData() {
         .duration(500)
         .each("start", function() {
             d3.select(this)
-                .attr("opacity", "0.5");
+                .attr ("class",function (d,i){
+                                    var filtro;
+                                    try {
+                                        filtro = $("#cambiador option:selected").attr("filtro");
+                                        filtro = filtro.split(",");
+                                            for (var i = 0; i < filtro.length; i++){
+                                                if ( !filtro[i].indexOf(d[0]) ){
+                                                    return "circulo";
+                                                }
+
+                                            }    
+                                    }
+                                    catch(err){
+                                        return "circulo";
+                                    }
+                                    return "circuloDim";
+                            });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -158,7 +172,6 @@ function updateData() {
         d3.select(this)
             .transition()
             .duration(200)
-            .attr("opacity", "1")
             .attr("r", radio);
     });
 
