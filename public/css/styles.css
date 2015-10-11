@@ -72,7 +72,6 @@ button:focus {
 /* Sidebar */
 .sidebar {
   text-align: center;
-  background: #333333;
   z-index: 1000;
   position: fixed;
   width: 300px;
@@ -91,73 +90,6 @@ button:focus {
     text-transform: uppercase; }
     .sidebar h1 span {
       display: block; }
-
-/* Codrops links */
-.codrops-links {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  min-height: 45px; }
-  .codrops-links::after {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 1px;
-    height: 100%;
-    background: #ddd;
-    content: '';
-    -webkit-transform: rotate3d(0, 0, 1, 22.5deg);
-    transform: rotate3d(0, 0, 1, 22.5deg); }
-
-.codrops-icon {
-  display: inline-block;
-  margin: 0.5em;
-  padding: 0em 0;
-  width: 1.5em;
-  text-decoration: none; }
-  .codrops-icon span {
-    display: none; }
-  .codrops-icon:before {
-    margin: 0 5px;
-    text-transform: none;
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    font-family: 'codropsicons';
-    line-height: 1;
-    speak: none; }
-
-.codrops-icon--drop:before {
-  content: "\e001"; }
-
-.codrops-icon--prev:before {
-  content: "\e004"; }
-
-/* Demo links */
-.codrops-demos {
-  margin: 2em 0 0;
-  font-size: 0.75em; }
-  .codrops-demos a {
-    display: inline-block;
-    margin: 0 0.5em; }
-    .codrops-demos a.current-demo {
-      color: #333;
-      font-weight: bold; }
-      .codrops-demos a.current-demo:focus {
-        color: #aaa; }
-
-.related {
-  font-size: 0.85em;
-  padding-bottom: 1em; }
-  .related h3 {
-    margin: 3em 0 0.5em 0;
-    font-size: 0.95em; }
-  .related a {
-    display: block;
-    color: inherit; }
-    .related a:hover, .related a:focus {
-      color: #414741; }
 
 /* Main content */
 .main {
@@ -292,21 +224,25 @@ button:focus {
   margin: 0;
   font-size: 0.8em;
   text-transform: uppercase;
-  text-align: left; }
+  text-align: left;
+  width: 80%;
+  color: #333333;
+  line-height: 1.1em;
+  padding: 5px;
+  white-space: pre-line; }
+  .title.salud {
+    background-color: #2bfda6; }
+  .title.educacion {
+    background-color: #cca2fc; }
+  .title.infraestructura {
+    background-color: #cca2fc; }
 
-.title--preview, .card-text {
-  -webkit-flex: 1;
-  flex: 1;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  width: 100%; }
+.title--preview {
+  width: 60%; }
 
 .card-text {
-  text-align: left; }
+  text-align: left;
+  font-size: 0.9em; }
 
 .loader {
   height: 1px;
@@ -338,18 +274,21 @@ button:focus {
 .category {
   margin: 0;
   position: relative;
-  font-size: 0.95em;
+  font-size: 0.65em;
+  text-transform: uppercase;
+  letter-spacing: 0.6em;
+  padding-bottom: 10px;
   text-align: left;
   display: block; }
 
-.title--preview, .card-text, .loader, .category {
+.title--preview, .loader, .category {
   -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
   transition: transform 0.2s, opacity 0.2s;
   -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
   transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1); }
 
 /* closing (delays) */
-.title--preview, .card-text {
+.title--preview {
   -webkit-transition-delay: 0.15s;
   transition-delay: 0.15s; }
 
@@ -362,7 +301,7 @@ button:focus {
   transition-delay: 0s; }
 
 /* opening */
-.grid__item--animate .title--preview, .grid__item--animate .card-text {
+.grid__item--animate .title--preview {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
   opacity: 0;
@@ -694,7 +633,7 @@ button:focus {
     font-size: 1em; }
   .grid__sizer,
   .grid__item {
-    padding: 45px 45px 30px; } }
+    padding: 30px 30px 20px; } }
 
 @media screen and (min-width: 900px) {
   .grid {

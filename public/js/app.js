@@ -13,7 +13,7 @@
   'use strict';
 
   var CardTemplate = Handlebars.compile($('#card-template').html()),
-    StoryTemplate = Handlebars.compile($('#story-template').html());
+     StoryTemplate = Handlebars.compile($('#story-template').html());
 
 
   var cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
