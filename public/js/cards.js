@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2015, Codrops
  * http://www.codrops.com
  */
@@ -17,15 +17,11 @@
 
 
   var cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
-    stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563';
+    stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563',
+    cardsToStories = [[0,0],[1,0],[2,1],[3,1],[4,1],[5,2],[6,2],[7,2],[8,2],[10,10],[11,11],[12,12],[13,13],[14,14],[15,15],[16,16],[17,17],[18,18],[19,19],[20,20],[21,21],[22,22],[23,23],[24,24],[25,25],[21,21],[21,21],[21,21],[21,21],[21,21],[21,21],[21,21],[21,21],[21,21],[21,21]];
 
+    console.log(cardsToStories[9][1])
 
-  $('.grid').sheetrock({
-      url: cards,
-      query: "select *",
-      rowHandler : CardTemplate,
-      callback: init
-  });
 
     var bodyEl = document.body,
       docElem = window.document.documentElement,
@@ -59,6 +55,7 @@
       isAnimating = false,
       menuCtrl = document.getElementById('menu-toggle'),
       menuCloseCtrl = sidebarEl.querySelector('.close-button'),
+      currentCard, selectedStory,
       // Isotope instance
       iso,
       // filter ctrls
@@ -80,22 +77,38 @@
         client = docElem['clientHeight'];
         inner = window['innerHeight'];
       }
-      
+
       return client < inner ? inner : client;
     }
     function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
     function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
+    // Instancio y ejecuto las cards desde el spreadsheet gestionado por sheetrock, luego ejecuto funcion para concatenar con la segundo generación de contenidos.
+
+    $('.grid').sheetrock({
+        url: cards,
+        headers: 1,
+        query: "select *",
+        rowHandler : CardTemplate,
+        callback: init
+    });
+
     function init() {
 
-
+      // Instancio y ejecuto las full stories desde el 2do. spreadsheet gestionado por sheetrock, concateno con funciones . Luego se ejecuta isotope
 
       $('.scroll-wrap').sheetrock({
         url: stories,
+        headers: 1,
         query: "select *",
           rowHandler : StoryTemplate,
           callback: initEvents
       });
+      // Close init();
+    }
+
+
+    function initEvents() {
 
       iso = new Isotope( gridItemsContainer, {
         getSortData: {
@@ -111,13 +124,11 @@
         },
         transitionDuration: '0.6s'
       });
-    }
-
-
-    function initEvents() {
 
       gridItems = gridItemsContainer.querySelectorAll('.grid__item');
       contentItems = contentItemsContainer.querySelectorAll('.content__item');
+
+      console.log(contentItems);
 
       // $(".grid__item").hover(function() { // Mouse over
       //   $(this).siblings().stop().fadeTo(300, 0.2);
@@ -148,28 +159,36 @@
       //   });
       // });
 
-      
+
 
       [].slice.call(gridItems).forEach(function(item, pos) {
 
 
-        console.log(item);
+        // console.log(item);
+
         // grid item click event
         item.addEventListener('click', function(ev) {
 
+          selectedStory = cardsToStories[pos][1];
+          currentCard = cardsToStories[pos][0];
+
           ev.preventDefault();
-          if(isAnimating || current === pos) {
+          // if(isAnimating || current === pos) {
+          if(isAnimating || current === currentCard) {
             return false;
           }
           isAnimating = true;
           // index of current item
-          current = pos;
+
+          current = selectedStory;
+          console.log('Posicion: '+pos,', Card clickeada: '+currentCard, ', Story seleccionada: '+selectedStory);
+
           // simulate loading time..
           classie.add(item, 'grid__item--loading');
           setTimeout(function() {
             classie.add(item, 'grid__item--animate');
             // reveal/load content after the last element animates out (todo: wait for the last transition to finish)
-            setTimeout(function() { loadContent(item); }, 500);
+            setTimeout(function() { loadContent(item); }, 200);
           }, 1000);
         });
       });
@@ -195,7 +214,7 @@
       // hamburger menu button (mobile) and close cross
       menuCtrl.addEventListener('click', function() {
         if( !classie.has(sidebarEl, 'sidebar--open') ) {
-          classie.add(sidebarEl, 'sidebar--open');  
+          classie.add(sidebarEl, 'sidebar--open');
         }
       });
 
@@ -209,8 +228,8 @@
 
 
     function loadContent(item) {
-      
-      // add expanding element/placeholder 
+
+      // add expanding element/placeholder
       var dummy = document.createElement('div');
       dummy.className = 'placeholder';
 
@@ -218,12 +237,12 @@
       dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
       dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 
-      // add transition class 
+      // add transition class
       classie.add(dummy, 'placeholder--trans-in');
 
       // insert it after all the grid items
       gridItemsContainer.appendChild(dummy);
-      
+
       // body overlay
       classie.add(bodyEl, 'view-single');
 
@@ -231,13 +250,13 @@
         // expands the placeholder
         dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
         dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
-        console.log(scrollY());
+        // console.log(scrollY());
         // disallow scroll
         window.addEventListener('scroll', noscroll);
       }, 25);
 
       onEndTransition(dummy, function() {
-        // add transition class 
+        // add transition class
         classie.remove(dummy, 'placeholder--trans-in');
         classie.add(dummy, 'placeholder--trans-out');
         // position the content container
@@ -256,7 +275,7 @@
     }
 
     function hideContent() {
-      var gridItem = gridItems[current], contentItem = contentItems[current];
+      var gridItem = gridItems[currentCard], contentItem = contentItems[current];
 
       classie.remove(contentItem, 'content__item--show');
       classie.remove(contentItemsContainer, 'content--show');
@@ -280,7 +299,7 @@
           lockScroll = false;
           window.removeEventListener( 'scroll', noscroll );
         });
-        
+
         // reset current
         current = -1;
       }, 25);
@@ -330,7 +349,7 @@
     };
   }
 
-  
+
   function done () {
     // sliders - flickity
     var sliders = [].slice.call(document.querySelectorAll('.slider')),
@@ -424,7 +443,7 @@
     }
       init();
   }
-  
+
   */
 
 

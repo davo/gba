@@ -50,7 +50,7 @@
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}">
-                    <span class="category">{{cells.eje}}</span>
+                    <span class="category">{{cells.eje}}/{{cells.orden}}/{{cells.dataviz_key}}</span>
                     <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
                     <div class="card-text">
                         <p>{{cells.contenido}}</p>
@@ -69,7 +69,7 @@
             <div class="scroll-wrap">
                 <script id="story-template" type="text/x-handlebars-template">
                     <article class="content__item">
-                        <span class="category category--full">{{cells.eje}}</span>
+                        <span class="category category--full">{{cells.eje}}/{{cells.dataviz_key}}</span>
                         <h2 class="title title--full">{{cells.titulo}}</h2>
 
                         <p>{{cells.contenido}}</p>
