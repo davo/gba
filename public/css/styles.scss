@@ -184,6 +184,7 @@ button:focus {
     font-weight: 300;
     text-align: left;
     text-transform: uppercase;
+    // font-family: "Playfair Display", serif;
     span {
       display: block;
     }
@@ -358,7 +359,7 @@ button:focus {
 // }
 
 
-$ejes: (salud, $salud), (educacion, $infraestructura), (infraestructura, $infraestructura);
+$ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestructura);
 @each $eje, $color in $ejes {
   .#{$eje} {
     border: none;
@@ -674,7 +675,7 @@ $ejes: (salud, $salud), (educacion, $infraestructura), (infraestructura, $infrae
   z-index: 100;
   top: 0;
   left: 0;
-  background: #fff;
+  background: $gris;
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   &.placeholder--trans-in {
@@ -725,6 +726,7 @@ $ejes: (salud, $salud), (educacion, $infraestructura), (infraestructura, $infrae
 /* single content item */
 
 .content__item {
+  background-color: $gris;
   position: absolute;
   top: 0;
   width: 100%;
@@ -743,6 +745,7 @@ $ejes: (salud, $salud), (educacion, $infraestructura), (infraestructura, $infrae
     }
   }
   &.content__item--show {
+
     height: auto;
     min-height: 100vh;
     opacity: 1;
@@ -895,7 +898,7 @@ $ejes: (salud, $salud), (educacion, $infraestructura), (infraestructura, $infrae
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
   span {
-    display: none;
+    // display: none;
   }
   &:hover {
     // color: #;

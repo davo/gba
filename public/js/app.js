@@ -63,6 +63,7 @@
       iso,
       // filter ctrls
       filterCtrls = [].slice.call(document.querySelectorAll('.filter > button'));
+      // orderCtrls = [].slice.call(document.querySelectorAll('.order > button'));
 
     /**
      * gets the viewport width and height
@@ -97,9 +98,13 @@
       });
 
       iso = new Isotope( gridItemsContainer, {
+        getSortData: {
+            prioridad: '[data-prioridad]'
+        },
         isResizeBound: true,
         itemSelector: '.grid__item',
         percentPosition: false,
+        sortBy: 'prioridad',
         masonry: {
           // use outer width of grid-sizer for columnWidth
           columnWidth: '.grid__sizer'
@@ -131,6 +136,17 @@
           iso.layout();
         });
       });
+
+      // orderCtrls.forEach(function(orderCtrl){
+      //   orderCtrl.addEventListener('click', function(){
+      //       console.log('Click en orden')
+      //       iso.arrange({
+      //           orderBy: orderCtrl.getAttribute('data-order')
+      //       });
+      //       iso.layout();
+      //       console.log(iso)
+      //   });
+      // });
 
       
 

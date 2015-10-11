@@ -171,9 +171,9 @@ button:focus {
 .educacion {
   border: none; }
   .educacion::before {
-    border: 1px solid #cca2fc; }
+    border: 1px solid #88ffff; }
   .educacion:hover::before, .educacion:focus::before {
-    border: 3px solid #cca2fc; }
+    border: 3px solid #88ffff; }
 
 .infraestructura {
   border: none; }
@@ -233,7 +233,7 @@ button:focus {
   .title.salud {
     background-color: #2bfda6; }
   .title.educacion {
-    background-color: #cca2fc; }
+    background-color: #88ffff; }
   .title.infraestructura {
     background-color: #cca2fc; }
 
@@ -426,7 +426,7 @@ button:focus {
   z-index: 100;
   top: 0;
   left: 0;
-  background: #fff;
+  background: #333333;
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0; }
   .placeholder.placeholder--trans-in {
@@ -468,6 +468,7 @@ button:focus {
 
 /* single content item */
 .content__item {
+  background-color: #333333;
   position: absolute;
   top: 0;
   width: 100%;
@@ -607,8 +608,6 @@ button:focus {
   user-select: none;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s; }
-  .close-button span {
-    display: none; }
 
 /* show class for content close button */
 .close-button--show {
