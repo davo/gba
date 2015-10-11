@@ -68,6 +68,7 @@
      * gets the viewport width and height
      * based on http://responsejs.com/labs/dimensions/
      */
+
     function getViewport( axis ) {
       var client, inner;
       if( axis === 'x' ) {
@@ -86,46 +87,44 @@
 
     function init() {
 
+
+
       $('.scroll-wrap').sheetrock({
         url: stories,
         query: "select *",
           rowHandler : StoryTemplate,
           callback: initEvents
       });
+
       iso = new Isotope( gridItemsContainer, {
         isResizeBound: true,
         itemSelector: '.grid__item',
-        percentPosition: true,
-        // masonry: {
-        //   // use outer width of grid-sizer for columnWidth
-        //   columnWidth: '.grid__sizer'
-        // },
+        percentPosition: false,
+        masonry: {
+          // use outer width of grid-sizer for columnWidth
+          columnWidth: '.grid__sizer'
+        },
         transitionDuration: '0.6s'
       });
     }
 
-    // setTimeout(function() { init(); }, 1500);
-
-    function initIsotope() {
-
-    }
 
     function initEvents() {
-
-      // console.log(gridItems);
-
-      console.log(iso);
 
       gridItems = gridItemsContainer.querySelectorAll('.grid__item');
       contentItems = contentItemsContainer.querySelectorAll('.content__item');
 
+      // $(".grid__item").hover(function() { // Mouse over
+      //   $(this).siblings().stop().fadeTo(300, 0.2);
+      // }, function() { // Mouse out
+      //   $(this).siblings().stop().fadeTo(300, 1);
+      // });
 
       filterCtrls.forEach(function(filterCtrl) {
 
         filterCtrl.addEventListener('click', function() {
           classie.remove(filterCtrl.parentNode.querySelector('.filter__item--selected'), 'filter__item--selected');
           classie.add(filterCtrl, 'filter__item--selected');
-          console.log(this);
           iso.arrange({
             filter: filterCtrl.getAttribute('data-filter')
           });
@@ -138,7 +137,7 @@
       [].slice.call(gridItems).forEach(function(item, pos) {
 
 
-        console.log(pos);
+        console.log(item);
         // grid item click event
         item.addEventListener('click', function(ev) {
 
@@ -216,6 +215,7 @@
         // expands the placeholder
         dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
         dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+        console.log(scrollY());
         // disallow scroll
         window.addEventListener('scroll', noscroll);
       }, 25);

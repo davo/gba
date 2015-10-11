@@ -84,8 +84,11 @@ button:focus {
   padding: 2em 1em; }
   .sidebar h1 {
     margin: 0.75em 0 0;
-    font-size: 2em;
-    line-height: 1; }
+    font-size: 1.5em;
+    line-height: 1;
+    font-weight: 300;
+    text-align: left;
+    text-transform: uppercase; }
     .sidebar h1 span {
       display: block; }
 
@@ -182,21 +185,6 @@ button:focus {
   opacity: 1; }
 
 /* Top bar above the grid */
-.top-bar {
-  width: 100%;
-  line-height: 1;
-  padding: 15px 15px 10px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center; }
-
-.top-bar__headline {
-  margin: 0;
-  font-size: 0.75em; }
-
 /* Menu button for toggling the sidebar (appears on small screen) */
 .menu-toggle {
   position: fixed;
@@ -241,51 +229,29 @@ button:focus {
       transform: translateY(7px); }
 
 /* Filter/dropdown dummy on the right */
-.bar {
-  position: fixed;
-  z-index: 100;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 1.75em 5em;
-  text-align: center;
-  background: #191a1b;
-  -webkit-transform: translate3d(0, 0, 0);
-  /* Fix for Chrome flicker on Mac ...party like we're in 2012! */ }
+.salud {
+  border: none; }
+  .salud::before {
+    border: 1px solid #2bfda6; }
+  .salud:hover::before, .salud:focus::before {
+    border: 3px solid #2bfda6; }
 
-.flexbox .filter {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center; }
+.educacion {
+  border: none; }
+  .educacion::before {
+    border: 1px solid #cca2fc; }
+  .educacion:hover::before, .educacion:focus::before {
+    border: 3px solid #cca2fc; }
 
-/* Filter */
-.filter__label {
-  font-size: .85em;
-  display: inline-block;
-  margin: 0 2%;
-  font-weight: bold;
-  color: #393A3F; }
-
-.filter__item {
-  font-weight: bold;
-  margin: 0 2%;
-  padding: .1em;
-  vertical-align: middle;
-  color: #a3a3b3;
-  border-bottom: 2px solid transparent; }
-
-.filter__item--selected {
-  color: #5c5edc;
-  border-color: #5c5edc; }
-
-.filter__item .icon {
-  font-size: 1.75em;
-  display: none; }
+.infraestructura {
+  border: none; }
+  .infraestructura::before {
+    border: 1px solid #cca2fc; }
+  .infraestructura:hover::before, .infraestructura:focus::before {
+    border: 3px solid #cca2fc; }
 
 /* Grid item */
+.grid__sizer,
 .grid__item {
   padding: 45px 55px 30px;
   position: relative;
@@ -304,16 +270,21 @@ button:focus {
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center; }
+  .grid__sizer::before,
   .grid__item::before {
     position: absolute;
     content: '';
     top: 0px;
     right: 55px;
     bottom: 0px;
-    left: 55px;
-    border-bottom: 1px solid rgba(74, 74, 74, 0.075); }
+    left: 55px; }
+  .grid__sizer *,
   .grid__item * {
     z-index: 10; }
+
+.no-touch .grid__sizer,
+.no-touch .grid__item {
+  padding: 0.75em 0.75em 1.25em; }
 
 /* Grid item "border" */
 /* grid item element and full content element styles */
@@ -721,6 +692,7 @@ button:focus {
     margin-left: 300px; }
   .content__item {
     font-size: 1em; }
+  .grid__sizer,
   .grid__item {
     padding: 45px 45px 30px; } }
 
@@ -734,39 +706,42 @@ button:focus {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap; }
   /* 2 columns */
+  .grid__sizer,
   .grid__item {
     width: 50%;
     border: none; }
+    .grid__sizer::before,
     .grid__item::before {
       top: 5px;
       right: 5px;
       bottom: 5px;
       left: 5px;
-      border: 1px solid rgba(74, 74, 74, 0.075);
       -webkit-transition: opacity 0.3s;
       transition: opacity 0.3s; }
-    .grid__item:hover::before, .grid__item:focus::before {
-      border: 3px solid rgba(129, 196, 131, 0.5); }
   .grid__item--loading.grid__item::before {
     opacity: 0; } }
 
 @media screen and (min-width: 1200px) {
   /* 3 columns */
+  .grid__sizer,
   .grid__item {
     width: 33.333%; } }
 
 @media screen and (min-width: 1500px) {
   /* 4 columns */
+  .grid__sizer,
   .grid__item {
     width: 25%; } }
 
 @media screen and (min-width: 1800px) {
   /* 5 columns */
+  .grid__sizer,
   .grid__item {
     width: 20%; } }
 
 @media screen and (min-width: 2100px) {
   /* 6 columns */
+  .grid__sizer,
   .grid__item {
     width: 16.66%; } }
 
