@@ -377,7 +377,7 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 /* Grid item */
 .grid__sizer,
 .grid__item {
-  padding: 45px 55px 30px;
+  padding: 0px 100px 0px 80px;
   position: relative;
   color: inherit;
   // background: #fff;
@@ -395,6 +395,9 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center;
+  &:first-child::before {
+    margin-top: 20px;
+  }
   &::before {
     position: absolute;
     content: '';
@@ -402,6 +405,8 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     right: 55px;
     bottom: 0px;
     left: 55px;
+    // margin-top: 10px;
+    // margin-bottom: 10px;
     // border-bottom: 1px solid rgba(74, 74, 74, 0.075);
   }
   * {
@@ -928,12 +933,37 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     height: 100%;
     margin-left: 300px;
   }
+  .grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
   .content__item {
     font-size: 1em;
   }
+  /* 2 columns */
   .grid__sizer,
   .grid__item {
-    padding: 30px 30px 20px;
+    width: 100%;
+    padding: 30px 20px 10px;
+    // border: none;
+
+    &::before {
+      top: 5px;
+      right: 5px;
+      bottom: 5px;
+      left: 5px;
+      // border: 1px solid rgba(74, 74, 74, 0.075);
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+    }
+    &:hover::before, &:focus::before {
+      // border: 3px solid rgba(129, 196, 131, 0.5);
+    }
   }
 }
 

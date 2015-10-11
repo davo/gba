@@ -185,7 +185,7 @@ button:focus {
 /* Grid item */
 .grid__sizer,
 .grid__item {
-  padding: 45px 55px 30px;
+  padding: 0px 100px 0px 80px;
   position: relative;
   color: inherit;
   min-height: 300px;
@@ -202,6 +202,9 @@ button:focus {
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center; }
+  .grid__sizer:first-child::before,
+  .grid__item:first-child::before {
+    margin-top: 20px; }
   .grid__sizer::before,
   .grid__item::before {
     position: absolute;
@@ -628,11 +631,29 @@ button:focus {
     height: 100vh;
     height: 100%;
     margin-left: 300px; }
+  .grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
   .content__item {
     font-size: 1em; }
+  /* 2 columns */
   .grid__sizer,
   .grid__item {
-    padding: 30px 30px 20px; } }
+    width: 100%;
+    padding: 30px 20px 10px; }
+    .grid__sizer::before,
+    .grid__item::before {
+      top: 5px;
+      right: 5px;
+      bottom: 5px;
+      left: 5px;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s; } }
 
 @media screen and (min-width: 900px) {
   .grid {
