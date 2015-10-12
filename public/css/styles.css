@@ -11,9 +11,6 @@
 /* #######
    Colores
    ####### */
-/* ################
-   Bootstrap Resets
-   ################ */
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -56,6 +53,131 @@ body {
   content: '';
   clear: both; }
 
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "datoscopio";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+
+/*
+
+.icon-salud-mortalidad-infantil {}
+.icon-salud-establecimientos {}
+.icon-salud-camas {}
+.icon-infraestructura-red-de-gas {}
+.icon-infraestructura-red-de-cloacas {}
+.icon-infraestructura-red-de-agua {}
+.icon-indicador-superficie {}
+.icon-indicador-presupuesto-per-capita {}
+.icon-indicador-poblacion {}
+.icon-educacion-uso-de-pc {}
+.icon-educacion-unidades-educativas {}
+.icon-educacion-analfabetismo {}
+.icon-educacion-alumnos {}
+
+salud-mortalidad-infantil
+salud-establecimientos
+salud-camas
+infraestructura-red-de-gas
+infraestructura-red-de-cloacas
+infraestructura-red-de-agua
+indicador-superficie
+indicador-presupuesto-per-capita
+indicador-poblacion
+educacion-uso-de-pc
+educacion-unidades-educativas
+educacion-analfabetismo
+educacion-alumnos
+
+*/
+.icon-logo:before {
+  content: '\e800'; }
+
+.icon-salud-mortalidad-infantil:before {
+  content: '\e801'; }
+
+.icon-salud-establecimientos:before {
+  content: '\e802'; }
+
+.icon-salud-camas:before {
+  content: '\e803'; }
+
+.icon-infraestructura-red-de-gas:before {
+  content: '\e804'; }
+
+.icon-infraestructura-red-de-cloacas:before {
+  content: '\e805'; }
+
+.icon-infraestructura-red-de-agua:before {
+  content: '\e806'; }
+
+.icon-indicador-superficie:before {
+  content: '\e807'; }
+
+.icon-indicador-presupuesto-per-capita:before {
+  content: '\e808'; }
+
+.icon-indicador-poblacion:before {
+  content: '\e809'; }
+
+.icon-educacion-uso-de-pc:before {
+  content: '\e80a'; }
+
+.icon-educacion-unidades-educativas:before {
+  content: '\e80b'; }
+
+.icon-educacion-analfabetismo:before {
+  content: '\e80c'; }
+
+.icon-educacion-alumnos:before {
+  content: '\e80d'; }
+
+.icon-arrow:before {
+  content: '\e80e'; }
+
+.icon-instagram:before {
+  content: '\e810'; }
+
+.icon-twitter-squared:before {
+  content: '\e811'; }
+
+.icon-github-squared:before {
+  content: '\e812'; }
+
+.icon-facebook-squared:before {
+  content: '\e813'; }
+
+.icon-mail-squared:before {
+  content: '\e814'; }
+
+[class*=" icon-salud"] {
+  color: #2bfda6; }
+
+[class*=" icon-infraestructura"] {
+  color: #cca2fc; }
+
+[class*=" icon-educacion"] {
+  color: #88ffff; }
+
 /* helper class when showing content */
 .noscroll {
   overflow: hidden; }
@@ -82,14 +204,27 @@ button:focus {
   top: 0;
   left: 0;
   padding: 2em 1em; }
+  .sidebar .logo {
+    display: block;
+    padding-bottom: 100px; }
+  .sidebar .icon-logo {
+    float: left;
+    font-size: 3em;
+    padding-right: 15px; }
   .sidebar h1 {
+    float: left;
+    font-size: 1.2em;
+    line-height: 2.1em;
+    font-weight: 500;
+    text-transform: uppercase; }
+  .sidebar h2 {
     margin: 0.75em 0 0;
     font-size: 1.5em;
     line-height: 1;
     font-weight: 300;
     text-align: left;
     text-transform: uppercase; }
-    .sidebar h1 span {
+    .sidebar h2 span {
       display: block; }
 
 /* Main content */
@@ -327,42 +462,25 @@ button:focus {
   transform: translate3d(0, -40px, 0); }
 
 .meta {
-  font-size: 0.765em;
   text-align: left; }
-  .meta .fa {
-    margin-right: 4px; }
-  .meta:before {
-    display: table;
-    content: ''; }
-  .meta:after {
-    display: table;
-    content: '';
-    clear: both; }
-
-.meta__avatar {
-  display: block;
-  border-radius: 50%;
-  margin: 2em auto; }
-
-.meta--preview .meta__avatar {
-  -webkit-filter: grayscale(50%);
-  filter: grayscale(50%); }
 
 .grid__item:hover .meta--preview .meta__avatar, .grid__item:focus .meta--preview .meta__avatar {
   -webkit-filter: none;
   filter: none; }
 
-.meta__date {
-  display: block;
-  float: left;
-  color: #aaa; }
+.meta__indicador_a {
+  font-size: 3em;
+  float: left; }
 
-.meta__reading-time {
+.meta__indicador_b {
+  font-size: 3em;
+  float: left; }
+
+.meta__arrow {
+  font-size: 1.2em;
   display: block;
-  float: left;
-  color: #aaa;
-  text-align: right;
-  float: right; }
+  float: right;
+  color: #fff; }
 
 .meta__misc {
   display: block;
@@ -483,9 +601,7 @@ button:focus {
   pointer-events: none;
   font-size: 0.85em; }
   .content__item p {
-    max-width: 1200px;
-    margin: 1em auto;
-    text-align: justify; }
+    text-align: left; }
     .content__item p:first-of-type {
       font-size: 1.35em; }
   .content__item .title {

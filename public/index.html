@@ -20,8 +20,12 @@
 <div class="container">
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
     <div id="theSidebar" class="sidebar">
-        <button class="close-button fa fa-fw fa-close">X</button>
-        <h1>Radiografía del Conurbano Bonaerense</h1>
+        <button class="close-button">X</button>
+        <div class="logo">
+            <span class="icon-logo"></span>
+            <h1>Datoscopio</h1>
+        </div>
+        <h2>Radiografía del Conurbano Bonaerense</h2>
         <header class="top-bar">
             <h2 class="top-bar__headline"></h2>
             <div class="bar">
@@ -59,7 +63,10 @@
 
 
                     <div class="meta meta--preview">
-                        <span class="meta__date">></span>
+                     
+                        <span class="meta__indicador_a icon-{{cells.indicador_a}}"></span>
+                        <span class="meta__indicador_b icon-{{cells.indicador_b}}"></span>
+                        <span class="meta__arrow icon-arrow"></span>
                     </div>
                 </a>
             </script>
