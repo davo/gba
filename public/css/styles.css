@@ -71,7 +71,8 @@ button:focus {
 
 /* Sidebar */
 .sidebar {
-  text-align: center;
+  text-align: left;
+  background: #333333;
   z-index: 1000;
   position: fixed;
   width: 300px;
