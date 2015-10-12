@@ -4,22 +4,9 @@ var gulp      = require('gulp'),
     rename    = require('gulp-rename'),
     plumber   = require('gulp-plumber'),
     webserver = require('gulp-webserver'),
-    iconfont  = require('gulp-iconfont'),
     opn       = require('opn');
 
 var tinylr;
-
-gulp.task('iconfont', function(){
-  gulp.src(['public/assests/icons/*.svg'])
-    .pipe(iconfont({
-      fontName: 'datoscopio',
-      appendCodepoints: true
-      }))
-    .on('codepoints', function(codepoints,options) {
-      console.log(codepoints,options);
-    })
-    .pipe(gulp.dest('public/fonts/'));
-  });
 
 gulp.task('livereload', function() {
   tinylr = require('tiny-lr')();
