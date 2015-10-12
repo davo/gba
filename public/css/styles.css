@@ -223,7 +223,7 @@ button:focus {
 
 /* Grid item "border" */
 /* grid item element and full content element styles */
-.title {
+.title, .content__item .title {
   margin: 0;
   font-size: 0.8em;
   text-transform: uppercase;
@@ -487,6 +487,8 @@ button:focus {
     text-align: justify; }
     .content__item p:first-of-type {
       font-size: 1.35em; }
+  .content__item .title {
+    color: white; }
   .content__item.content__item--show {
     height: auto;
     min-height: 100vh;

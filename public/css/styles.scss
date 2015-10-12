@@ -749,6 +749,10 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
       font-size: 1.35em;
     }
   }
+  .title {
+    @extend .title;
+    color: white;
+  }
   &.content__item--show {
 
     height: auto;
