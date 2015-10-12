@@ -1,7 +1,7 @@
 /**
- * main.js
+ * cards.js
  * http://www.codrops.com
- *
+ * Based on: http://tympanus.net/codrops/2015/04/15/grid-item-animation-layout/
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  *
