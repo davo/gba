@@ -5,7 +5,7 @@ var datos = [];
 var centroides = [];
 var xScale, yScale, svg, dataset, xAxis, yAxis, path, temp;
 var radio = 5;
-var divDeVizualizacion = "#grafico";
+var divDeVizualizacion = ".content__item--show #grafico";
 
 // Abstract: Crea el scatterplot
 // Param: @Array = datos  
@@ -60,10 +60,7 @@ function dibujoGrafico(datos) {
             return d[2]
         })
         .on("mouseover", function(d) {
-            $("#info").html(d[0]);
-        })
-        .on("mouseout", function() {
-            $("#info").html("");
+            console.log(d[0]);
         });
 
     svg.append("g")
@@ -78,7 +75,7 @@ function dibujoGrafico(datos) {
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
-    d3.select("#cambiador")
+    d3.select(".content__item--show #cambiador")
         .on("change", function() {
             updateData();
         });
@@ -86,8 +83,6 @@ function dibujoGrafico(datos) {
     if (!hayDatos) {
         $(divDeVizualizacion).prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
     }
-    $("#consola").html("");
-    $("#consola").slideUp("fast");
 }
 
 // Abstract: Mueve puntos del grafico al centroide del mapa
@@ -143,7 +138,7 @@ function updateData() {
                 .attr("class", function(d, i) {
                     var filtro;
                     try {
-                        filtro = $("#cambiador option:selected").attr("filtro");
+                        filtro = $(".content__item--show #cambiador option:selected").attr("filtro");
                         filtro = filtro.split(",");
                         for (var i = 0; i < filtro.length; i++) {
                             if (!filtro[i].trim().indexOf(d[0])) {
@@ -236,7 +231,7 @@ function cargaDatos() {
 // dependiendo los valores que estan en el select
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
-    var valores = $("#cambiador").val();
+    var valores = $(".content__item--show #cambiador").val();
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
         var dato1 = +datos[i][valores.split("-")[0]];
@@ -291,10 +286,7 @@ function cargaMapa() {
                 return d.features[i].properties["distrito"]
             })
             .on("mouseover", function(d, i) {
-                $("#info").html(d.properties.distrito);
-            })
-            .on("mouseout", function() {
-                $("#info").html("");
+                console.log(d.properties.distrito);
             });
 
 
@@ -319,24 +311,30 @@ $(window).on("resize", function() {
 });
 
 // listener de checkbox
-$("#verMapa").click(function() {
+$(".content__item--show #verMapa").click(function() {
     if ($(this).prop('checked')) {
-        $("#mapa").attr("class", "visible");
-        $("#cambiador").attr("class", "invisible");
-        $("#xAxis").attr("class", "x axis invisible");
-        $("#yAxis").attr("class", "y axis invisible");
+        $(".content__item--show #mapa").attr("class", "visible");
+        $(".content__item--show #cambiador").attr("class", "invisible");
+        $(".content__item--show #xAxis").attr("class", "x axis invisible");
+        $(".content__item--show #yAxis").attr("class", "y axis invisible");
         dataToMap();
     } else {
-        $("#mapa").attr("class", "invisible")
-        $("#cambiador").attr("class", "visible");
-        $("#xAxis").attr("class", "x axis visible");
-        $("#yAxis").attr("class", "y axis visible");
+        $(".content__item--show #mapa").attr("class", "invisible")
+        $(".content__item--show #cambiador").attr("class", "visible");
+        $(".content__item--show #xAxis").attr("class", "x axis visible");
+        $(".content__item--show #yAxis").attr("class", "y axis visible");
         updateData(); // vuelven los circulos a scatterplot
     }
 
 });
 
-$(document).ready(function() {
-    cargaDatos();
+
+
+
+
+// Abstract: Dibuja el grafico en el div especificado en la var global divDeVizualizacion
+// Esta funcion se debe llamar al abrir el card.
+function armaVisualizacion() {
     cargaMapa();
-});
+    cargaDatos();
+};

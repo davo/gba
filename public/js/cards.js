@@ -196,6 +196,8 @@
       closeCtrl.addEventListener('click', function() {
         // hide content
         hideContent();
+        // hide graph
+        $("svg").remove();
       });
 
       // keyboard esc - hide content
