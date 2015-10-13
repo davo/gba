@@ -130,6 +130,8 @@
 
       console.log(contentItems);
 
+      //** Dimear cards que no estan seleccionadas.
+
       // $(".grid__item").hover(function() { // Mouse over
       //   $(this).siblings().stop().fadeTo(300, 0.2);
       // }, function() { // Mouse out
