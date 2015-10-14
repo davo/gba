@@ -248,6 +248,7 @@
       // body overlay
       classie.add(bodyEl, 'view-single');
 
+      
       setTimeout(function() {
         // expands the placeholder
         dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
@@ -271,6 +272,9 @@
         classie.add(closeCtrl, 'close-button--show');
         // sets overflow hidden to the body and allows the switch to the content scroll
         classie.addClass(bodyEl, 'noscroll');
+  
+        //arma la visualizacion una vez armado el card
+        armaVisualizacion();
 
         isAnimating = false;
       });

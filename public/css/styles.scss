@@ -1130,8 +1130,8 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 Estilos d3
 *****/
 #grafico{
-  background-color: #fafafa;
-  border: 1px solid #eaeaea;
+  background-color: transparent;
+  border: 0px;
   margin: 0 auto;
   padding: 0;
   width: 500px;
@@ -1144,23 +1144,24 @@ Estilos d3
 }
 
 .circulo{
-  fill: white;
-  stroke: black;
+  fill: black;
+  stroke: white;
  }
 
 .circuloDim{
-  fill: white;
-  stroke: black;
+  fill: black;
+  stroke: white;
   opacity:0.3;
 }
 
 .axis path , .axis line {
   fill: none;
-  stroke: black;
+  stroke: white;
   shape-rendering: crispEdges;
 }
 
 .axis text {
+  fill: white;
   font-family: sans-serif;
   font-size: 11px;
 }
