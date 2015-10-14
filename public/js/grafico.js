@@ -180,9 +180,8 @@ function updateData() {
 // Abstract: convierte un objeto de datos a CSV  
 // Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
-    // NO VOLVER A CARGAR SI YA CARGO!!!!!!!!!!
-    console.log (error, "--" ,options, "--" ,response)
     if (!error) {
+        hayDatos = true;
         jQuery.each(response.rows, function(index, value) {
             // las propiedades de las celdas son los titulos del spreadsheet
             // y son case sensitive (no usar espacios ni caracteres raros)
@@ -196,7 +195,6 @@ var cargoDatosEnArray = function(error, options, response) {
             ];
             datos.push(fila);
         });
-        hayDatos = true;
     } else {
         //lleno con datos falsos y aviso
         alert("No se pudieron cargar los datos. Estos datos son genéricos");
@@ -219,11 +217,15 @@ var cargoDatosEnArray = function(error, options, response) {
 // llama por callback a una funcion que pasa esos datos a un array
 // Param: @String = ID de la tabla  
 function cargaDatos() {
-    var archivo = sheetrock({
-        url: spreadSheet,
-        query: "select A,B,C,D,E,F",
-        callback: cargoDatosEnArray
-    });
+    if (!hayDatos){
+        var archivo = sheetrock({
+            url: spreadSheet,
+            query: "select A,B,C,D,E,F",
+            callback: cargoDatosEnArray
+        });
+    }else{
+        dibujoGrafico(datos);
+    }
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
@@ -334,7 +336,7 @@ function armaVisualizacion() {
         }
 
     });
-    cargaDatos();
     cargaMapa();
+    cargaDatos();
 
 };
