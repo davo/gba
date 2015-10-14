@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Radiografía del Conurbano</title>
+		<meta name="description" content="A responsive, magazine-like website layout with a grid item animation effect when opening the content" />
+		<meta name="keywords" content="grid, layout, effect, animated, responsive, magazine, template, web design" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style1.css" />
+		<script src="js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="../../components/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../../components/sheetrock/dist/sheetrock.min.js"></script>
+		<script type="text/javascript" src="../../components/handlebars/handlebars.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+			<div id="theSidebar" class="sidebar">
+				<button class="close-button fa fa-fw fa-close"></button>
+				<h1>Radiografía del Conurbano</h1>
+			</div>
+			<div id="theGrid" class="main">
+				<section class="grid">
+					<!--
+					<header class="top-bar">
+						<h2 class="top-bar__headline">Latest articles</h2>
+						<div class="filter">
+							<span>Filter by:</span>
+							<span class="dropdown">Popular</span>
+						</div>
+					</header>
+					-->
+					<script id="card-template" type="text/x-handlebars-template">
+						<a class="grid__item {{cells.eje_key}}" href="#">
+							<span class="category">{{cells.eje}}</span>
+							<h2 class="title title--preview">{{cells.titulo}}</h2>
+							<div class="loader"></div>
+							
+							<div class="content">
+								<p>{{cells.contenido}}</p>
+							</div>
+							<div class="meta meta--preview">
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+							</div>
+						</a>
+					</script>
+					
+				</section>
+				<section class="content">
+					<div class="scroll-wrap">
+						<script id="story-template" type="text/x-handlebars-template">
+							<article class="content__item">
+								<span class="category category--full">{{cells.eje}}</span>
+								<h2 class="title title--full">{{cells.titulo}}</h2>
+								
+								<p>{{cells.contenido}}</p>
+								<div class="meta meta--full">
+								</div>
+							</article>
+						</script>
+					</div>
+					<button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
+				</section>
+			</div>
+		</div><!-- /container -->
+		<script src="js/classie.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>

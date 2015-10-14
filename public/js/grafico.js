@@ -1,11 +1,11 @@
 // Abstract: En document.ready carga datos y los pone en un array
-var spreadSheet = 'https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=509195421';
+var spreadSheet ='https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=509195421';
 var hayDatos = false;
 var datos = [];
 var centroides = [];
 var xScale, yScale, svg, dataset, xAxis, yAxis, path, temp;
 var radio = 5;
-var divDeVizualizacion = "#grafico";
+var divDeVizualizacion = ".content__item--show #grafico";
 
 // Abstract: Crea el scatterplot
 // Param: @Array = datos  
@@ -60,10 +60,7 @@ function dibujoGrafico(datos) {
             return d[2]
         })
         .on("mouseover", function(d) {
-            $("#info").html(d[0]);
-        })
-        .on("mouseout", function() {
-            $("#info").html("");
+            console.log(d[0]);
         });
 
     svg.append("g")
@@ -78,16 +75,10 @@ function dibujoGrafico(datos) {
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
-    d3.select("#cambiador")
+    d3.select(".content__item--show #cambiador")
         .on("change", function() {
             updateData();
         });
-
-    if (!hayDatos) {
-        $(divDeVizualizacion).prepend("<span>No se pudieron cargar los datos. Estos datos son genéricos</span>")
-    }
-    $("#consola").html("");
-    $("#consola").slideUp("fast");
 }
 
 // Abstract: Mueve puntos del grafico al centroide del mapa
@@ -106,6 +97,7 @@ function dataToMap() {
 
     //sacar centroides y mover en funcion de eso.
     .attr("cx", function(d) {
+            console.log (">>d",dataset);
             return centroides[centroides.indexOf(d[0]) - 1][0];
         })
         .attr("cy", function(d) {
@@ -143,7 +135,7 @@ function updateData() {
                 .attr("class", function(d, i) {
                     var filtro;
                     try {
-                        filtro = $("#cambiador option:selected").attr("filtro");
+                        filtro = $(".content__item--show #cambiador option:selected").attr("filtro");
                         filtro = filtro.split(",");
                         for (var i = 0; i < filtro.length; i++) {
                             if (!filtro[i].trim().indexOf(d[0])) {
@@ -183,29 +175,29 @@ function updateData() {
         .transition()
         .duration(800)
         .call(yAxis);
-
 };
+
 // Abstract: convierte un objeto de datos a CSV  
 // Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
     if (!error) {
+        hayDatos = true;
         jQuery.each(response.rows, function(index, value) {
             // las propiedades de las celdas son los titulos del spreadsheet
             // y son case sensitive (no usar espacios ni caracteres raros)
             var fila = [
-                value.cells.Partido,
-                value.cells.Poblacion,
-                value.cells.Hogares,
-                value.cells.Superficie,
-                value.cells.Establecimientos,
-                value.cells.Camas
+                value.cells.partido,
+                value.cells.indicadorPoblacion,
+                value.cells.indicadorHogares,
+                value.cells.indicadorSuperficie,
+                value.cells.saludEstablecimientos,
+                value.cells.saludCamas
             ];
             datos.push(fila);
         });
-        hayDatos = true;
     } else {
-
-        //lleno con datos falsos
+        //lleno con datos falsos y aviso
+        alert("No se pudieron cargar los datos. Estos datos son genéricos");
         for (var i = 0; i < 30; i++) {
             var linea = [];
             for (var p = 0; p < 6; p++) {
@@ -225,18 +217,22 @@ var cargoDatosEnArray = function(error, options, response) {
 // llama por callback a una funcion que pasa esos datos a un array
 // Param: @String = ID de la tabla  
 function cargaDatos() {
-    var archivo = sheetrock({
-        url: spreadSheet,
-        query: "select A,B,C,D,E,F",
-        callback: cargoDatosEnArray
-    })
+    if (!hayDatos){
+        var archivo = sheetrock({
+            url: spreadSheet,
+            query: "select A,B,C,D,E,F",
+            callback: cargoDatosEnArray
+        });
+    }else{
+        dibujoGrafico(datos);
+    }
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
-    var valores = $("#cambiador").val();
+    var valores = $(".content__item--show #cambiador").val();
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
         var dato1 = +datos[i][valores.split("-")[0]];
@@ -291,10 +287,7 @@ function cargaMapa() {
                 return d.features[i].properties["distrito"]
             })
             .on("mouseover", function(d, i) {
-                $("#info").html(d.properties.distrito);
-            })
-            .on("mouseout", function() {
-                $("#info").html("");
+                console.log(d.properties.distrito);
             });
 
 
@@ -318,25 +311,32 @@ $(window).on("resize", function() {
     responsiveSVG();
 });
 
-// listener de checkbox
-$("#verMapa").click(function() {
-    if ($(this).prop('checked')) {
-        $("#mapa").attr("class", "visible");
-        $("#cambiador").attr("class", "invisible");
-        $("#xAxis").attr("class", "x axis invisible");
-        $("#yAxis").attr("class", "y axis invisible");
-        dataToMap();
-    } else {
-        $("#mapa").attr("class", "invisible")
-        $("#cambiador").attr("class", "visible");
-        $("#xAxis").attr("class", "x axis visible");
-        $("#yAxis").attr("class", "y axis visible");
-        updateData(); // vuelven los circulos a scatterplot
-    }
 
-});
 
-$(document).ready(function() {
-    cargaDatos();
+
+
+// Abstract: Dibuja el grafico en el div especificado en la var global divDeVizualizacion
+// Esta funcion se debe llamar al abrir el card.
+function armaVisualizacion() {
+
+    // bindeo click checkbox
+    $(".content__item--show #verMapa").click(function() {
+        if ($(this).prop('checked')) {
+            $(".content__item--show #mapa").attr("class", "visible");
+            $(".content__item--show #cambiador").attr("class", "invisible");
+            $(".content__item--show #xAxis").attr("class", "x axis invisible");
+            $(".content__item--show #yAxis").attr("class", "y axis invisible");
+            dataToMap();
+        } else {
+            $(".content__item--show #mapa").attr("class", "invisible")
+            $(".content__item--show #cambiador").attr("class", "visible");
+            $(".content__item--show #xAxis").attr("class", "x axis visible");
+            $(".content__item--show #yAxis").attr("class", "y axis visible");
+            updateData(); // vuelven los circulos a scatterplot
+        }
+
+    });
     cargaMapa();
-});
+    cargaDatos();
+
+};

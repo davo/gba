@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<script type="text/javascript" src="../../components/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../../components/sheetrock/dist/sheetrock.min.js"></script>
+		<script type="text/javascript" src="../../components/handlebars/handlebars.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container">
+		<!-- <table id="tabla"></table> -->
+			
+<!-- 			<div id="cards">
+				<script id="cards-template" type="text/x-handlebars-template">
+						<h3 class="proyecto">{{cells.titulo}}</h3>
+				</script>
+			</div> -->
+			<section class="grid-wrap">
+				<ul class="grid swipe-right" id="grid">
+					<script id="card-template" type="text/x-handlebars-template">
+						<li>
+						<a href="#">
+							<h3>{{cells.titulo}}</h3>
+							<p>{{cells.contenido}}</p>
+						</a>
+						</li>
+					</script>
+				</ul>
+			</section>
+		</div><!-- /container -->
+		
+		<script>
+
+		// var HRTemplate = Handlebars.compile($('#cards-template').html());
+
+		var CardTemplate = Handlebars.compile($('#card-template').html());
+
+
+		// var spreadSheet1 = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=0';
+
+		// // cargo spreadsheet.
+		// $('#tabla').sheetrock({
+		//     url: spreadSheet1,
+		//     query: "select *"
+		// });
+
+		var spreadSheet = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=0';
+
+		// cargo spreadsheet.
+		$('#grid').sheetrock({
+		    url: spreadSheet,
+		    query: "select *",
+		    rowHandler : CardTemplate,
+		    callback: done
+		});
+
+		function done () {
+			console.log("Done!");
+			new GridScrollFx( document.getElementById( 'grid' ), {
+				viewportFactor : 0.4
+			} );
+		}
+		</script>
+		<script src="js/masonry.pkgd.min.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script src="js/classie.js"></script>
+		<script src="js/colorfinder-1.1.js"></script>
+		<script src="js/gridScrollFx.js"></script>
+		<script>
+			
+		</script>
+	</body>
+</html>
