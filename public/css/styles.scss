@@ -25,6 +25,7 @@ $infraestructura: #cca2fc;
 $salud: #2bfda6;
 $educacion: #88ffff;
 
+$ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestructura);
 
 
 
@@ -362,54 +363,50 @@ button:focus {
 
 /* Filter/dropdown dummy on the right */
 
-
-// .bar {
-//   position: fixed;
-//   z-index: 100;
-//   bottom: 0;
-//   left: 0;
-//   width: 100%;
-//   padding: 1.75em 5em;
-//   text-align: center;
-//   background: #191a1b;
-//   -webkit-transform: translate3d(0, 0, 0);
-//   /* Fix for Chrome flicker on Mac ...party like we're in 2012! */
-// }
-
-// .flexbox .filter {
-//   display: -webkit-flex;
-//   display: flex;
-//   -webkit-align-items: center;
-//   align-items: center;
-//   -webkit-justify-content: center;
-//   justify-content: center;
-// }
-
 // /* Filter */
 
 .filter__item {
-  background-color:#2dabf9;
-  
   display: block;
-  cursor:pointer;
-  color:#ffffff;
+  cursor: pointer;
+  color: $gris;
   text-transform: uppercase;
   font-family: $fontset-roboto;
   font-size: 1em;
   padding: 9px 15px;
-  text-decoration:none;
-}
-.filter__item:hover {
-  background-color:#0688fa;
-}
-.filter__item:active {
-  position:relative;
-  top:1px;
+  margin-bottom: 4px;
+  text-decoration: none;
+  @include border-top-radius(4px);
+  @include border-right-radius(4px);
+  @include border-bottom-radius(4px);
+  @include border-left-radius(4px);
+  &:hover {
+  }
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+  @each $eje, $color in $ejes {
+    &.#{$eje} {
+      border: none;
+      background-color: rgba($color, .9);
+      &:hover, &:focus {
+          background-color: rgba($color, 1);
+      }
+    }
+  }
 }
 
 .filter__item--selected {
-  color: #5c5edc;
-  border-color: #5c5edc;
+  // color: #5c5edc;
+  @each $eje, $color in $ejes {
+    &.#{$eje} {
+      border: none;
+      background-color: rgba(lighten($color,15), 1);
+      &:hover, &:focus {
+          background-color: rgba(lighten($color,15), .5);
+      }
+    }
+  }
 }
 
 .filter__hide {
@@ -418,13 +415,12 @@ button:focus {
 
 
 
-$ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestructura);
 @each $eje, $color in $ejes {
   .#{$eje} {
     border: none;
+    @include transition(border 0.5s ease-in-out);
     &::before {
-      border: 1px solid rgba($color,1);
-      @include transition(all 0.5s ease-in-out);
+      border: 1px solid rgba($color,.5);  
     }
     &:hover::before, &:focus::before {
         border: 3px solid rgba($color,1);
@@ -441,7 +437,7 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
   position: relative;
   color: inherit;
   // background: #fff;
-  min-height: 300px;
+  min-height: 20px;
   cursor: pointer;
   text-align: center;
   display: -webkit-box;
@@ -453,8 +449,9 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-justify-content: top;
+  justify-content: top;
+
   &:first-child::before {
     margin-top: 20px;
   }
@@ -465,6 +462,10 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     right: 55px;
     bottom: 0px;
     left: 55px;
+    @include border-top-radius(5px);
+    @include border-right-radius(5px);
+    @include border-bottom-radius(5px);
+    @include border-left-radius(5px);
     // margin-top: 10px;
     // margin-bottom: 10px;
     // border-bottom: 1px solid rgba(74, 74, 74, 0.075);
@@ -486,17 +487,18 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 .title {
   margin: 0;
   font-size: 0.8em;
+  font-weight: 400;
   text-transform: uppercase;
   text-align: left;
-  width: 80%;
-  color: $gris;
+  width: 100%;
+  color: white;
   line-height: 1.1em;
-  padding: 5px;
+  padding: 0px;
   white-space: pre-line;
 
   @each $eje, $color in $ejes {
   &.#{$eje} {
-      background-color: $color;
+      // background-color: $color;
     }
   }
 }
@@ -510,20 +512,23 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
   // align-items: center;
   // -webkit-justify-content: center;
   // justify-content: center;
-  width: 60%;
+  // width: 100%;
 }
 
-.card-text {
+.card--text {
   text-align: left;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding: 0px;
+  white-space: pre-line;
   // @extend .title--preview;
 
 }
 
 .loader {
   height: 1px;
-  width: 40%;
-  margin: 1em auto;
+  width: 100%;
+  margin: 5px auto;
   position: relative;
   background: rgba(0, 0, 0, 0.1);
   &::before {
@@ -539,6 +544,11 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     -webkit-transform-origin: 0% 50%;
     transform-origin: 0% 50%;
   }
+  @each $eje, $color in $ejes {
+  &.#{$eje}::before {
+      background-color: $color;
+    }
+  }
 }
 
 .grid__item--loading .loader::before {
@@ -551,19 +561,29 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 }
 
 .category {
-  margin: 0;
+  margin: 5px 0px;
+  padding: 5px;
   position: relative;
-  font-size: 0.65em;
+  font-size: 0.7em;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6em;
-  padding-bottom: 10px;
+  white-space: pre-line;
+  letter-spacing: 0.2em;
+  // padding-bottom: 10px;
   text-align: left;
   display: block;
+  color: $gris;
+  width: auto;
+  @each $eje, $color in $ejes {
+  &.#{$eje} {
+      background-color: $color;
+    }
+  }
 }
 
-.title--preview, .loader, .category {
-  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-  transition: transform 0.2s, opacity 0.2s;
+.title--preview, .loader, .category, .card--text {
+  -webkit-transition: -webkit-transform 0.25s, opacity 0.25s;
+  transition: transform 0.25s, opacity 0.25s;
   -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
   transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -609,6 +629,13 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     -webkit-transform: translate3d(0, -40px, 0);
     transform: translate3d(0, -40px, 0);
   }
+  .card--text {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+    opacity: 0;
+    -webkit-transform: translate3d(0, -40px, 0);
+    transform: translate3d(0, -40px, 0);    
+  }
 }
 
 .meta {
@@ -624,12 +651,28 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 }
 
 .meta__indicador_a {
-  font-size: 3em;
+  font-size: 2.9em;
   float: left;
+  display: block;
+  visibility: hidden;
 }
 .meta__indicador_b {
-  font-size: 3em;
+  font-size: 2.9em;
   float: left;
+  display: block;
+  visibility: hidden;
+}
+.meta__indicador_c {
+  font-size: 2.9em;
+  float: left;
+  display: block;
+  visibility: hidden;
+}
+
+.grid__item {
+  &:hover .meta__indicador_a, &:focus .meta__indicador_a {
+    visibility: show;
+  }
 }
 
 .meta__arrow {
@@ -831,7 +874,6 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     font-style: italic;
     float: left;
     margin: 0 5px;
-    font-family: "Playfair Display", serif;
     &::before {
       content: "in ";
     }
@@ -989,14 +1031,14 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
   .grid__sizer,
   .grid__item {
     width: 100%;
-    padding: 30px 20px 10px;
+    padding: 30px 30px 5px 30px;
     // border: none;
 
     &::before {
-      top: 5px;
-      right: 5px;
-      bottom: 5px;
-      left: 5px;
+      // top: 5px;
+      // right: 5px;
+      // bottom: 5px;
+      // left: 5px;`
       // border: 1px solid rgba(74, 74, 74, 0.075);
       -webkit-transition: opacity 0.3s;
       transition: opacity 0.3s;
@@ -1025,10 +1067,10 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     border: none;
 
     &::before {
-      top: 5px;
-      right: 5px;
-      bottom: 5px;
-      left: 5px;
+      top: 15px;
+      right: 15px;
+      bottom: 15px;
+      left: 15px;
       // border: 1px solid rgba(74, 74, 74, 0.075);
       -webkit-transition: opacity 0.3s;
       transition: opacity 0.3s;
