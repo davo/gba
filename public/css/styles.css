@@ -16,8 +16,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-y: scroll; }
+  -moz-osx-font-smoothing: grayscale; }
 
 html, body {
   margin: 0;
@@ -778,10 +777,9 @@ button:focus {
 /* 5 columns */
 /* 6 columns */
 @media screen and (min-width: 600px) {
-  html, body, .container {
+  html, body, .container, .main {
     height: 100vh; }
   .main {
-    height: 100vh;
     height: 100%;
     margin-left: 300px; }
   .grid {

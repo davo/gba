@@ -34,7 +34,6 @@ html {
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: scroll;
 }
 
 html, body {
@@ -793,7 +792,6 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
     color: white;
   }
   &.content__item--show {
-
     height: auto;
     min-height: 100vh;
     opacity: 1;
@@ -968,11 +966,10 @@ $ejes: (salud, $salud), (educacion, $educacion), (infraestructura, $infraestruct
 /* 5 columns */
 /* 6 columns */
 @media screen and (min-width: 600px) {
-  html, body, .container {
+  html, body, .container, .main {
     height: 100vh;
   }
-  .main {
-    height: 100vh;
+  .main  {
     height: 100%;
     margin-left: 300px;
   }

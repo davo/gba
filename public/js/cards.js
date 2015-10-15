@@ -12,6 +12,8 @@
 
   'use strict';
 
+
+
   var CardTemplate = Handlebars.compile($('#card-template').html()),
      StoryTemplate = Handlebars.compile($('#story-template').html());
 
@@ -20,7 +22,7 @@
     stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563',
     cardsToStories = [[0,0],[1,0],[2,1],[3,1],[4,1],[5,2],[6,2],[7,2],[8,2],[9,3],[10,4],[11,4],[12,4],[13,5],[14,6],[15,6],[16,6],[17,7],[18,7],[19,7],[20,8],[21,9],[22,9],[23,10],[24,10],[25,10],[26,10],[27,10],[28,11],[29,11],[30,11],[31,12],[32,12],[33,12],[34,12],[35,12]];
 
-    console.log(cardsToStories[9][1])
+    // console.log(cardsToStories[9][1])
 
 
     var bodyEl = document.body,
@@ -83,6 +85,8 @@
     function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
     function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
+      // $('#theGrid').on('scroll',function(){ console.log(scrollTop); })
+
     // Instancio y ejecuto las cards desde el spreadsheet gestionado por sheetrock, luego ejecuto funcion para concatenar con la segundo generación de contenidos.
 
     $('.grid').sheetrock({
@@ -128,7 +132,7 @@
       gridItems = gridItemsContainer.querySelectorAll('.grid__item');
       contentItems = contentItemsContainer.querySelectorAll('.content__item');
 
-      console.log(contentItems);
+      // console.log(contentItems);
 
       // $(".grid__item").hover(function() { // Mouse over
       //   $(this).siblings().stop().fadeTo(300, 0.2);
@@ -211,7 +215,7 @@
             hideContent();
           }
         }
-      } );
+      });
 
       // hamburger menu button (mobile) and close cross
       menuCtrl.addEventListener('click', function() {
@@ -227,7 +231,7 @@
       });
     }
 
-
+    // console.log(window.pageYOffset);
 
     function loadContent(item) {
 
@@ -238,6 +242,8 @@
       // set the width/heigth and position
       dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
       dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
+
+      // console.log('translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)');
 
       // add transition class
       classie.add(dummy, 'placeholder--trans-in');
@@ -253,6 +259,9 @@
         // expands the placeholder
         dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
         dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+
+        // console.log('translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)');
+
         // console.log(scrollY());
         // disallow scroll
         window.addEventListener('scroll', noscroll);
@@ -263,7 +272,11 @@
         classie.remove(dummy, 'placeholder--trans-in');
         classie.add(dummy, 'placeholder--trans-out');
         // position the content container
+
         contentItemsContainer.style.top = scrollY() + 'px';
+
+        console.log(scrollY() + 'px');
+        
         // show the main content container
         classie.add(contentItemsContainer, 'content--show');
         // show content item:

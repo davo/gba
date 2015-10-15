@@ -75,8 +75,10 @@
 		
 		return client < inner ? inner : client;
 	}
+
+
 	function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
-	function scrollY() { return window.pageYOffset || docElem.scrollTop; }
+	function scrollY() { return $(window).scrollTop() || docElem.scrollTop; }
 
 	function init() {
 
@@ -90,6 +92,10 @@
 
 	// setTimeout(function() { init(); }, 1500);
 
+	$(window).scroll(function (event) {
+    	var scroll = $(window).scrollTop();
+    	console.log(window.pageXOffset)
+	});
 
 	function initEvents() {
 
@@ -105,7 +111,7 @@
 		[].slice.call(gridItems).forEach(function(item, pos) {
 
 
-			console.log(pos);
+			// console.log(pos);
 			// grid item click event
 			item.addEventListener('click', function(ev) {
 
@@ -168,6 +174,8 @@
 		dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 		dummy.style.transform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)';
 
+		// console.log('translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth/gridItemsContainer.offsetWidth + ',' + item.offsetHeight/getViewport('y') + ',1)');
+
 		// add transition class 
 		classie.add(dummy, 'placeholder--trans-in');
 
@@ -181,6 +189,9 @@
 			// expands the placeholder
 			dummy.style.WebkitTransform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
 			dummy.style.transform = 'translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)';
+
+			console.log('translate3d(-5px, ' + (scrollY() - 5) + 'px, 0px)');
+
 			// disallow scroll
 			window.addEventListener('scroll', noscroll);
 		}, 25);
@@ -191,6 +202,9 @@
 			classie.add(dummy, 'placeholder--trans-out');
 			// position the content container
 			contentItemsContainer.style.top = scrollY() + 'px';
+
+			console.log(scrollY() + 'px');
+
 			// show the main content container
 			classie.add(contentItemsContainer, 'content--show');
 			// show content item:

@@ -764,6 +764,8 @@ button:focus {
   transition: opacity 0.5s 0.25s;
 }
 
+
+
 /* close button (for content and sidebar) */
 .close-button {
   position: absolute;
@@ -803,13 +805,7 @@ button:focus {
   pointer-events: auto;
 }
 
-/* Viewport sizes based on column number and sidebar */
-/* 1 column */
-/* 2 columns */
-/* 3 columns */
-/* 4 columns */
-/* 5 columns */
-/* 6 columns */
+
 @media screen and (min-width: 600px) {
   html,
   body,
@@ -859,6 +855,8 @@ button:focus {
     display: none;
   }
 }
+
+
 @media screen and (min-width: 900px) {
   .grid {
     display: -webkit-box;
@@ -870,7 +868,7 @@ button:focus {
     flex-wrap: wrap;
   }
 
-  /* 2 columns */
+
   .grid__item {
     width: 50%;
     border: none;
@@ -895,31 +893,27 @@ button:focus {
     opacity: 0;
   }
 }
+
 @media screen and (min-width: 1200px) {
-  /* 3 columns */
   .grid__item {
     width: 33.333%;
   }
 }
 @media screen and (min-width: 1500px) {
-  /* 4 columns */
   .grid__item {
     width: 25%;
   }
 }
 @media screen and (min-width: 1800px) {
-  /* 5 columns */
   .grid__item {
     width: 20%;
   }
 }
 @media screen and (min-width: 2100px) {
-  /* 6 columns */
   .grid__item {
     width: 16.66%;
   }
 }
-/* small screen changes for sidebar (it becomes an off-canvas menu) */
 @media screen and (max-width: 599px) {
   .sidebar {
     -webkit-transform: translate3d(-100%, 0, 0);
@@ -980,5 +974,6 @@ button:focus {
     display: none;
   }
 }
+
 
 /*# sourceMappingURL=style1.css.map */
