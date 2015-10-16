@@ -437,7 +437,7 @@ button:focus {
   position: relative;
   color: inherit;
   // background: #fff;
-  min-height: 20px;
+  min-height: 420px;
   cursor: pointer;
   text-align: center;
   display: -webkit-box;
@@ -485,8 +485,8 @@ button:focus {
 /* grid item element and full content element styles */
 
 .title {
-  margin: 0;
-  font-size: 0.8em;
+  margin: 40px 0 0 0;
+  font-size: 0.95em;
   font-weight: 400;
   text-transform: uppercase;
   text-align: left;
@@ -517,8 +517,8 @@ button:focus {
 
 .card--text {
   text-align: left;
-  font-size: 1.1em;
-  line-height: 1.5em;
+  font-size: 1.25em;
+  line-height: 1.35em;
   padding: 0px;
   white-space: pre-line;
   // @extend .title--preview;
@@ -563,13 +563,13 @@ button:focus {
 .category {
   margin: 5px 0px;
   padding: 5px;
-  position: relative;
+  position: absolute;
   font-size: 0.7em;
   font-weight: 700;
   text-transform: uppercase;
   white-space: pre-line;
   letter-spacing: 0.2em;
-  // padding-bottom: 10px;
+  // padding-top: 10px;
   text-align: left;
   display: block;
   color: $gris;
