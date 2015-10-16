@@ -55,19 +55,20 @@
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}">
-                    <span class="category">{{cells.eje}}/{{cells.orden}}/{{cells.dataviz_key}}</span>
-                    <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
-                    <div class="card-text">
+                    <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
+                    <h2 class="title title--preview">{{cells.titulo}}</h2>
+                    <div class="card--text">
                         <p>{{cells.contenido}}</p>
                     </div>
-                    <div class="loader"></div>
+
+                    <div class="loader {{cells.eje_key}}"></div>
 
 
                     <div class="meta meta--preview">
                      
                         <span class="meta__indicador_a icon-{{cells.indicador_a}}"></span>
                         <span class="meta__indicador_b icon-{{cells.indicador_b}}"></span>
-                        <span class="meta__arrow icon-arrow"></span>
+                        <span class="meta__indicador_c icon-{{cells.indicador_c}}"></span>
                     </div>
                 </a>
             </script>
