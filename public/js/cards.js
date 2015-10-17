@@ -16,6 +16,9 @@
 
   var CardTemplate = Handlebars.compile($('#card-template').html()),
      StoryTemplate = Handlebars.compile($('#story-template').html());
+  var navTemplate = Handlebars.compile($('#nav-partial').html());
+
+  // Handlebars.registerPartial("nav", $("#nav-partial").html());
 
 
   var cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
@@ -61,8 +64,23 @@
       // Isotope instance
       iso,
       // filter ctrls
-      filterCtrls = [].slice.call(document.querySelectorAll('.filter > button'));
+      filterCtrls = [].slice.call(document.querySelectorAll('.filter > button')),
+
+      cardsNav = [];
       // orderCtrls = [].slice.call(document.querySelectorAll('.order > button'));
+
+      // from http://www.sberry.me/articles/javascript-event-throttling-debouncing
+      function throttle(fn, delay) {
+        var allowSample = true;
+
+        return function(e) {
+          if (allowSample) {
+            allowSample = false;
+            setTimeout(function() { allowSample = true; }, delay);
+            fn(e);
+          }
+        };
+      }
 
     /**
      * gets the viewport width and height
@@ -105,14 +123,15 @@
         url: stories,
         headers: 1,
         query: "select *",
-          rowHandler : StoryTemplate,
-          callback: initEvents
+        rowHandler : StoryTemplate,
+        callback: initEvents
       });
       // Close init();
     }
 
 
     function initEvents() {
+
 
       iso = new Isotope( gridItemsContainer, {
         getSortData: {
@@ -128,6 +147,10 @@
         },
         transitionDuration: '0.6s'
       });
+
+      window.addEventListener('resize', throttle(function(ev) {
+        iso.layout();
+      }, 50));
 
       gridItems = gridItemsContainer.querySelectorAll('.grid__item');
       contentItems = contentItemsContainer.querySelectorAll('.content__item');
@@ -285,9 +308,20 @@
         classie.add(closeCtrl, 'close-button--show');
         // sets overflow hidden to the body and allows the switch to the content scroll
         classie.addClass(bodyEl, 'noscroll');
+
+        classie.addClass(bodyEl, 'selectedStory'+selectedStory);
+
+        classie.addClass(bodyEl, 'currentCard'+currentCard);
+
+        // var newNav = '#currentCard'+currentCard;
+
+        $('#currentCard'+currentCard).html(navTemplate);
+
+        console.log(navTemplate);
+
   
         //arma la visualizacion una vez armado el card
-        armaVisualizacion();
+        // armaVisualizacion();
 
         isAnimating = false;
       });
@@ -305,6 +339,11 @@
         var dummy = gridItemsContainer.querySelector('.placeholder');
 
         classie.removeClass(bodyEl, 'noscroll');
+
+        classie.removeClass(bodyEl, 'selectedStory'+selectedStory);
+
+        classie.removeClass(bodyEl, 'currentCard'+currentCard);
+
 
         dummy.style.WebkitTransform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
         dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
@@ -355,18 +394,7 @@
       }
     };
 
-  // from http://www.sberry.me/articles/javascript-event-throttling-debouncing
-  function throttle(fn, delay) {
-    var allowSample = true;
 
-    return function(e) {
-      if (allowSample) {
-        allowSample = false;
-        setTimeout(function() { allowSample = true; }, delay);
-        fn(e);
-      }
-    };
-  }
 
 
   function done () {

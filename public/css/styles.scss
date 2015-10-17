@@ -8,13 +8,28 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500);
 @include font-face('Datoscopio', '../fonts/datoscopio', $file-formats: eot svg woff ttf);
 
+/*
+
+pfdindisplaypro-black
+pfdindisplaypro-bold
+pfdindisplaypro-light
+pfdindisplaypro-med
+pfdindisplaypro-reg
+pfdindisplaypro-thin
+pfdindisplaypro-xthin
+
+*/
+
+@include font-face('DIN Display Pro Regular', '../fonts/pfdindisplaypro-reg', $file-formats: eot svg woff ttf);
+@include font-face('DIN Display Pro Thin', '../fonts/pfdindisplaypro-thin', $file-formats: eot svg woff ttf);
 
 /* ########
    Fuentes
    ######## */
 
-$fontset-roboto: "Roboto Mono", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-sans-serif: $fontset-roboto;
+$fontset-regular: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-thin: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif: $fontset-regular;
 
 /* #######
    Colores
@@ -50,7 +65,7 @@ body {
   line-height: 1.42857;
   background-color: $gris !important;
   color: #fff;
-  font-family: $fontset-roboto;
+  font-family: $fontset-regular;
   font-weight: 400;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -370,7 +385,7 @@ button:focus {
   cursor: pointer;
   color: $gris;
   text-transform: uppercase;
-  font-family: $fontset-roboto;
+  font-family: $fontset-regular;
   font-size: 1em;
   padding: 9px 15px;
   margin-bottom: 4px;
@@ -516,9 +531,10 @@ button:focus {
 }
 
 .card--text {
+  font-family: $fontset-thin;
   text-align: left;
-  font-size: 1.25em;
-  line-height: 1.35em;
+  font-size: 1.7em;
+  line-height: 1.3em;
   padding: 0px;
   white-space: pre-line;
   // @extend .title--preview;
@@ -572,11 +588,11 @@ button:focus {
   // padding-top: 10px;
   text-align: left;
   display: block;
-  color: $gris;
+  // color: $gris;
   width: auto;
   @each $eje, $color in $ejes {
   &.#{$eje} {
-      background-color: $color;
+      color: $color;
     }
   }
 }
@@ -1221,4 +1237,37 @@ Estilos d3
 
 .resaltada{
   fill: #996666;
+}
+
+.tabs {
+  position: absolute;
+  width: 90%;
+  max-width: 960px;
+  margin: 2em auto;
+  bottom: 0;
+  left: 0;
+
+  @include clearfix;
+    nav {
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background: red;
+    }
+    .tabs-navigation {
+      width: 60 * 6;
+      list-style: none;
+      @include clearfix;
+      li {
+        float: left;
+      }
+      a {
+        position: relative;
+        display: block;
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        padding-top: 60px - 26px;
+      }
+    }
+
 }

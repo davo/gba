@@ -5,6 +5,29 @@
   font-weight: normal;
   src: url("../fonts/datoscopio.eot?#iefix") format("embedded-opentype"), url("../fonts/datoscopio.woff") format("woff"), url("../fonts/datoscopio.ttf") format("truetype"), url("../fonts/datoscopio.svg#Datoscopio") format("svg"); }
 
+/*
+
+pfdindisplaypro-black
+pfdindisplaypro-bold
+pfdindisplaypro-light
+pfdindisplaypro-med
+pfdindisplaypro-reg
+pfdindisplaypro-thin
+pfdindisplaypro-xthin
+
+*/
+@font-face {
+  font-family: "DIN Display Pro Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/pfdindisplaypro-reg.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-reg.woff") format("woff"), url("../fonts/pfdindisplaypro-reg.ttf") format("truetype"), url("../fonts/pfdindisplaypro-reg.svg#DIN Display Pro Regular") format("svg"); }
+
+@font-face {
+  font-family: "DIN Display Pro Thin";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/pfdindisplaypro-thin.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-thin.woff") format("woff"), url("../fonts/pfdindisplaypro-thin.ttf") format("truetype"), url("../fonts/pfdindisplaypro-thin.svg#DIN Display Pro Thin") format("svg"); }
+
 /* ########
    Fuentes
    ######## */
@@ -29,7 +52,7 @@ body {
   line-height: 1.42857;
   background-color: #333333 !important;
   color: #fff;
-  font-family: "Roboto Mono", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -301,7 +324,7 @@ button:focus {
   cursor: pointer;
   color: #333333;
   text-transform: uppercase;
-  font-family: "Roboto Mono", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   padding: 9px 15px;
   margin-bottom: 4px;
@@ -446,9 +469,10 @@ button:focus {
   white-space: pre-line; }
 
 .card--text {
+  font-family: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
-  font-size: 1.25em;
-  line-height: 1.35em;
+  font-size: 1.7em;
+  line-height: 1.3em;
   padding: 0px;
   white-space: pre-line; }
 
@@ -496,14 +520,13 @@ button:focus {
   letter-spacing: 0.2em;
   text-align: left;
   display: block;
-  color: #333333;
   width: auto; }
   .category.salud {
-    background-color: #2bfda6; }
+    color: #2bfda6; }
   .category.educacion {
-    background-color: #88ffff; }
+    color: #88ffff; }
   .category.infraestructura {
-    background-color: #cca2fc; }
+    color: #cca2fc; }
 
 .title--preview, .loader, .category, .card--text {
   -webkit-transition: -webkit-transform 0.25s, opacity 0.25s;
@@ -1006,3 +1029,35 @@ Estilos d3
 
 .resaltada {
   fill: #996666; }
+
+.tabs {
+  position: absolute;
+  width: 90%;
+  max-width: 960px;
+  margin: 2em auto;
+  bottom: 0;
+  left: 0; }
+  .tabs::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tabs nav {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: red; }
+  .tabs .tabs-navigation {
+    width: 360;
+    list-style: none; }
+    .tabs .tabs-navigation::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .tabs .tabs-navigation li {
+      float: left; }
+    .tabs .tabs-navigation a {
+      position: relative;
+      display: block;
+      height: 60px;
+      width: 60px;
+      text-align: center;
+      padding-top: 34px; }

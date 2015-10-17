@@ -37,11 +37,6 @@
                         <button class="action filter__item educacion" data-filter=".educacion">Educacion</button>
                         <button class="action filter__item infraestructura" data-filter=".infraestructura">Infraestructura</button>
                 </div>
-                <!-- <div class="order">
-                    <span class="order__label">Ordenar</span>
-                    <button class="action order__item order__item--selected" data-order="*">Ver todos</button>
-                    <button class="action order__item" data-order="destacado">Destacadas</button>
-                </div> -->
             </div>
 
         </header>
@@ -54,7 +49,7 @@
 
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
-                <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}">
+                <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}" data-orden="{{cells.orden}}" data-viz="{{cells.dataviz_key}}">
                     <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
                     <h2 class="title title--preview">{{cells.titulo}}</h2>
                     <div class="card--text">
@@ -78,21 +73,59 @@
             <div class="scroll-wrap">
                 <script id="story-template" type="text/x-handlebars-template">
                     <article class="content__item">
-                        <span class="category category--full">{{cells.eje}}/{{cells.dataviz_key}}</span>
-                        <h2 class="title title--full">{{cells.titulo}}</h2>
+                        <span class="category category--full {{cells.eje}}">{{cells.eje}} / {{cells.titulo}}</span>
+                        <h2 class="title title--full">{{cells.orden_array}} - {{cells.dataviz_key}}</h2>
 
-                        <p>{{cells.contenido}}</p>
                         <div class="meta meta--full">
                         </div>
-                        <input id="verMapa" type="checkbox">Ver en mapa</input>
-                        <select id="cambiador">
-                          <option value="1-4" selected>Poblacion vs Establecimientos</option>
-                          <option value="1-4" filtro="La Matanza, Moreno">Poblacion vs Establecimientos (La Matanza y Moreno)</option>
-                          <option value="1-5">Poblacion vs Camas</option>
-                          <option value="4-3">Establecimientos vs Superficie</option>
-                        </select>
-                        <div id="grafico"> </div>
+                        <div id="grafico"></div>
+                        <nav id="cardNav{{cells.dataviz_key}}" class="tabs">
+                            <ul class="tabs-navigation">
+
+                                {{#unless cells.card_menu_1}}
+                                    <li>{{cells.card_menu_1}}</li>
+                                {{/unless}}
+                                {{#if cells.card_menu_1}}
+                                    <li>{{cells.card_menu_1}}</li>
+                                {{/if}}
+                                {{#if cells.card_menu_2}}
+                                    <li>{{cells.card_menu_2}}</li>
+                                {{/if}}
+                                {{#if cells.card_menu_3}}
+                                    <li>{{cells.card_menu_3}}</li>
+                                {{/if}}
+                                {{#if cells.card_menu_4}}
+                                    <li>{{cells.card_menu_4}}</li>
+                                {{/if}}
+                                {{#if cells.card_menu_5}}
+                                    <li>{{cells.card_menu_5}}</li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+
                     </article>
+                </script>
+                <script id="nav-partial" type="text/x-handlebars-template">
+                    <ul>
+                        {{#unless card_menu_1}}
+                            <li>{{cells.card_menu_1}}</li>
+                        {{/unless}}
+                        {{#if card_menu_1}}
+                            <li>{{cells.card_menu_1}}</li>
+                        {{/if}}
+                        {{#if card_menu_2}}
+                            <li>{{cells.card_menu_2}}</li>
+                        {{/if}}
+                        {{#if card_menu_3}}
+                            <li>{{cells.card_menu_3}}</li>
+                        {{/if}}
+                        {{#if card_menu_4}}
+                            <li>{{cells.card_menu_4}}</li>
+                        {{/if}}
+                        {{#if card_menu_5}}
+                            <li>{{cells.card_menu_5}}</li>
+                        {{/if}}
+                    </ul>
                 </script>
             </div>
             <button class="close-button"><span>Cerrar</span></button>
