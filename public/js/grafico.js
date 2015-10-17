@@ -264,10 +264,11 @@ function cargaDatos() {
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var valores = $(".content__item--show #cambiador").val();
+    console.log(valores);
     var array_de_datos = [];
     for (var i = 1; i < datos.length - 1; i++) {
-        var dato1 = +datos[i][valores.split("-")[0]];
-        var dato2 = +datos[i][valores.split("-")[1]];
+        var dato1 = +datos[i][valores.split(",")[0]];
+        var dato2 = +datos[i][valores.split(",")[1]];
         var nombrePartido = datos[i][0];
         array_de_datos.push([nombrePartido, dato1, dato2]);
     }
@@ -299,7 +300,7 @@ function cargaMapa() {
     var svg = d3.select(divDeVizualizacion).append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .attr('viewBox', '0 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
+        .attr('viewBox', '-20 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
         .attr('preserveAspectRatio', 'xMinYMin');
 
     d3.json("data/gba.json", function(error, gba) {

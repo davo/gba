@@ -1272,7 +1272,7 @@ Estilos d3
       -webkit-overflow-scrolling: touch;
     }
     .tabs-navigation {
-      width: 100 * 6;
+      width: 100%;
       list-style: none;
       margin: 0;
       @include clearfix;
@@ -1289,21 +1289,27 @@ Estilos d3
       }
       a {
         font-family: $fontset-medium;
-        font-size: 0.7em;
-        color: white;
+        font-size: 0.8em;
+        color: $gris;
         position: relative;
         display: block;
         height: 90px;
-        width: 200px;
-        white-space: nowrap;
+        width: 180px;
+        white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: left;
-        padding: 42px 20px;
-
-
-
-
+        padding: 30px 20px;
+        @include transition(all 0.5s ease-in-out);
+        &:hover {
+          position: relative;
+          overflow: visible;
+          text-overflow: clip;
+          width: auto;
+        }
+        &.active {
+          width: 200px;          
+        }
       }
 
     }

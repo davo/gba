@@ -1049,7 +1049,7 @@ Estilos d3
     overflow: auto;
     -webkit-overflow-scrolling: touch; }
   .tabs .tabs-navigation {
-    width: 600;
+    width: 100%;
     list-style: none;
     margin: 0; }
     .tabs .tabs-navigation::after {
@@ -1072,14 +1072,24 @@ Estilos d3
       float: left; }
     .tabs .tabs-navigation a {
       font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 0.7em;
-      color: white;
+      font-size: 0.8em;
+      color: #333333;
       position: relative;
       display: block;
       height: 90px;
-      width: 200px;
-      white-space: nowrap;
+      width: 180px;
+      white-space: wrap;
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: left;
-      padding: 42px 20px; }
+      padding: 30px 20px;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out; }
+      .tabs .tabs-navigation a:hover {
+        position: relative;
+        overflow: visible;
+        text-overflow: clip;
+        width: auto; }
+      .tabs .tabs-navigation a.active {
+        width: 200px; }

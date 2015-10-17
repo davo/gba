@@ -100,6 +100,8 @@
     function scrollX() { return window.pageXOffset || docElem.scrollLeft; }
     function scrollY() { return window.pageYOffset || docElem.scrollTop; }
 
+    var checkComma = /(,)/g
+
       // $('#theGrid').on('scroll',function(){ console.log(scrollTop); })
 
     // Instancio y ejecuto las cards desde el spreadsheet gestionado por sheetrock, luego ejecuto funcion para concatenar con la segundo generación de contenidos.
@@ -114,13 +116,14 @@
 
 
     function crearNavegador(data) {
-      console.log(cardsContentNav);
+      // console.log(cardsContentNav);
     }
 
 
     var cargarCardsEnArray = function(error, options, response) {
         if (!error) {
             // hayDatos = true;
+
             $.each(response.rows, function(index, value) {
                 // las propiedades de las celdas son los titulos del spreadsheet
                 // y son case sensitive (no usar espacios ni caracteres raros)
@@ -134,10 +137,17 @@
                     value.cells.indicador_c,
                     value.cells.filtro,
                     value.cells.titulo,
-                    value.cells.contenido
+                    value.cells.contenido,
+                    value.cells.criterio_visualizacion
 
                ];
-                cardsContentNav.push(fila);
+                if (index === 0) {
+                  console.log('Skipping header!');
+                } else if (index === 1) {
+                  console.log('Skipping zero value!');
+                } else {
+                  cardsContentNav.push(fila);
+                }
             });
         } else {
           console.log(error);
@@ -147,53 +157,78 @@
     };
 
 
-    var card = [],
-        selectedNav;
+  
+      
 
     // Abstract: Selecciona el navegador creado por StoryTemplate
     // y extrae los valores de los cards internos. Luego convierte
     // en Array.
 
     function currentNav() {
-      
-      var nav = $(".content__item--show").find("#cardNav");
-      var list = nav.find(".tabs-navigation");
-      console.log(list);
-      var cardContent = [];
-      selectedNav = nav.data("cards");
-      
-      selectedNav = selectedNav.split(",");
 
-      function createNav() {
-        console.log(card.indexOf(5));
-        var listItem = '<li><a href=\"\">'+ card.indexOf(5)  +'</a></li>'
+      // El criterio para crear esta funcion fue el siguiente:
+      // Asumimos que en el spreadsheet "stories", hay una columna 'cards' y extraemos sus valores (separados por coma)
+      // Iteramos desde el spreadshhet "cards" para matchear el contenido de la columna "cards" (spreadsheet stories) con
+      // los objetos que necesitamos para la interfaz.
+
+      console.table(cardsContentNav);
+
+      // var nav, navegador cuyo contenido son los cards relacionados entre si atraves de una full story.
+      var nav = $(".content__item--show").find("#cardNav");
+      // var list, placeholder donde van a ir en formato de lista el contenido de los cards relacionados/
+      var list = nav.find(".tabs-navigation");
+      // getCambiador, select donde arrojaremos la lista de opciones basadas en los criterios a visualizar.
+      var getCambiador = $("#cambiador");
+      console.log(getCambiador);
+      // cardContent, array donde arrojaremos el contenido de los cards que corresponden.
+      var cardContent = [];
+
+      // selectedNav, get de lista con los cards arrojados por mustache en story-template.
+      var selectedNav = nav.data("cards");
+
+      if(!selectedNav.includes(',')) {
+        // Alerta, bug en el Card 12 que es una card que no comparte Full Story. Rompe el patron. Revisar y corregir.
+        console.log('No comma!');
+      } else {
+        selectedNav = selectedNav.split(",");
+      }
+
+      // Creo una lista de options 
+      function createVizOptions(i) {
+        var optionItem;
+        optionItem = '<option value='+cardsContentNav[cardContent[i]][10]+' filtro="'+cardsContentNav[cardContent[i]][7]+'">'+cardsContentNav[cardContent[i]][9]+'</option>';
+        $(optionItem).appendTo(getCambiador);
+        console.log(cardsContentNav[cardContent[i]][10]);
+      }
+      
+      function createNav(i) {
+        var listItem;
+        listItem = '<li><a href=\"\">'+cardsContentNav[cardContent[i]][8]+'</a></li>';
         $(listItem).appendTo(list);
       }
 
-      // $.each(selectedNav,function(i,lecard){
 
-      // })
 
       // console.table(selectedNav);
 
-      for (var i = 1; i < selectedNav.length; i++) {
+      for (var i = 0; i < selectedNav.length; i++) {
           var getCard = parseInt(selectedNav[i]);
-          card.push(getCard);
-          if (i == selectedNav.length) {
-            console.log("Exit!")
-          }
+          cardContent.push(getCard);
+          createNav(i);
+          createVizOptions(i)
       }
-      createNav();
-      // $.each(card,function(e,c){
-      //   cardContent = cardsContentNav[c];        
+      // $.each(selectedNav,function(i,cardContent){
+        
       // })
+
+      armaVisualizacion();
     }
 
     function cargaDatosNav() {
       var archivo = sheetrock({
           url: cards,
           headers: 1,
-          query: "select A,B,D,E,F,G,H,I,K,M",
+          query: "select A,B,D,E,F,G,H,I,K,M,O",
           callback: cargarCardsEnArray
       });
     }
@@ -410,7 +445,7 @@
         currentNav();
   
         //arma la visualizacion una vez armado el card
-        armaVisualizacion();
+        
 
         isAnimating = false;
       });
@@ -418,6 +453,8 @@
 
     function hideContent() {
       var gridItem = gridItems[currentCard], contentItem = contentItems[current];
+
+
 
       classie.remove(contentItem, 'content__item--show');
       classie.remove(contentItemsContainer, 'content--show');
