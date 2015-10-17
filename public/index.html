@@ -87,52 +87,11 @@
                           <option value="4-3">Establecimientos vs Superficie</option>
                         </select>
                         <nav id="cardNav" class="tabs" data-cards="{{cells.cards}}">
-                            <ul class="tabs-navigation">
-
-                                {{#unless cells.card_menu_1}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_1}}</a></li>
-                                {{/unless}}
-                                {{#if cells.card_menu_1}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_1}}</a></li>
-                                {{/if}}
-                                {{#if cells.card_menu_2}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_2}}</a></li>
-                                {{/if}}
-                                {{#if cells.card_menu_3}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_3}}</a></li>
-                                {{/if}}
-                                {{#if cells.card_menu_4}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_4}}</a></li>
-                                {{/if}}
-                                {{#if cells.card_menu_5}}
-                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_5}}</a></li>
-                                {{/if}}
+                            <ul class="tabs-navigation {{cells.eje_key}}">
                             </ul>
                         </nav>
 
                     </article>
-                </script>
-                <script id="nav-partial" type="text/x-handlebars-template">
-                    <ul>
-                        {{#unless card_menu_1}}
-                            <li>{{cells.card_menu_1}}</li>
-                        {{/unless}}
-                        {{#if card_menu_1}}
-                            <li>{{cells.card_menu_1}}</li>
-                        {{/if}}
-                        {{#if card_menu_2}}
-                            <li>{{cells.card_menu_2}}</li>
-                        {{/if}}
-                        {{#if card_menu_3}}
-                            <li>{{cells.card_menu_3}}</li>
-                        {{/if}}
-                        {{#if card_menu_4}}
-                            <li>{{cells.card_menu_4}}</li>
-                        {{/if}}
-                        {{#if card_menu_5}}
-                            <li>{{cells.card_menu_5}}</li>
-                        {{/if}}
-                    </ul>
                 </script>
             </div>
             <button class="close-button"><span>Cerrar</span></button>

@@ -5,7 +5,7 @@
 
 // @import "animate.min.css";
 
-@import url(http://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500);
+// @import url(http://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500);
 @include font-face('Datoscopio', '../fonts/datoscopio', $file-formats: eot svg woff ttf);
 
 /*
@@ -1276,13 +1276,21 @@ Estilos d3
       list-style: none;
       margin: 0;
       @include clearfix;
+      @each $eje, $color in $ejes {
+        &.#{$eje} a {
+          background-color: rgba($color, .9);
+          &:hover, &:focus {
+              background-color: rgba($color, 1);
+          }
+        }
+      }
       li {
         float: left;
       }
       a {
         font-family: $fontset-medium;
         font-size: 0.7em;
-        color: $gris;
+        color: white;
         position: relative;
         display: block;
         height: 90px;
@@ -1294,14 +1302,7 @@ Estilos d3
         padding: 42px 20px;
 
 
-        @each $eje, $color in $ejes {
-          &.#{$eje} {
-            background-color: rgba($color, .9);
-            &:hover, &:focus {
-                background-color: rgba($color, 1);
-            }
-          }
-        }
+
 
       }
 

@@ -16,9 +16,6 @@
 
   var CardTemplate = Handlebars.compile($('#card-template').html()),
      StoryTemplate = Handlebars.compile($('#story-template').html());
-  var navTemplate = Handlebars.compile($('#nav-partial').html());
-
-  // Handlebars.registerPartial("nav", $("#nav-partial").html());
 
 
   var cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
@@ -66,7 +63,7 @@
       // filter ctrls
       filterCtrls = [].slice.call(document.querySelectorAll('.filter > button')),
 
-      cardsNav = [];
+      cardsContentNav = [];
       // orderCtrls = [].slice.call(document.querySelectorAll('.order > button'));
 
       // from http://www.sberry.me/articles/javascript-event-throttling-debouncing
@@ -116,10 +113,10 @@
     });
 
 
-    // function crearNavegador(data) {
+    function crearNavegador(data) {
+      // console.table(cardsContentNav);
 
-
-    // }
+    }
 
 
     var cargarCardsEnArray = function(error, options, response) {
@@ -141,12 +138,12 @@
                     value.cells.contenido
 
                ];
-                cardsNav.push(fila);
+                cardsContentNav.push(fila);
             });
         } else {
           console.log(error);
         }
-        // crearNavegador(cardsNav);
+        crearNavegador(cardsContentNav);
 
     };
 
@@ -161,36 +158,42 @@
     function currentNav() {
       
       var nav = $(".content__item--show").find("#cardNav");
+      var list = nav.find(".tabs-navigation");
+      console.log(list);
       var cardContent = [];
       selectedNav = nav.data("cards");
       
       selectedNav = selectedNav.split(",");
 
-      $.each(selectedNav,function(i,lecard){
-
-      })
-
-      console.table(selectedNav);
-
-      for (var i = 0; i < selectedNav.length; i++) {
-          var getCard = parseInt(selectedNav[i]);
-          // console.log(getCard);
-          card.push(getCard);
-          // console.table(card);
+      function createNav() {
+        console.log(card.indexOf(5));
+        var listItem = '<li><a href=\"\">'+ card.indexOf(5)  +'</a></li>'
+        $(listItem).appendTo(list);
       }
-      $.each(card,function(e,c){
-        cardContent = cardsNav[c];
-        // $.each(cardContent, function(i,t,a,d){
-        //   console.log(i,t,a,d);
-        // })
-        console.table(cardContent);
-        // console.log(e,c)
-      })
+
+      // $.each(selectedNav,function(i,lecard){
+
+      // })
+
+      // console.table(selectedNav);
+
+      for (var i = 1; i < selectedNav.length; i++) {
+          var getCard = parseInt(selectedNav[i]);
+          card.push(getCard);
+          if (i == selectedNav.length) {
+            console.log("Exit!")
+          }
+      }
+      createNav();
+      // $.each(card,function(e,c){
+      //   cardContent = cardsContentNav[c];        
+      // })
     }
 
     function cargaDatosNav() {
       var archivo = sheetrock({
           url: cards,
+          headers: 1,
           query: "select A,B,D,E,F,G,H,I,K,M",
           callback: cargarCardsEnArray
       });
@@ -404,10 +407,6 @@
         classie.addClass(bodyEl, 'currentCard'+currentCard);
 
         // var newNav = '#currentCard'+currentCard;
-
-        $('#currentCard'+currentCard).html(navTemplate);
-
-        // console.log(navTemplate);
 
         currentNav();
   
