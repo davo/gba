@@ -78,7 +78,7 @@
 
                         <div class="meta meta--full">
                         </div>
-                        <div id="grafico"></div>
+                        <div id="grafico" class="{{cells.eje_key}}"></div>
                         <input id="verMapa" type="checkbox">Ver en mapa</input>
                         <select id="cambiador">
                           <option value="1-4" selected>Poblacion vs Establecimientos</option>
@@ -86,7 +86,7 @@
                           <option value="1-5">Poblacion vs Camas</option>
                           <option value="4-3">Establecimientos vs Superficie</option>
                         </select>
-                        <nav id="cardNav{{cells.dataviz_key}}" class="tabs" data-cards="{{cells.cards}}">
+                        <nav id="cardNav" class="tabs" data-cards="{{cells.cards}}">
                             <ul class="tabs-navigation">
 
                                 {{#unless cells.card_menu_1}}

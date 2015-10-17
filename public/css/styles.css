@@ -995,8 +995,16 @@ Estilos d3
   width: 500px; }
 
 .circulo {
-  fill: black;
-  stroke: white; }
+  fill: black; }
+
+.salud .circulo {
+  fill: #2bfda6; }
+
+.educacion .circulo {
+  fill: #88ffff; }
+
+.infraestructura .circulo {
+  fill: #cca2fc; }
 
 .circuloDim {
   fill: black;

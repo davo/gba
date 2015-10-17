@@ -116,17 +116,16 @@
     });
 
 
-    function crearNavegador(data) {
-
-      console.table(cardsNav);
-
-    }
+    // function crearNavegador(data) {
 
 
-    var cargoDatosEnArray = function(error, options, response) {
+    // }
+
+
+    var cargarCardsEnArray = function(error, options, response) {
         if (!error) {
             // hayDatos = true;
-            jQuery.each(response.rows, function(index, value) {
+            $.each(response.rows, function(index, value) {
                 // las propiedades de las celdas son los titulos del spreadsheet
                 // y son case sensitive (no usar espacios ni caracteres raros)
                 var fila = [
@@ -147,15 +146,53 @@
         } else {
           console.log(error);
         }
-        crearNavegador(cardsNav);
+        // crearNavegador(cardsNav);
 
     };
+
+
+    var card = [],
+        selectedNav;
+
+    // Abstract: Selecciona el navegador creado por StoryTemplate
+    // y extrae los valores de los cards internos. Luego convierte
+    // en Array.
+
+    function currentNav() {
+      
+      var nav = $(".content__item--show").find("#cardNav");
+      var cardContent = [];
+      selectedNav = nav.data("cards");
+      
+      selectedNav = selectedNav.split(",");
+
+      $.each(selectedNav,function(i,lecard){
+
+      })
+
+      console.table(selectedNav);
+
+      for (var i = 0; i < selectedNav.length; i++) {
+          var getCard = parseInt(selectedNav[i]);
+          // console.log(getCard);
+          card.push(getCard);
+          // console.table(card);
+      }
+      $.each(card,function(e,c){
+        cardContent = cardsNav[c];
+        // $.each(cardContent, function(i,t,a,d){
+        //   console.log(i,t,a,d);
+        // })
+        console.table(cardContent);
+        // console.log(e,c)
+      })
+    }
 
     function cargaDatosNav() {
       var archivo = sheetrock({
           url: cards,
           query: "select A,B,D,E,F,G,H,I,K,M",
-          callback: cargoDatosEnArray
+          callback: cargarCardsEnArray
       });
     }
 
@@ -164,6 +201,8 @@
     function init() {
 
       cargaDatosNav();
+
+
 
       // Instancio y ejecuto las full stories desde el 2do. spreadsheet gestionado por sheetrock, concateno con funciones . Luego se ejecuta isotope
 
@@ -259,7 +298,7 @@
           // index of current item
 
           current = selectedStory;
-          console.log('Posicion: '+pos,', Card clickeada: '+currentCard, ', Story seleccionada: '+selectedStory);
+          // console.log('Posicion: '+pos,', Card clickeada: '+currentCard, ', Story seleccionada: '+selectedStory);
 
           // simulate loading time..
           classie.add(item, 'grid__item--loading');
@@ -349,7 +388,7 @@
 
         contentItemsContainer.style.top = scrollY() + 'px';
 
-        console.log(scrollY() + 'px');
+        // console.log(scrollY() + 'px');
         
         // show the main content container
         classie.add(contentItemsContainer, 'content--show');
@@ -368,8 +407,9 @@
 
         $('#currentCard'+currentCard).html(navTemplate);
 
-        console.log(navTemplate);
+        // console.log(navTemplate);
 
+        currentNav();
   
         //arma la visualizacion una vez armado el card
         armaVisualizacion();
