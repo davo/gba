@@ -716,7 +716,7 @@ button:focus {
   overflow: hidden;
   height: 0;
   opacity: 0;
-  padding: 60px 60px 80px 60px;
+  padding: 0px 60px 0px 60px;
   pointer-events: none;
   font-size: 0.85em; }
   .content__item p {
@@ -735,9 +735,15 @@ button:focus {
 
 /* content elements */
 .category--full {
-  font-size: 1.25em;
-  margin-bottom: 20px;
-  color: #81c483; }
+  font-size: 0.9em;
+  position: relative;
+  margin: 30px 0 40px 0; }
+  .category--full.salud {
+    color: #2bfda6; }
+  .category--full.educacion {
+    color: #88ffff; }
+  .category--full.infraestructura {
+    color: #cca2fc; }
 
 .title--full {
   font-size: 3.25em; }
@@ -981,8 +987,8 @@ Estilos d3
   border: 0px;
   margin: 0 auto;
   padding: 0;
-  width: 500px;
-  height: 400px; }
+  width: 100%;
+  height: 70vh; }
 
 #info {
   text-align: center;
@@ -1023,9 +1029,9 @@ Estilos d3
 
 .tabs {
   position: absolute;
-  width: 90%;
-  max-width: 960px;
-  margin: 2em auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
   bottom: 0;
   left: 0; }
   .tabs::after {
@@ -1034,11 +1040,11 @@ Estilos d3
     display: table; }
   .tabs nav {
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    background: red; }
+    -webkit-overflow-scrolling: touch; }
   .tabs .tabs-navigation {
-    width: 360;
-    list-style: none; }
+    width: 600;
+    list-style: none;
+    margin: 0; }
     .tabs .tabs-navigation::after {
       clear: both;
       content: "";
@@ -1046,9 +1052,27 @@ Estilos d3
     .tabs .tabs-navigation li {
       float: left; }
     .tabs .tabs-navigation a {
+      font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 0.7em;
+      color: #333333;
       position: relative;
       display: block;
-      height: 60px;
-      width: 60px;
-      text-align: center;
-      padding-top: 34px; }
+      height: 90px;
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+      padding: 42px 20px; }
+      .tabs .tabs-navigation a.salud {
+        background-color: rgba(43, 253, 166, 0.9); }
+        .tabs .tabs-navigation a.salud:hover, .tabs .tabs-navigation a.salud:focus {
+          background-color: #2bfda6; }
+      .tabs .tabs-navigation a.educacion {
+        background-color: rgba(136, 255, 255, 0.9); }
+        .tabs .tabs-navigation a.educacion:hover, .tabs .tabs-navigation a.educacion:focus {
+          background-color: #88ffff; }
+      .tabs .tabs-navigation a.infraestructura {
+        background-color: rgba(204, 162, 252, 0.9); }
+        .tabs .tabs-navigation a.infraestructura:hover, .tabs .tabs-navigation a.infraestructura:focus {
+          background-color: #cca2fc; }

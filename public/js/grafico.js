@@ -1,7 +1,7 @@
 // Abstract: En document.ready carga datos y los pone en un array
 
 
-var spreadSheet ='https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=509195421';
+var spreadSheet ='https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=1860459801';
 var hayDatos = false;
 var datos = [];
 var centroides = [];

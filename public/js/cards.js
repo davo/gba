@@ -115,7 +115,55 @@
         callback: init
     });
 
+
+    function crearNavegador(data) {
+
+      console.table(cardsNav);
+
+    }
+
+
+    var cargoDatosEnArray = function(error, options, response) {
+        if (!error) {
+            // hayDatos = true;
+            jQuery.each(response.rows, function(index, value) {
+                // las propiedades de las celdas son los titulos del spreadsheet
+                // y son case sensitive (no usar espacios ni caracteres raros)
+                var fila = [
+                    value.cells.orden,
+                    value.cells.dataviz_key,
+                    value.cells.eje,
+                    value.cells.eje_key,
+                    value.cells.indicador_a,
+                    value.cells.indicador_b,
+                    value.cells.indicador_c,
+                    value.cells.filtro,
+                    value.cells.titulo,
+                    value.cells.contenido
+
+               ];
+                cardsNav.push(fila);
+            });
+        } else {
+          console.log(error);
+        }
+        crearNavegador(cardsNav);
+
+    };
+
+    function cargaDatosNav() {
+      var archivo = sheetrock({
+          url: cards,
+          query: "select A,B,D,E,F,G,H,I,K,M",
+          callback: cargoDatosEnArray
+      });
+    }
+
+
+
     function init() {
+
+      cargaDatosNav();
 
       // Instancio y ejecuto las full stories desde el 2do. spreadsheet gestionado por sheetrock, concateno con funciones . Luego se ejecuta isotope
 
@@ -132,6 +180,9 @@
 
     function initEvents() {
 
+      
+
+      
 
       iso = new Isotope( gridItemsContainer, {
         getSortData: {

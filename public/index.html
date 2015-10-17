@@ -50,7 +50,7 @@
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}" data-orden="{{cells.orden}}" data-viz="{{cells.dataviz_key}}">
-                    <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
+                    <span class="category {{cells.eje_key}}">{{cells.eje}} / {{cells.orden}}</span>
                     <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
                     <div class="card--text">
                         <p>{{cells.contenido}}</p>
@@ -73,11 +73,12 @@
             <div class="scroll-wrap">
                 <script id="story-template" type="text/x-handlebars-template">
                     <article class="content__item">
-                        <span class="category category--full {{cells.eje}}">{{cells.eje}} / {{cells.titulo}}</span>
-                        <h2 class="title title--full">{{cells.orden_array}} - {{cells.dataviz_key}}</h2>
+                        <span class="category category--full {{cells.eje_key}}">{{cells.eje}} / {{cells.titulo}} / {{cells.cards}} - {{cells.dataviz_key}}</span>
+                        <h2 class="title title--full"></h2>
 
                         <div class="meta meta--full">
                         </div>
+                        <div id="grafico"></div>
                         <input id="verMapa" type="checkbox">Ver en mapa</input>
                         <select id="cambiador">
                           <option value="1-4" selected>Poblacion vs Establecimientos</option>
@@ -85,27 +86,26 @@
                           <option value="1-5">Poblacion vs Camas</option>
                           <option value="4-3">Establecimientos vs Superficie</option>
                         </select>
-                        <div id="grafico"> </div>
-                        <nav id="cardNav{{cells.dataviz_key}}" class="tabs">
+                        <nav id="cardNav{{cells.dataviz_key}}" class="tabs" data-cards="{{cells.cards}}">
                             <ul class="tabs-navigation">
 
                                 {{#unless cells.card_menu_1}}
-                                    <li>{{cells.card_menu_1}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_1}}</a></li>
                                 {{/unless}}
                                 {{#if cells.card_menu_1}}
-                                    <li>{{cells.card_menu_1}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_1}}</a></li>
                                 {{/if}}
                                 {{#if cells.card_menu_2}}
-                                    <li>{{cells.card_menu_2}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_2}}</a></li>
                                 {{/if}}
                                 {{#if cells.card_menu_3}}
-                                    <li>{{cells.card_menu_3}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_3}}</a></li>
                                 {{/if}}
                                 {{#if cells.card_menu_4}}
-                                    <li>{{cells.card_menu_4}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_4}}</a></li>
                                 {{/if}}
                                 {{#if cells.card_menu_5}}
-                                    <li>{{cells.card_menu_5}}</li>
+                                    <li><a href="" class="{{cells.eje_key}}">{{cells.titulo}} - {{cells.card_menu_5}}</a></li>
                                 {{/if}}
                             </ul>
                         </nav>
