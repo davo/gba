@@ -192,8 +192,36 @@ var cargoDatosEnArray = function(error, options, response) {
                 value.cells.indicador_poblacion,
                 value.cells.indicador_hogares,
                 value.cells.indicador_superficie,
+                value.cells.indicador_presupuesto_per_capita,
                 value.cells.salud_establecimientos,
-                value.cells.salud_camas
+                value.cells.salud_camas,
+                value.cells.salud_establecimientos_1000,
+                value.cells.salud_establecimientos_10000,
+                value.cells.salud_camas_1000,
+                value.cells.salud_establecimientos_KM,
+                value.cells.salud_tasa_mortalidad_infantil,
+                value.cells.infraestructura_red_de_agua,
+                value.cells.infraestructura_red_de_agua_porcentaje,
+                value.cells.infraestructura_red_de_gas,
+                value.cells.infraestrtuctura_red_de_gas_porcentaje,
+                value.cells.infraestructura_red_de_cloacas,
+                value.cells.infraestructura_red_de_cloacas_porcentaje,
+                value.cells.educacion_total_unidades_educativas,
+                value.cells.educacion_total_alumnos,
+                value.cells.educacion_unidades_educativas,
+                value.cells.educacion_alumnos,
+                value.cells.educacion_porcentaje_unidades_educativas_estatales,
+                value.cells.educacion_porcentaje_asistencia_unidades_educativas_estatales,
+                value.cells.educacion_unidades_educativas_privadas,
+                value.cells.educacion_alumnos_privadas,
+                value.cells.educacion_porcentaje_unidades_educativas_privadas,
+                value.cells.educacion_porcentaje_asistencia_unidades_educativas_privadas,
+                value.cells.educacion_porcentaje_poblacion_asistencia_unidad_educativa,
+                value.cells.educacion_cantidad_unidades_educativas_cada_10000,
+                value.cells.educacion_cantidad_unidades_educativas_por_km2,
+                value.cells.educacion_porcentaje_poblacion_edad3_uso_pc,
+                value.cells.educacion_analfabetismo_poblacion_edad10mas,
+                value.cells.educacion_analfabetismo_nominal
             ];
 
             datos.push(fila);
@@ -223,7 +251,7 @@ function cargaDatos() {
     if (!hayDatos){
         var archivo = sheetrock({
             url: spreadSheet,
-            query: "select A,B,C,D,E,F,G",
+            query: "select *",
             callback: cargoDatosEnArray
         });
     }else{

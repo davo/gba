@@ -321,7 +321,7 @@
 
   
         //arma la visualizacion una vez armado el card
-        // armaVisualizacion();
+        armaVisualizacion();
 
         isAnimating = false;
       });

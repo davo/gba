@@ -17,6 +17,12 @@ pfdindisplaypro-xthin
 
 */
 @font-face {
+  font-family: "DIN Display Pro Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/pfdindisplaypro-med.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-med.woff") format("woff"), url("../fonts/pfdindisplaypro-med.ttf") format("truetype"), url("../fonts/pfdindisplaypro-med.svg#DIN Display Pro Medium") format("svg"); }
+
+@font-face {
   font-family: "DIN Display Pro Regular";
   font-style: normal;
   font-weight: normal;
@@ -415,18 +421,7 @@ button:focus {
   color: inherit;
   min-height: 420px;
   cursor: pointer;
-  text-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-direction: normal;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: top;
-  justify-content: top; }
+  text-align: center; }
   .grid__sizer:first-child::before,
   .grid__item:first-child::before {
     margin-top: 20px; }
@@ -458,26 +453,22 @@ button:focus {
 /* grid item element and full content element styles */
 .title, .content__item .title {
   margin: 40px 0 0 0;
+  font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.95em;
-  font-weight: 400;
-  text-transform: uppercase;
   text-align: left;
   width: 100%;
-  color: white;
   line-height: 1.1em;
-  padding: 0px;
-  white-space: pre-line; }
+  padding: 0px; }
 
 .card--text {
-  font-family: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
-  font-size: 1.7em;
+  font-size: 1.4em;
   line-height: 1.3em;
-  padding: 0px;
-  white-space: pre-line; }
+  padding: 0px; }
 
 .loader {
-  height: 1px;
+  height: 0px;
   width: 100%;
   margin: 5px auto;
   position: relative;
@@ -495,11 +486,11 @@ button:focus {
     -webkit-transform-origin: 0% 50%;
     transform-origin: 0% 50%; }
   .loader.salud::before {
-    background-color: #2bfda6; }
+    background-color: rgba(43, 253, 166, 0.95); }
   .loader.educacion::before {
-    background-color: #88ffff; }
+    background-color: rgba(136, 255, 255, 0.95); }
   .loader.infraestructura::before {
-    background-color: #cca2fc; }
+    background-color: rgba(204, 162, 252, 0.95); }
 
 .grid__item--loading .loader::before {
   -webkit-transition: -webkit-transform 1s;
@@ -513,11 +504,11 @@ button:focus {
   margin: 5px 0px;
   padding: 5px;
   position: absolute;
+  font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.7em;
   font-weight: 700;
   text-transform: uppercase;
-  white-space: pre-line;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   text-align: left;
   display: block;
   width: auto; }

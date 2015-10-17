@@ -20,6 +20,7 @@ pfdindisplaypro-xthin
 
 */
 
+@include font-face('DIN Display Pro Medium', '../fonts/pfdindisplaypro-med', $file-formats: eot svg woff ttf);
 @include font-face('DIN Display Pro Regular', '../fonts/pfdindisplaypro-reg', $file-formats: eot svg woff ttf);
 @include font-face('DIN Display Pro Thin', '../fonts/pfdindisplaypro-thin', $file-formats: eot svg woff ttf);
 
@@ -27,9 +28,9 @@ pfdindisplaypro-xthin
    Fuentes
    ######## */
 
+$fontset-medium: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-regular: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-thin: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-sans-serif: $fontset-regular;
 
 /* #######
    Colores
@@ -455,17 +456,17 @@ button:focus {
   min-height: 420px;
   cursor: pointer;
   text-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-direction: normal;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: top;
-  justify-content: top;
+  // display: -webkit-box;
+  // display: -webkit-flex;
+  // display: -ms-flexbox;
+  // display: flex;
+  // -webkit-box-direction: normal;
+  // -webkit-box-orient: vertical;
+  // -webkit-flex-direction: column;
+  // -ms-flex-direction: column;
+  // flex-direction: column;
+  // -webkit-justify-content: top;
+  // justify-content: top;
 
   &:first-child::before {
     margin-top: 20px;
@@ -501,21 +502,21 @@ button:focus {
 
 .title {
   margin: 40px 0 0 0;
+  font-family: $fontset-medium;
   font-size: 0.95em;
-  font-weight: 400;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   text-align: left;
   width: 100%;
-  color: white;
+  
   line-height: 1.1em;
   padding: 0px;
-  white-space: pre-line;
+  // white-space: pre-line;
 
-  @each $eje, $color in $ejes {
-  &.#{$eje} {
-      // background-color: $color;
-    }
-  }
+  // @each $eje, $color in $ejes {
+  // &.#{$eje} {
+  //     color: rgba($color,.8);;
+  //   }
+  // }
 }
 
 .title--preview {
@@ -531,18 +532,18 @@ button:focus {
 }
 
 .card--text {
-  font-family: $fontset-thin;
+  font-family: $fontset-regular;
   text-align: left;
-  font-size: 1.7em;
+  font-size: 1.4em;
   line-height: 1.3em;
   padding: 0px;
-  white-space: pre-line;
+  // white-space: pre-line;
   // @extend .title--preview;
 
 }
 
 .loader {
-  height: 1px;
+  height: 0px;
   width: 100%;
   margin: 5px auto;
   position: relative;
@@ -562,7 +563,7 @@ button:focus {
   }
   @each $eje, $color in $ejes {
   &.#{$eje}::before {
-      background-color: $color;
+      background-color: rgba($color,.95);
     }
   }
 }
@@ -580,11 +581,12 @@ button:focus {
   margin: 5px 0px;
   padding: 5px;
   position: absolute;
+  font-family: $fontset-medium;
   font-size: 0.7em;
   font-weight: 700;
   text-transform: uppercase;
-  white-space: pre-line;
-  letter-spacing: 0.2em;
+  // white-space: pre-line;
+  letter-spacing: 0.1em;
   // padding-top: 10px;
   text-align: left;
   display: block;

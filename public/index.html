@@ -51,7 +51,7 @@
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}" data-orden="{{cells.orden}}" data-viz="{{cells.dataviz_key}}">
                     <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
-                    <h2 class="title title--preview">{{cells.titulo}}</h2>
+                    <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
                     <div class="card--text">
                         <p>{{cells.contenido}}</p>
                     </div>
@@ -78,7 +78,14 @@
 
                         <div class="meta meta--full">
                         </div>
-                        <div id="grafico"></div>
+                        <input id="verMapa" type="checkbox">Ver en mapa</input>
+                        <select id="cambiador">
+                          <option value="1-4" selected>Poblacion vs Establecimientos</option>
+                          <option value="1-4" filtro="La Matanza, Moreno">Poblacion vs Establecimientos (La Matanza y Moreno)</option>
+                          <option value="1-5">Poblacion vs Camas</option>
+                          <option value="4-3">Establecimientos vs Superficie</option>
+                        </select>
+                        <div id="grafico"> </div>
                         <nav id="cardNav{{cells.dataviz_key}}" class="tabs">
                             <ul class="tabs-navigation">
 
