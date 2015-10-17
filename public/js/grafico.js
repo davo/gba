@@ -1,4 +1,6 @@
 // Abstract: En document.ready carga datos y los pone en un array
+
+
 var spreadSheet ='https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhEam6e33aslSg84Gws2VJbmjnQo/edit#gid=509195421';
 var hayDatos = false;
 var datos = [];
@@ -187,12 +189,13 @@ var cargoDatosEnArray = function(error, options, response) {
             // y son case sensitive (no usar espacios ni caracteres raros)
             var fila = [
                 value.cells.partido,
-                value.cells.indicadorPoblacion,
-                value.cells.indicadorHogares,
-                value.cells.indicadorSuperficie,
-                value.cells.saludEstablecimientos,
-                value.cells.saludCamas
+                value.cells.indicador_poblacion,
+                value.cells.indicador_hogares,
+                value.cells.indicador_superficie,
+                value.cells.salud_establecimientos,
+                value.cells.salud_camas
             ];
+
             datos.push(fila);
         });
     } else {
@@ -220,7 +223,7 @@ function cargaDatos() {
     if (!hayDatos){
         var archivo = sheetrock({
             url: spreadSheet,
-            query: "select A,B,C,D,E,F",
+            query: "select A,B,C,D,E,F,G",
             callback: cargoDatosEnArray
         });
     }else{
