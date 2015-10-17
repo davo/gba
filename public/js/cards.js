@@ -114,8 +114,7 @@
 
 
     function crearNavegador(data) {
-      // console.table(cardsContentNav);
-
+      console.log(cardsContentNav);
     }
 
 
