@@ -164,6 +164,9 @@
     // y extrae los valores de los cards internos. Luego convierte
     // en Array.
 
+    // cardContent, array donde arrojaremos el contenido de los cards que corresponden.
+    var cardContent = [];
+
     function currentNav() {
 
       // El criterio para crear esta funcion fue el siguiente:
@@ -171,7 +174,9 @@
       // Iteramos desde el spreadshhet "cards" para matchear el contenido de la columna "cards" (spreadsheet stories) con
       // los objetos que necesitamos para la interfaz.
 
-      console.table(cardsContentNav);
+      // console.table(cardsContentNav);
+
+      console.log(cardContent);
 
       // var nav, navegador cuyo contenido son los cards relacionados entre si atraves de una full story.
       var nav = $(".content__item--show").find("#cardNav");
@@ -180,8 +185,7 @@
       // getCambiador, select donde arrojaremos la lista de opciones basadas en los criterios a visualizar.
       var getCambiador = $("#cambiador");
       console.log(getCambiador);
-      // cardContent, array donde arrojaremos el contenido de los cards que corresponden.
-      var cardContent = [];
+      
 
       // selectedNav, get de lista con los cards arrojados por mustache en story-template.
       var selectedNav = nav.data("cards");
@@ -202,14 +206,12 @@
       }
       
       function createNav(i) {
-        var listItem;
-        listItem = '<li><a href=\"\">'+cardsContentNav[cardContent[i]][8]+'</a></li>';
-        $(listItem).appendTo(list);
+          // Appendeo lista solo sino fue creada.
+            var listItem;
+            listItem = '<li class=\"card\"><a href=\"\">'+cardsContentNav[cardContent[i]][9]+'</a></li>';
+            $(listItem).appendTo(list);
       }
 
-
-
-      // console.table(selectedNav);
 
       for (var i = 0; i < selectedNav.length; i++) {
           var getCard = parseInt(selectedNav[i]);
@@ -217,9 +219,7 @@
           createNav(i);
           createVizOptions(i)
       }
-      // $.each(selectedNav,function(i,cardContent){
-        
-      // })
+
 
       armaVisualizacion();
     }
@@ -453,8 +453,6 @@
 
     function hideContent() {
       var gridItem = gridItems[currentCard], contentItem = contentItems[current];
-
-
 
       classie.remove(contentItem, 'content__item--show');
       classie.remove(contentItemsContainer, 'content--show');

@@ -241,6 +241,7 @@ var cargoDatosEnArray = function(error, options, response) {
             datos.push(linea);
         };
     }
+    console.log(datos);
     dibujoGrafico(datos);
 };
 

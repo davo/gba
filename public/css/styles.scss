@@ -1294,12 +1294,12 @@ Estilos d3
         position: relative;
         display: block;
         height: 90px;
-        width: 180px;
+        width: 200px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: left;
-        padding: 30px 20px;
+        padding: 20px 10px;
         @include transition(all 0.5s ease-in-out);
         &:hover {
           position: relative;
