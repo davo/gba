@@ -988,55 +988,53 @@ button:focus {
   margin: 0;
   bottom: 0;
   left: 0;
-
   @include clearfix;
     nav {
       overflow: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .tabs-navigation {
-      width: 100%;
-      list-style: none;
-      margin: 0;
-      @include clearfix;
-      @each $eje, $color in $ejes {
-        &.#{$eje} a {
-          background-color: rgba($color, .5);
-          &:hover, &:focus, &.active {
-              background-color: rgba($color, 1);
-          }
-        }
+}
+.tabs-navigation {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  @include clearfix;
+  @each $eje, $color in $ejes {
+    &.#{$eje} a {
+      background-color: rgba($color, .5);
+      &:hover, &:focus, &.active {
+          background-color: rgba($color, 1);
       }
-      li {
-        float: left;
-      }
-      a {
-        font-family: $fontset-medium;
-        font-size: 0.8em;
-        color: $gris;
-        position: relative;
-        display: block;
-        height: 100px;
-        width: 250px;
-        white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: left;
-        padding: 10px 10px;
-        -webkit-transform-style: preserve-3d;
-        @include transition(all 0.5s ease-in-out);
-
-        &:hover {
-          position: relative;
-          overflow: visible;
-          width: 400px;
-        }
-        &.active {
-          width: 200px;          
-        }
-      }
-
     }
+  }
+  li {
+    float: left;
+  }
+  a {
+    font-family: $fontset-medium;
+    font-size: 0.8em;
+    color: $gris;
+    position: relative;
+    display: block;
+    height: 100px;
+    width: 250px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding: 10px 10px;
+    -webkit-transform-style: preserve-3d;
+    @include transition(all 0.5s ease-in-out);
+
+    &:hover {
+      position: relative;
+      overflow: visible;
+      width: 400px;
+    }
+    &.active {
+      width: 200px;          
+    }
+  }
 }
 
 /* close button (for content and sidebar) */
@@ -1077,6 +1075,77 @@ button:focus {
   opacity: 1;
   pointer-events: auto;
 }
+
+
+/*****
+Estilos d3
+*****/
+
+.grafico {
+  background-color: transparent;
+  border: 0px;
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  height: 60vh;
+}
+
+#info{
+  text-align: center;
+  width: 500px;
+}
+.circulo{
+  // fill: black;
+  // stroke: white;
+ }
+ @each $eje, $color in $ejes {
+   .#{$eje} {
+     .circulo {
+       fill: $color;
+       stroke: lighten($color, 70);
+       stroke-width: 1.5;
+     }
+     // &:hover, &:focus {
+     //     background-color: rgba($color, 1);
+     // }
+   }
+}
+
+
+.circuloDim{
+  opacity:0.3;
+}
+
+.axis path , .axis line {
+  fill: none;
+  stroke: white;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  fill: white;
+  font-family: sans-serif;
+  font-size: 11px;
+}
+
+#mapa{
+  fill: #c0c0c0;
+  stroke: #ffffff;
+  opacity: 0.5;
+}
+
+
+.invisible{
+  display: none;
+}
+.visible{
+  display: inline-block;
+}
+
+.resaltada{
+  fill: #996666;
+}
+
 
 /* Viewport sizes based on column number and sidebar */
 /* 1 column */
@@ -1169,6 +1238,30 @@ button:focus {
   .grid__item {
     width: 33.333%;
   }
+  .grafico {
+    width: 95%;
+    height: 65vh;
+  }
+  .tabs-navigation {
+    a {
+      font-size: 0.55em;
+      position: relative;
+      display: block;
+      height: 120px;
+      width: 150px;
+      text-overflow: ellipsis;
+      padding: 10px 10px;
+      &:hover {
+        font-size: 0.8em;
+        position: relative;
+        overflow: visible;
+        width: 350px;
+      }
+      &.active {
+        width: 200px;          
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 1500px) {
@@ -1244,75 +1337,5 @@ button:focus {
       z-index: -1;
     }
   }
-}
-
-/*****
-Estilos d3
-*****/
-
-.grafico {
-  background-color: transparent;
-  border: 0px;
-  margin: 0 auto;
-  padding: 0;
-  width: 90%;
-  height: 60vh;
-
-}
-
-#info{
-  text-align: center;
-  width: 500px;
-}
-.circulo{
-  // fill: black;
-  // stroke: white;
- }
- @each $eje, $color in $ejes {
-   .#{$eje} {
-     .circulo {
-       fill: $color;
-     }
-     // &:hover, &:focus {
-     //     background-color: rgba($color, 1);
-     // }
-   }
-}
-
-
-.circuloDim{
-  fill: black;
-  stroke: white;
-  opacity:0.3;
-}
-
-.axis path , .axis line {
-  fill: none;
-  stroke: white;
-  shape-rendering: crispEdges;
-}
-
-.axis text {
-  fill: white;
-  font-family: sans-serif;
-  font-size: 11px;
-}
-
-#mapa{
-  fill: #c0c0c0;
-  stroke: #ffffff;
-  opacity: 0.5;
-}
-
-
-.invisible{
-  display: none;
-}
-.visible{
-  display: inline-block;
-}
-
-.resaltada{
-  fill: #996666;
 }
 

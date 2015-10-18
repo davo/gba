@@ -47,10 +47,10 @@ function cambioDataset(datos) {
         } else {
             radioTMP = +radioDefault;
         }
-
+        var dato3TMP = +datos[i][filtro];
 
         // radioTMP = +radioDefault;
-        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP]);
+        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP]);
     }
 
     return array_de_datos;
@@ -90,7 +90,7 @@ function addGraph() {
 
     yAxis = d3.svg.axis()
         .scale(yScale)
-        .orient("left")
+        .orient("right")
         .ticks(8);
 
     svg = d3.select(objectGraph).append("svg")
@@ -185,20 +185,20 @@ function updateGraph() {
         .duration(500)
         .each("start", function() {
             d3.select(this)
-                .attr("class", function(d, i) {
-                    var filtro;
-                    try {
-                        filtro = filtro.split(",");
-                        for (var i = 0; i < filtro.length; i++) {
-                            if (!filtro[i].trim().indexOf(d[0])) {
-                                return "circulo";
-                            }
+            .attr("class", function(d, i) {
+                var filtro;
+                try {
+                    filtro = filtro.split(",");
+                    for (var i = 0; i < filtro.length; i++) {
+                        if (!filtro[i].trim().indexOf(d[3])) {
+                            return "circulo";
                         }
-                    } catch (err) {
-                        return "circulo";
                     }
-                    return "circuloDim";
-                });
+                } catch (err) {
+                    return "circulo";
+                }
+                return "circuloDim";
+            });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;

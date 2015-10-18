@@ -170,6 +170,11 @@
     var cardContent = [],
         nav, list;
 
+    var changeData = function(item) {
+      var value1 = item.data('columnax');
+      return console.log(value1);        
+    }
+
     function currentNav() {
 
       // El criterio para crear esta funcion fue el siguiente:
@@ -191,6 +196,7 @@
       
 
 
+
       // selectedNav, get de lista con los cards arrojados por mustache en story-template.
       var selectedNav = nav.data("cards");
       
@@ -200,11 +206,32 @@
             var dataValue1 = 'data-columnax='+cardsContentNav[cardContent[i]][10]+' ';
             var dataValue2 = 'data-columnay='+cardsContentNav[cardContent[i]][11]+' ';
             var dataValue3 = 'data-radio='+cardsContentNav[cardContent[i]][12]+' ';
-            var dataValue4 = 'data-filtro='+cardsContentNav[cardContent[i]][7]+' ';
+            var dataValue4 = 'data-filtro=\"'+cardsContentNav[cardContent[i]][7]+'\"';
+
+            var behavior = 'onmouseover=cambiarVisualizacion(this);';
+
+
+
+
+
+            // $(".").on({
+            //     mouseenter: function() {
+            //         $('<a href="javascript:void(0)" class="hoverItTemplate">click to edit</a>').appendTo($(this));
+            //     },
+            //     mouseleave: function() {
+            //         $(this).find(".hoverItTemplate").remove();
+            //     }
+            // });​
 
             listItem = '<li class=\"card\"><a href=\"\"';
-            listItem += dataValue1+dataValue2+dataValue3+dataValue4+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
+            listItem += dataValue1+dataValue2+dataValue3+dataValue4+behavior+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
             $(listItem).appendTo(list);
+
+            $(listItem).on({
+                mouseenter: function() {
+                  console.log('Binded!')
+                }
+            });
 
             console.log("Filtro: "+cardsContentNav[cardContent[i]][7])
             console.log("Filtro: criterio 1"+cardsContentNav[cardContent[i]][10])
@@ -321,16 +348,7 @@
         });
       });
 
-      // orderCtrls.forEach(function(orderCtrl){
-      //   orderCtrl.addEventListener('click', function(){
-      //       console.log('Click en orden')
-      //       iso.arrange({
-      //           orderBy: orderCtrl.getAttribute('data-order')
-      //       });
-      //       iso.layout();
-      //       console.log(iso)
-      //   });
-      // });
+
 
 
 

@@ -841,51 +841,52 @@ button:focus {
   .tabs nav {
     overflow: auto;
     -webkit-overflow-scrolling: touch; }
-  .tabs .tabs-navigation {
-    width: 100%;
-    list-style: none;
-    margin: 0; }
-    .tabs .tabs-navigation::after {
-      clear: both;
-      content: "";
-      display: table; }
-    .tabs .tabs-navigation.salud a {
-      background-color: rgba(43, 253, 166, 0.5); }
-      .tabs .tabs-navigation.salud a:hover, .tabs .tabs-navigation.salud a:focus, .tabs .tabs-navigation.salud a.active {
-        background-color: #2bfda6; }
-    .tabs .tabs-navigation.educacion a {
-      background-color: rgba(136, 255, 255, 0.5); }
-      .tabs .tabs-navigation.educacion a:hover, .tabs .tabs-navigation.educacion a:focus, .tabs .tabs-navigation.educacion a.active {
-        background-color: #88ffff; }
-    .tabs .tabs-navigation.infraestructura a {
-      background-color: rgba(204, 162, 252, 0.5); }
-      .tabs .tabs-navigation.infraestructura a:hover, .tabs .tabs-navigation.infraestructura a:focus, .tabs .tabs-navigation.infraestructura a.active {
-        background-color: #cca2fc; }
-    .tabs .tabs-navigation li {
-      float: left; }
-    .tabs .tabs-navigation a {
-      font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 0.8em;
-      color: #333333;
+
+.tabs-navigation {
+  width: 100%;
+  list-style: none;
+  margin: 0; }
+  .tabs-navigation::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tabs-navigation.salud a {
+    background-color: rgba(43, 253, 166, 0.5); }
+    .tabs-navigation.salud a:hover, .tabs-navigation.salud a:focus, .tabs-navigation.salud a.active {
+      background-color: #2bfda6; }
+  .tabs-navigation.educacion a {
+    background-color: rgba(136, 255, 255, 0.5); }
+    .tabs-navigation.educacion a:hover, .tabs-navigation.educacion a:focus, .tabs-navigation.educacion a.active {
+      background-color: #88ffff; }
+  .tabs-navigation.infraestructura a {
+    background-color: rgba(204, 162, 252, 0.5); }
+    .tabs-navigation.infraestructura a:hover, .tabs-navigation.infraestructura a:focus, .tabs-navigation.infraestructura a.active {
+      background-color: #cca2fc; }
+  .tabs-navigation li {
+    float: left; }
+  .tabs-navigation a {
+    font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.8em;
+    color: #333333;
+    position: relative;
+    display: block;
+    height: 100px;
+    width: 250px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    padding: 10px 10px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+    .tabs-navigation a:hover {
       position: relative;
-      display: block;
-      height: 100px;
-      width: 250px;
-      white-space: wrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: left;
-      padding: 10px 10px;
-      -webkit-transform-style: preserve-3d;
-      -webkit-transition: all 0.5s ease-in-out;
-      -moz-transition: all 0.5s ease-in-out;
-      transition: all 0.5s ease-in-out; }
-      .tabs .tabs-navigation a:hover {
-        position: relative;
-        overflow: visible;
-        width: 400px; }
-      .tabs .tabs-navigation a.active {
-        width: 200px; }
+      overflow: visible;
+      width: 400px; }
+    .tabs-navigation a.active {
+      width: 200px; }
 
 /* close button (for content and sidebar) */
 .close-button {
@@ -915,6 +916,63 @@ button:focus {
 .close-button--show {
   opacity: 1;
   pointer-events: auto; }
+
+/*****
+Estilos d3
+*****/
+.grafico {
+  background-color: transparent;
+  border: 0px;
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  height: 60vh; }
+
+#info {
+  text-align: center;
+  width: 500px; }
+
+.salud .circulo {
+  fill: #2bfda6;
+  stroke: white;
+  stroke-width: 1.5; }
+
+.educacion .circulo {
+  fill: #88ffff;
+  stroke: white;
+  stroke-width: 1.5; }
+
+.infraestructura .circulo {
+  fill: #cca2fc;
+  stroke: white;
+  stroke-width: 1.5; }
+
+.circuloDim {
+  opacity: 0.3; }
+
+.axis path, .axis line {
+  fill: none;
+  stroke: white;
+  shape-rendering: crispEdges; }
+
+.axis text {
+  fill: white;
+  font-family: sans-serif;
+  font-size: 11px; }
+
+#mapa {
+  fill: #c0c0c0;
+  stroke: #ffffff;
+  opacity: 0.5; }
+
+.invisible {
+  display: none; }
+
+.visible {
+  display: inline-block; }
+
+.resaltada {
+  fill: #996666; }
 
 /* Viewport sizes based on column number and sidebar */
 /* 1 column */
@@ -978,7 +1036,25 @@ button:focus {
   /* 3 columns */
   .grid__sizer,
   .grid__item {
-    width: 33.333%; } }
+    width: 33.333%; }
+  .grafico {
+    width: 95%;
+    height: 65vh; }
+  .tabs-navigation a {
+    font-size: 0.55em;
+    position: relative;
+    display: block;
+    height: 120px;
+    width: 150px;
+    text-overflow: ellipsis;
+    padding: 10px 10px; }
+    .tabs-navigation a:hover {
+      font-size: 0.8em;
+      position: relative;
+      overflow: visible;
+      width: 350px; }
+    .tabs-navigation a.active {
+      width: 200px; } }
 
 @media screen and (min-width: 1500px) {
   /* 4 columns */
@@ -1036,56 +1112,3 @@ button:focus {
       height: 50px;
       pointer-events: none;
       z-index: -1; } }
-
-/*****
-Estilos d3
-*****/
-.grafico {
-  background-color: transparent;
-  border: 0px;
-  margin: 0 auto;
-  padding: 0;
-  width: 90%;
-  height: 60vh; }
-
-#info {
-  text-align: center;
-  width: 500px; }
-
-.salud .circulo {
-  fill: #2bfda6; }
-
-.educacion .circulo {
-  fill: #88ffff; }
-
-.infraestructura .circulo {
-  fill: #cca2fc; }
-
-.circuloDim {
-  fill: black;
-  stroke: white;
-  opacity: 0.3; }
-
-.axis path, .axis line {
-  fill: none;
-  stroke: white;
-  shape-rendering: crispEdges; }
-
-.axis text {
-  fill: white;
-  font-family: sans-serif;
-  font-size: 11px; }
-
-#mapa {
-  fill: #c0c0c0;
-  stroke: #ffffff;
-  opacity: 0.5; }
-
-.invisible {
-  display: none; }
-
-.visible {
-  display: inline-block; }
-
-.resaltada {
-  fill: #996666; }
