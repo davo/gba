@@ -218,9 +218,6 @@
 
 
 
-
-
-
             // $(".").on({
             //     mouseenter: function() {
             //         $('<a href="javascript:void(0)" class="hoverItTemplate">click to edit</a>').appendTo($(this));
@@ -255,7 +252,13 @@
             window.radio = cardsContentNav[cardContent[i]][12];
 
             $(list).find('a').bind("click", function (e) {
-                    e.preventDefault();
+              var values = e.currentTarget; 
+              columnaX = values.attributes["data-columnax"].value;
+              columnaY = values.attributes["data-columnaY"].value;
+              radio =  values.attributes["data-radio"].value;
+              filtro = values.attributes["data-filtro"].value;
+              updateGraph();
+              e.preventDefault();
             });
       }
 

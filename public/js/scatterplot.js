@@ -1,6 +1,7 @@
 var objectGraph = ".content__item--show .grafico";
 var radioDefault = 8; //el radio por default si no hay dato de radio
 var svg;
+var temp;
 
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
@@ -23,7 +24,7 @@ function updateKeys() {
     columnaY = parseInt(window.columnaY);
     radio = parseInt(window.radio);
 
-    console.log(radio);
+    //console.log(radio);
 
     //estas variables deben popularse al seleccionar una historia o tarjeta
     // columnaX = Math.floor((Math.random() * 32) + 1);
@@ -122,7 +123,7 @@ function addGraph() {
             return d[0]
         })
         .on("mouseover", function(d) {
-            console.log(d[0]);
+            //console.log(d[0]);
         });
 
     svg.selectAll("text")
@@ -186,11 +187,11 @@ function updateGraph() {
         .each("start", function() {
             d3.select(this)
             .attr("class", function(d, i) {
-                var filtro;
+                var filtros;
                 try {
-                    filtro = filtro.split(",");
-                    for (var i = 0; i < filtro.length; i++) {
-                        if (!filtro[i].trim().indexOf(d[3])) {
+                    filtros = filtro.split(",");
+                    for (var i = 0; i < filtros.length; i++) {
+                        if (!filtros[i].trim().indexOf(d[0])) {
                             return "circulo";
                         }
                     }
@@ -217,7 +218,7 @@ function updateGraph() {
             .duration(200)
             .attr("r", function(d) {
                 if (radio > 0) {
-                    console.log (d[3]);
+                    //console.log (d[3]);
                     return rScale(d[3]);
                 } else {
                     return radioDefault;
@@ -239,6 +240,7 @@ function updateGraph() {
 
 // da de baja el grafico
 function removeGraph() {
+    filtro = "";
     $("svg").remove();
 };
 

@@ -23,7 +23,6 @@ function cargaDatos() {
 }
 
 // Abstract: convierte un objeto de datos un array
-// Param: @String; @Object, @Object  
 var cargoDatosEnArray = function(error, options, response) {
     if (!error) {
         jQuery.each(response.rows, function(index, value) {
