@@ -195,6 +195,7 @@
                 columnaX = values.attributes["data-columnax"].value;
                 columnaY = values.attributes["data-columnaY"].value;
                 radio = values.attributes["data-radio"].value;
+                // Check, if empty, breaks.
                 filtro = values.attributes["data-filtro"].value;
                 updateGraph();
                 e.preventDefault();
