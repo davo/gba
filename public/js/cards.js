@@ -221,7 +221,7 @@
       }
 
 
-      armaVisualizacion();
+      //armaVisualizacion();
     }
 
     function cargaDatosNav() {
@@ -351,7 +351,7 @@
         // hide content
         hideContent();
         // hide graph
-        $("svg").remove();
+        removeGraph();
       });
 
       // keyboard esc - hide content
