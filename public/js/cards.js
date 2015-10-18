@@ -193,14 +193,6 @@
 
       // selectedNav, get de lista con los cards arrojados por mustache en story-template.
       var selectedNav = nav.data("cards");
-
-      // Creo una lista de options 
-      function createVizOptions(i) {
-        var optionItem;
-        optionItem = '<option value='+cardsContentNav[cardContent[i]][10]+' filtro="'+cardsContentNav[cardContent[i]][7]+'">'+cardsContentNav[cardContent[i]][9]+'</option>';
-        $(optionItem).appendTo(getCambiador);
-        // console.log(cardsContentNav[cardContent[i]][10]);
-      }
       
       function createNav(i) {
           // Appendeo lista solo sino fue creada.
@@ -208,10 +200,12 @@
             var dataValue1 = 'data-columnax='+cardsContentNav[cardContent[i]][10]+' ';
             var dataValue2 = 'data-columnay='+cardsContentNav[cardContent[i]][11]+' ';
             var dataValue3 = 'data-radio='+cardsContentNav[cardContent[i]][12]+' ';
+            var dataValue4 = 'data-filtro='+cardsContentNav[cardContent[i]][7]+' ';
 
             listItem = '<li class=\"card\"><a href=\"\"';
-            listItem += dataValue1+dataValue2+dataValue3+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
+            listItem += dataValue1+dataValue2+dataValue3+dataValue4+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
             $(listItem).appendTo(list);
+
             console.log("Filtro: "+cardsContentNav[cardContent[i]][7])
             console.log("Filtro: criterio 1"+cardsContentNav[cardContent[i]][10])
             console.log("Filtro: criterio 2"+cardsContentNav[cardContent[i]][11])
@@ -221,6 +215,10 @@
             window.columnaY = cardsContentNav[cardContent[i]][11];
             window.filtro = cardsContentNav[cardContent[i]][7];
             window.radio = cardsContentNav[cardContent[i]][12];
+
+            $(list).find('a').bind("click", function (e) {
+                    e.preventDefault();
+            });
       }
 
       if(selectedNav === 12) {
@@ -241,12 +239,8 @@
           cardContent.push(getCard);
           
           createNav(i);
-          createVizOptions(i)
       }
       manageGraph();
-
-
-      //armaVisualizacion();
     }
 
     function cargaDatosNav() {
