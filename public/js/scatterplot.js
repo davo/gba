@@ -4,10 +4,22 @@ var svg;
 
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
-var columnaX = 1;
-var columnaY = 2;
+var columnaX = 0;
+var columnaY = 0;
 var radio = 0;
 var filtro = "";
+
+
+// Abstract: Cambio el array de datos a dibujar en el gráfico
+// dependiendo los valores que estan en el select
+// Param: @object = datos del spreadsheet  
+function updateKeys() {
+    columnaX = Math.floor((Math.random() * 32) + 1);
+    columnaY = Math.floor((Math.random() * 32) + 1);
+    radio = 0;
+    filtro = "";
+    return true;
+}
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
@@ -19,14 +31,14 @@ function cambioDataset(datos) {
         var nombrePartido = datos[i][0];
         var dato1TMP = +datos[i][columnaX];
         var dato2TMP = +datos[i][columnaY];
-        var radioTMP = function (){
-                if (radio < 0){
-                    return +datos[i][radio];
-                } else {
-                    return 0;
-                }
-            };
-        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP,radioTMP]);
+        var radioTMP = function() {
+            if (radio < 0) {
+                return +datos[i][radio];
+            } else {
+                return 0;
+            }
+        };
+        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP]);
     }
 
     return array_de_datos;
@@ -34,8 +46,10 @@ function cambioDataset(datos) {
 
 // Abstract: Crea el scatterplot
 // Param: @Array = datos  
-function addGraph(){
+function addGraph() {
+
     var dataset = cambioDataset(datosTotales);
+
     var padding = 50;
 
     xScale = d3.scale.linear()
@@ -72,13 +86,13 @@ function addGraph(){
         .append("circle")
         .attr("class", "circulo")
         .attr("cx", function(d) {
-            return xScale(d[1]);
+            return xScale()/2;
         })
         .attr("cy", function(d) {
-            return yScale(d[2]);
+            return yScale()/2;
         })
         .attr("r", function(d) {
-            if (radio){
+            if (radio) {
                 return d[3];
             } else {
                 return radioDefault;
@@ -112,14 +126,7 @@ function addGraph(){
 
 // Abstract: Cambia la posicion de los puntos del scatterplot
 // al value del select que esté seleccionado
-function updateGraph(){
-
-columnaX = 3;
-columnaY = 4;
-radio = 6;
-filtro = "La Matanza";
-
-
+function updateGraph() {
 
     var dataset = cambioDataset(datosTotales);
 
@@ -138,15 +145,15 @@ filtro = "La Matanza";
             d3.select(this)
                 .attr("class", "circulo");
 
-                /*function(d, i) {
-                    filtro = filtro.split(",");
-                    for (var i = 0; i < filtro.length; i++) {
-                        if (!filtro[i].trim().indexOf(d[0])) {
-                            return "circulo";
-                        }
+            /*function(d, i) {
+                filtro = filtro.split(",");
+                for (var i = 0; i < filtro.length; i++) {
+                    if (!filtro[i].trim().indexOf(d[0])) {
+                        return "circulo";
                     }
-                    return "circuloDim";
-                });*/
+                }
+                return "circuloDim";
+            });*/
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -164,14 +171,14 @@ filtro = "La Matanza";
             .transition()
             .duration(200)
             .attr("r", function(d) {
-            if (radio < 0 ){
-                console.log (d[3]);
-                return d[3];
-            } else {
-                return radioDefault;
-            }
+                if (radio < 0) {
+                    console.log(d[3]);
+                    return d[3];
+                } else {
+                    return radioDefault;
+                }
 
-        });
+            });
     });
 
     svg.select(".x.axis")
@@ -186,17 +193,21 @@ filtro = "La Matanza";
 };
 
 // da de baja el grafico
-function removeGraph(){
+function removeGraph() {
     $("svg").remove();
 };
 
 
 // si existe el grafico lo updatea
 // si NO existe lo genera
-function manageGraph(){
-    if ($(objectGraph + " svg").length){
+function manageGraph() {
+    updateKeys();
+
+    if ($(objectGraph + " svg").length > 0) {
         updateGraph();
     } else {
         addGraph();
+        updateGraph();
     }
+
 }
