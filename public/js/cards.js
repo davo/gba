@@ -203,6 +203,8 @@
       var selectedNav = nav.data("cards");
       
       function createNav(i) {
+
+            
           // Appendeo lista solo sino fue creada.
             var listItem;
             var dataValue1 = 'data-columnax='+cardsContentNav[cardContent[i]][10]+' ';
@@ -228,7 +230,11 @@
             //     }
             // });​
 
-            listItem = '<li class=\"card\"><a href=\"\"';
+            listItem = '<li class=\"card\">';
+            listItem += '<a href=\"\"';
+            if (currentCard == cardsContentNav[cardContent[i]][0]) {
+              listItem += 'class=\"activo\"';
+            }
             listItem += dataValue1+dataValue2+dataValue3+dataValue4+behavior+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
             $(listItem).appendTo(list);
 

@@ -852,15 +852,15 @@ button:focus {
     display: table; }
   .tabs-navigation.salud a {
     background-color: rgba(43, 253, 166, 0.5); }
-    .tabs-navigation.salud a:hover, .tabs-navigation.salud a:focus, .tabs-navigation.salud a.active {
+    .tabs-navigation.salud a:hover, .tabs-navigation.salud a:focus, .tabs-navigation.salud a.activo {
       background-color: #2bfda6; }
   .tabs-navigation.educacion a {
     background-color: rgba(136, 255, 255, 0.5); }
-    .tabs-navigation.educacion a:hover, .tabs-navigation.educacion a:focus, .tabs-navigation.educacion a.active {
+    .tabs-navigation.educacion a:hover, .tabs-navigation.educacion a:focus, .tabs-navigation.educacion a.activo {
       background-color: #88ffff; }
   .tabs-navigation.infraestructura a {
     background-color: rgba(204, 162, 252, 0.5); }
-    .tabs-navigation.infraestructura a:hover, .tabs-navigation.infraestructura a:focus, .tabs-navigation.infraestructura a.active {
+    .tabs-navigation.infraestructura a:hover, .tabs-navigation.infraestructura a:focus, .tabs-navigation.infraestructura a.activo {
       background-color: #cca2fc; }
   .tabs-navigation li {
     float: left; }
@@ -885,8 +885,14 @@ button:focus {
       position: relative;
       overflow: visible;
       width: 400px; }
-    .tabs-navigation a.active {
-      width: 200px; }
+    .tabs-navigation a.activo {
+      font-size: .9em;
+      position: relative;
+      overflow: visible;
+      width: 400px; }
+      .tabs-navigation a.activo:hover {
+        font-size: .9em;
+        width: 400px; }
 
 /* close button (for content and sidebar) */
 .close-button {
