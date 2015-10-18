@@ -1,5 +1,5 @@
 var objectGraph = ".content__item--show .grafico";
-var radioDefault = 5; //el radio por default si no hay dato de radio
+var radioDefault = 8; //el radio por default si no hay dato de radio
 var svg;
 
 // globales que usa el grafico para armarse
@@ -20,10 +20,10 @@ function updateKeys() {
     width = $(".grafico").width();
 
     //estas variables deben popularse al seleccionar una historia o tarjeta
-    columnaX = Math.floor((Math.random() * 32) + 1);
-    columnaY = Math.floor((Math.random() * 32) + 1);
-    radio = Math.floor((Math.random() * 32) + 1);
-    filtro = "";
+    // columnaX = Math.floor((Math.random() * 32) + 1);
+    // columnaY = Math.floor((Math.random() * 32) + 1);
+    // radio = Math.floor((Math.random() * 32) + 1);
+    // filtro = "";
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
@@ -72,18 +72,19 @@ function addGraph() {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(5);
+        .ticks(8);
 
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(5);
+        .ticks(8);
 
     svg = d3.select(objectGraph).append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
         .attr('viewBox', '0 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
         .attr('preserveAspectRatio', 'xMinYMin');
+
 
     svg.selectAll("circle")
         .data(dataset)
@@ -109,6 +110,23 @@ function addGraph() {
         .on("mouseover", function(d) {
             console.log(d[0]);
         });
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text(function(d) {
+               return d[0];
+        })
+       .attr("x", function(d) {
+           return xScale(d[1]) + 10;  // Returns scaled location of x
+       })
+       // .attr("text-anchor","middle")
+       .attr("y", function(d) {
+           return yScale(d[2])+2;  // Returns scaled circle y
+       })
+       .attr("font-size", "9px")
+       .attr("fill", "white");
 
     svg.append("g")
         .attr("class", "x axis")

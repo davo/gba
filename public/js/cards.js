@@ -138,7 +138,8 @@
                     value.cells.filtro,
                     value.cells.titulo,
                     value.cells.contenido,
-                    value.cells.criterio_visualizacion
+                    value.cells.indicador_1,
+                    value.cells.indicador_2
 
                ];
                 if (index === 0) {
@@ -165,7 +166,8 @@
     // en Array.
 
     // cardContent, array donde arrojaremos el contenido de los cards que corresponden.
-    var cardContent = [];
+    var cardContent = [],
+        nav, list;
 
     function currentNav() {
 
@@ -179,30 +181,24 @@
       console.log(cardContent);
 
       // var nav, navegador cuyo contenido son los cards relacionados entre si atraves de una full story.
-      var nav = $(".content__item--show").find("#cardNav");
+      nav = $(".content__item--show").find("#cardNav");
       // var list, placeholder donde van a ir en formato de lista el contenido de los cards relacionados/
-      var list = nav.find(".tabs-navigation");
+      list = nav.find(".tabs-navigation");
       // getCambiador, select donde arrojaremos la lista de opciones basadas en los criterios a visualizar.
       var getCambiador = $("#cambiador");
       console.log(getCambiador);
       
 
+
       // selectedNav, get de lista con los cards arrojados por mustache en story-template.
       var selectedNav = nav.data("cards");
-
-      if(!selectedNav.includes(',')) {
-        // Alerta, bug en el Card 12 que es una card que no comparte Full Story. Rompe el patron. Revisar y corregir.
-        console.log('No comma!');
-      } else {
-        selectedNav = selectedNav.split(",");
-      }
 
       // Creo una lista de options 
       function createVizOptions(i) {
         var optionItem;
         optionItem = '<option value='+cardsContentNav[cardContent[i]][10]+' filtro="'+cardsContentNav[cardContent[i]][7]+'">'+cardsContentNav[cardContent[i]][9]+'</option>';
         $(optionItem).appendTo(getCambiador);
-        console.log(cardsContentNav[cardContent[i]][10]);
+        // console.log(cardsContentNav[cardContent[i]][10]);
       }
       
       function createNav(i) {
@@ -210,15 +206,36 @@
             var listItem;
             listItem = '<li class=\"card\"><a href=\"\">'+cardsContentNav[cardContent[i]][9]+'</a></li>';
             $(listItem).appendTo(list);
+            console.log("Filtro: "+cardsContentNav[cardContent[i]][7])
+            console.log("Filtro: criterio 1"+cardsContentNav[cardContent[i]][10])
+            console.log("Filtro: criterio 2"+cardsContentNav[cardContent[i]][11])
+
+            columnaX = cardsContentNav[cardContent[i]][10];
+            columnaY = cardsContentNav[cardContent[i]][11];
+            filtro = cardsContentNav[cardContent[i]][7]
       }
+
+      if(selectedNav === 12) {
+        // Alerta, bug en el Card 12 que es una card que no comparte Full Story. Rompe el patron. Revisar y corregir.
+        console.log('No comma!');
+        // Crear return de objeto para el menu.
+        cardContent.push(12);
+        createNav(1);
+      } else {
+        selectedNav = selectedNav.split(",");
+      }
+
+
 
 
       for (var i = 0; i < selectedNav.length; i++) {
           var getCard = parseInt(selectedNav[i]);
           cardContent.push(getCard);
+          
           createNav(i);
           createVizOptions(i)
       }
+      manageGraph();
 
 
       //armaVisualizacion();
@@ -228,7 +245,7 @@
       var archivo = sheetrock({
           url: cards,
           headers: 1,
-          query: "select A,B,D,E,F,G,H,I,K,M,O",
+          query: "select A,B,D,E,F,G,H,I,K,M,O,P",
           callback: cargarCardsEnArray
       });
     }
@@ -458,6 +475,9 @@
       classie.remove(contentItemsContainer, 'content--show');
       classie.remove(closeCtrl, 'close-button--show');
       classie.remove(bodyEl, 'view-single');
+
+      cardContent = [];
+      list.empty();
 
       setTimeout(function() {
         var dummy = gridItemsContainer.querySelector('.placeholder');

@@ -1197,8 +1197,9 @@ Estilos d3
   border: 0px;
   margin: 0 auto;
   padding: 0;
-  width: 100%;
+  width: 90%;
   height: 60vh;
+
 }
 
 #info{
@@ -1206,18 +1207,18 @@ Estilos d3
   width: 500px;
 }
 .circulo{
-  fill: black;
+  // fill: black;
   // stroke: white;
  }
-@each $eje, $color in $ejes {
-  .#{$eje} {
-    .circulo {
-      fill: $color;
-    }
-    // &:hover, &:focus {
-    //     background-color: rgba($color, 1);
-    // }
-  }
+ @each $eje, $color in $ejes {
+   .#{$eje} {
+     .circulo {
+       fill: $color;
+     }
+     // &:hover, &:focus {
+     //     background-color: rgba($color, 1);
+     // }
+   }
 }
 
 

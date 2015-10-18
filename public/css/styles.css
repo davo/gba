@@ -986,15 +986,12 @@ Estilos d3
   border: 0px;
   margin: 0 auto;
   padding: 0;
-  width: 100%;
+  width: 90%;
   height: 60vh; }
 
 #info {
   text-align: center;
   width: 500px; }
-
-.circulo {
-  fill: black; }
 
 .salud .circulo {
   fill: #2bfda6; }
