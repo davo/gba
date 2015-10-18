@@ -170,7 +170,9 @@
     var cardContent = [],
         nav, list;
 
-    var changeData = function(item) {
+
+
+    var cambiarVisualizacion = function(item) {
       var value1 = item.data('columnax');
       return console.log(value1);        
     }
@@ -209,6 +211,9 @@
             var dataValue4 = 'data-filtro=\"'+cardsContentNav[cardContent[i]][7]+'\"';
 
             var behavior = 'onmouseover=cambiarVisualizacion(this);';
+                // Reseteo esto porque no funciona como esperaba.
+                behavior = '';
+
 
 
 
