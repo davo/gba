@@ -19,6 +19,12 @@ function updateKeys() {
     height = $(".grafico").height();
     width = $(".grafico").width();
 
+    columnaX = parseInt(window.columnaX);
+    columnaY = parseInt(window.columnaY);
+    radio = parseInt(window.radio);
+
+    console.log(radio);
+
     //estas variables deben popularse al seleccionar una historia o tarjeta
     // columnaX = Math.floor((Math.random() * 32) + 1);
     // columnaY = Math.floor((Math.random() * 32) + 1);
@@ -43,7 +49,7 @@ function cambioDataset(datos) {
         }
 
 
-        radioTMP = +radioDefault;
+        // radioTMP = +radioDefault;
         array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP]);
     }
 
@@ -57,6 +63,8 @@ function addGraph() {
 
     var padding = 50;
 
+
+
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
             return d[1];
@@ -68,6 +76,12 @@ function addGraph() {
             return d[2];
         })])
         .range([height - padding, padding]);
+
+    rScale = d3.scale.sqrt()
+        .range([5,15])
+        .domain([0, d3.max(dataset, function(d) {
+            return d[3];
+        })]);
 
     xAxis = d3.svg.axis()
         .scale(xScale)
@@ -99,7 +113,7 @@ function addGraph() {
         })
         .attr("r", function(d) {
             if (radio) {
-                return d[3];
+                return rScale(d[3]);
             } else {
                 return radioDefault;
             }
@@ -119,7 +133,7 @@ function addGraph() {
                return d[0];
         })
        .attr("x", function(d) {
-           return xScale(d[1]) + 10;  // Returns scaled location of x
+           return xScale(d[1]) + 20;  // Returns scaled location of x
        })
        // .attr("text-anchor","middle")
        .attr("y", function(d) {
@@ -158,6 +172,12 @@ function updateGraph() {
     yScale.domain([0, d3.max(dataset, function(d) {
         return d[2];
     })]);
+
+    rScale = d3.scale.sqrt()
+        .range([5,15])
+        .domain([0, d3.max(dataset, function(d) {
+            return d[3];
+        })]);
 
     svg.selectAll("circle")
         .data(dataset)
@@ -198,7 +218,7 @@ function updateGraph() {
             .attr("r", function(d) {
                 if (radio > 0) {
                     console.log (d[3]);
-                    return d[3];
+                    return rScale(d[3]);
                 } else {
                     return radioDefault;
                 }

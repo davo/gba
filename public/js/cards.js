@@ -139,7 +139,8 @@
                     value.cells.titulo,
                     value.cells.contenido,
                     value.cells.indicador_1,
-                    value.cells.indicador_2
+                    value.cells.indicador_2,
+                    value.cells.indicador_3
 
                ];
                 if (index === 0) {
@@ -204,15 +205,22 @@
       function createNav(i) {
           // Appendeo lista solo sino fue creada.
             var listItem;
-            listItem = '<li class=\"card\"><a href=\"\">'+cardsContentNav[cardContent[i]][9]+'</a></li>';
+            var dataValue1 = 'data-columnax='+cardsContentNav[cardContent[i]][10]+' ';
+            var dataValue2 = 'data-columnay='+cardsContentNav[cardContent[i]][11]+' ';
+            var dataValue3 = 'data-radio='+cardsContentNav[cardContent[i]][12]+' ';
+
+            listItem = '<li class=\"card\"><a href=\"\"';
+            listItem += dataValue1+dataValue2+dataValue3+'>'+cardsContentNav[cardContent[i]][9]+'</a></li>';
             $(listItem).appendTo(list);
             console.log("Filtro: "+cardsContentNav[cardContent[i]][7])
             console.log("Filtro: criterio 1"+cardsContentNav[cardContent[i]][10])
             console.log("Filtro: criterio 2"+cardsContentNav[cardContent[i]][11])
+            console.log("Filtro: criterio 3"+cardsContentNav[cardContent[i]][12])
 
-            columnaX = cardsContentNav[cardContent[i]][10];
-            columnaY = cardsContentNav[cardContent[i]][11];
-            filtro = cardsContentNav[cardContent[i]][7]
+            window.columnaX = cardsContentNav[cardContent[i]][10];
+            window.columnaY = cardsContentNav[cardContent[i]][11];
+            window.filtro = cardsContentNav[cardContent[i]][7];
+            window.radio = cardsContentNav[cardContent[i]][12];
       }
 
       if(selectedNav === 12) {
@@ -245,7 +253,7 @@
       var archivo = sheetrock({
           url: cards,
           headers: 1,
-          query: "select A,B,D,E,F,G,H,I,K,M,O,P",
+          query: "select A,B,D,E,F,G,H,I,K,M,O,P,Q",
           callback: cargarCardsEnArray
       });
     }
