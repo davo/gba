@@ -453,7 +453,7 @@ button:focus {
   position: relative;
   color: inherit;
   // background: #fff;
-  min-height: 420px;
+  min-height: 460px;
   cursor: pointer;
   text-align: center;
   // display: -webkit-box;
@@ -669,22 +669,19 @@ button:focus {
 }
 
 .meta__indicador_a {
-  font-size: 2.9em;
+  font-size: 2em;
   float: left;
   display: block;
-  visibility: hidden;
 }
 .meta__indicador_b {
-  font-size: 2.9em;
+  font-size: 2em;
   float: left;
   display: block;
-  visibility: hidden;
 }
 .meta__indicador_c {
-  font-size: 2.9em;
+  font-size: 2em;
   float: left;
   display: block;
-  visibility: hidden;
 }
 
 .grid__item {
