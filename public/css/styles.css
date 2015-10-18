@@ -300,8 +300,8 @@ button:focus {
     left: 0;
     display: block;
     width: 100%;
-    height: 2px;
-    background-color: #81c483;
+    height: 3px;
+    background-color: white;
     font-size: 0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -314,7 +314,7 @@ button:focus {
       left: 0;
       width: 100%;
       height: 100%;
-      background: #81c483;
+      background: white;
       content: ''; }
     .menu-toggle span:before {
       -webkit-transform: translateY(-7px);
@@ -889,7 +889,8 @@ button:focus {
       font-size: .9em;
       position: relative;
       overflow: visible;
-      width: 400px; }
+      width: 400px;
+      transform: translate3d(0, -5px, 0); }
       .tabs-navigation a.activo:hover {
         font-size: .9em;
         width: 400px; }
@@ -1007,11 +1008,13 @@ Estilos d3
   .grid__sizer,
   .grid__item {
     width: 100%;
-    padding: 30px 30px 5px 30px; }
+    padding: 30px 50px 0px 30px; }
     .grid__sizer::before,
     .grid__item::before {
-      -webkit-transition: opacity 0.3s;
-      transition: opacity 0.3s; } }
+      top: 10px;
+      right: 15px;
+      bottom: 10px;
+      left: 5px; } }
 
 @media screen and (min-width: 900px) {
   .grid {
@@ -1072,16 +1075,36 @@ Estilos d3
   /* 5 columns */
   .grid__sizer,
   .grid__item {
-    width: 20%; } }
+    width: 20%; }
+  .tabs {
+    width: 100%;
+    max-width: 1600px; } }
 
 @media screen and (min-width: 2100px) {
   /* 6 columns */
   .grid__sizer,
   .grid__item {
-    width: 16.66%; } }
+    width: 16.66%; }
+  .tabs {
+    width: 100%;
+    max-width: 1800px; } }
 
 /* small screen changes for sidebar (it becomes an off-canvas menu) */
 @media screen and (max-width: 599px) {
+  .grid {
+    margin-top: 50px; }
+  .view-single .grid {
+    margin-top: 0px; }
+  .grid__sizer,
+  .grid__item {
+    width: 100%;
+    padding: 30px 50px 0px 30px; }
+    .grid__sizer::before,
+    .grid__item::before {
+      top: 10px;
+      right: 15px;
+      bottom: 10px;
+      left: 5px; }
   .sidebar {
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
@@ -1104,7 +1127,7 @@ Estilos d3
   .title--full {
     font-size: 2em; }
   .content__item {
-    padding: 80px 20px 40px; }
+    padding: 80px 5px 40px; }
   .content .close-button {
     padding: 10px 20px; }
     .content .close-button::before {
@@ -1112,9 +1135,38 @@ Estilos d3
       position: absolute;
       top: 0;
       right: 0;
-      background: #fff;
-      border-bottom: 1px solid #f5f5f5;
+      background: #333333;
       width: 100vw;
       height: 50px;
       pointer-events: none;
-      z-index: -1; } }
+      z-index: -1; }
+  .grafico {
+    width: 100%;
+    height: 60vh; } }
+
+@media screen and (max-width: 599px) {
+  border: 2px solid aqua; }
+
+@media screen and (min-width: 600px) {
+  body {
+    border: 2px solid red; } }
+
+@media screen and (min-width: 900px) {
+  body {
+    border: 2px solid blue; } }
+
+@media screen and (min-width: 1200px) {
+  body {
+    border: 2px solid yellow; } }
+
+@media screen and (min-width: 1500px) {
+  body {
+    border: 2px solid violet; } }
+
+@media screen and (min-width: 1800px) {
+  body {
+    border: 2px solid lightblue; } }
+
+@media screen and (min-width: 2100px) {
+  body {
+    border: 2px solid orange; } }
