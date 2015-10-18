@@ -830,6 +830,66 @@ button:focus {
   -webkit-transition: opacity 0.5s 0.25s;
   transition: opacity 0.5s 0.25s; }
 
+.tabs {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  bottom: 0;
+  left: 0; }
+  .tabs::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .tabs nav {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; }
+  .tabs .tabs-navigation {
+    width: 100%;
+    list-style: none;
+    margin: 0; }
+    .tabs .tabs-navigation::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .tabs .tabs-navigation.salud a {
+      background-color: rgba(43, 253, 166, 0.5); }
+      .tabs .tabs-navigation.salud a:hover, .tabs .tabs-navigation.salud a:focus, .tabs .tabs-navigation.salud a.active {
+        background-color: #2bfda6; }
+    .tabs .tabs-navigation.educacion a {
+      background-color: rgba(136, 255, 255, 0.5); }
+      .tabs .tabs-navigation.educacion a:hover, .tabs .tabs-navigation.educacion a:focus, .tabs .tabs-navigation.educacion a.active {
+        background-color: #88ffff; }
+    .tabs .tabs-navigation.infraestructura a {
+      background-color: rgba(204, 162, 252, 0.5); }
+      .tabs .tabs-navigation.infraestructura a:hover, .tabs .tabs-navigation.infraestructura a:focus, .tabs .tabs-navigation.infraestructura a.active {
+        background-color: #cca2fc; }
+    .tabs .tabs-navigation li {
+      float: left; }
+    .tabs .tabs-navigation a {
+      font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 0.8em;
+      color: #333333;
+      position: relative;
+      display: block;
+      height: 100px;
+      width: 250px;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+      padding: 10px 10px;
+      -webkit-transform-style: preserve-3d;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out; }
+      .tabs .tabs-navigation a:hover {
+        position: relative;
+        overflow: visible;
+        width: 400px; }
+      .tabs .tabs-navigation a.active {
+        width: 200px; }
+
 /* close button (for content and sidebar) */
 .close-button {
   position: absolute;
@@ -955,6 +1015,8 @@ button:focus {
         pointer-events: none; }
   .top-bar {
     padding: 22px 15px 10px 60px; }
+  .tabs-navigation {
+    display: none; }
   .menu-toggle {
     display: inline-block; }
   .sidebar .close-button {
@@ -1030,63 +1092,3 @@ Estilos d3
 
 .resaltada {
   fill: #996666; }
-
-.tabs {
-  position: absolute;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0;
-  bottom: 0;
-  left: 0; }
-  .tabs::after {
-    clear: both;
-    content: "";
-    display: table; }
-  .tabs nav {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; }
-  .tabs .tabs-navigation {
-    width: 100%;
-    list-style: none;
-    margin: 0; }
-    .tabs .tabs-navigation::after {
-      clear: both;
-      content: "";
-      display: table; }
-    .tabs .tabs-navigation.salud a {
-      background-color: rgba(43, 253, 166, 0.9); }
-      .tabs .tabs-navigation.salud a:hover, .tabs .tabs-navigation.salud a:focus {
-        background-color: #2bfda6; }
-    .tabs .tabs-navigation.educacion a {
-      background-color: rgba(136, 255, 255, 0.9); }
-      .tabs .tabs-navigation.educacion a:hover, .tabs .tabs-navigation.educacion a:focus {
-        background-color: #88ffff; }
-    .tabs .tabs-navigation.infraestructura a {
-      background-color: rgba(204, 162, 252, 0.9); }
-      .tabs .tabs-navigation.infraestructura a:hover, .tabs .tabs-navigation.infraestructura a:focus {
-        background-color: #cca2fc; }
-    .tabs .tabs-navigation li {
-      float: left; }
-    .tabs .tabs-navigation a {
-      font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 0.8em;
-      color: #333333;
-      position: relative;
-      display: block;
-      height: 100px;
-      width: 250px;
-      white-space: wrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: left;
-      padding: 10px 10px;
-      -webkit-transform-style: preserve-3d;
-      -webkit-transition: all 0.5s ease-in-out;
-      -moz-transition: all 0.5s ease-in-out;
-      transition: all 0.5s ease-in-out; }
-      .tabs .tabs-navigation a:hover {
-        position: relative;
-        overflow: visible;
-        width: 600px; }
-      .tabs .tabs-navigation a.active {
-        width: 200px; }

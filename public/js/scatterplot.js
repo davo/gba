@@ -165,17 +165,20 @@ function updateGraph() {
         .duration(500)
         .each("start", function() {
             d3.select(this)
-                .attr("class", "circulo");
-
-            /*function(d, i) {
-                filtro = filtro.split(",");
-                for (var i = 0; i < filtro.length; i++) {
-                    if (!filtro[i].trim().indexOf(d[0])) {
+                .attr("class", function(d, i) {
+                    var filtro;
+                    try {
+                        filtro = filtro.split(",");
+                        for (var i = 0; i < filtro.length; i++) {
+                            if (!filtro[i].trim().indexOf(d[0])) {
+                                return "circulo";
+                            }
+                        }
+                    } catch (err) {
                         return "circulo";
                     }
-                }
-                return "circuloDim";
-            });*/
+                    return "circuloDim";
+                });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;

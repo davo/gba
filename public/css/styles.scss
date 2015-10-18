@@ -984,6 +984,64 @@ button:focus {
   }
 }
 
+.tabs {
+  position: absolute;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  bottom: 0;
+  left: 0;
+
+  @include clearfix;
+    nav {
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tabs-navigation {
+      width: 100%;
+      list-style: none;
+      margin: 0;
+      @include clearfix;
+      @each $eje, $color in $ejes {
+        &.#{$eje} a {
+          background-color: rgba($color, .5);
+          &:hover, &:focus, &.active {
+              background-color: rgba($color, 1);
+          }
+        }
+      }
+      li {
+        float: left;
+      }
+      a {
+        font-family: $fontset-medium;
+        font-size: 0.8em;
+        color: $gris;
+        position: relative;
+        display: block;
+        height: 100px;
+        width: 250px;
+        white-space: wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        padding: 10px 10px;
+        -webkit-transform-style: preserve-3d;
+        @include transition(all 0.5s ease-in-out);
+
+        &:hover {
+          position: relative;
+          overflow: visible;
+          width: 400px;
+        }
+        &.active {
+          width: 200px;          
+        }
+      }
+
+    }
+}
+
 /* close button (for content and sidebar) */
 
 .close-button {
@@ -1158,6 +1216,9 @@ button:focus {
   .top-bar {
     padding: 22px 15px 10px 60px;
   }
+  .tabs-navigation {
+    display: none;
+  }
   .menu-toggle {
     display: inline-block;
   }
@@ -1258,61 +1319,3 @@ Estilos d3
   fill: #996666;
 }
 
-.tabs {
-  position: absolute;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0;
-  bottom: 0;
-  left: 0;
-
-  @include clearfix;
-    nav {
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .tabs-navigation {
-      width: 100%;
-      list-style: none;
-      margin: 0;
-      @include clearfix;
-      @each $eje, $color in $ejes {
-        &.#{$eje} a {
-          background-color: rgba($color, .9);
-          &:hover, &:focus {
-              background-color: rgba($color, 1);
-          }
-        }
-      }
-      li {
-        float: left;
-      }
-      a {
-        font-family: $fontset-medium;
-        font-size: 0.8em;
-        color: $gris;
-        position: relative;
-        display: block;
-        height: 100px;
-        width: 250px;
-        white-space: wrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: left;
-        padding: 10px 10px;
-        -webkit-transform-style: preserve-3d;
-        @include transition(all 0.5s ease-in-out);
-
-        &:hover {
-          position: relative;
-          overflow: visible;
-          width: 600px;
-        }
-        &.active {
-          width: 200px;          
-        }
-      }
-
-    }
-
-}
