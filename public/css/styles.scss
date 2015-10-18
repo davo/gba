@@ -182,7 +182,7 @@ educacion-alumnos
 */
 
 .icon-logo:before { content: '\e800'; }
-.icon-salud-mortalidad-infantil:before { content: '\e801'; }
+.icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before { content: '\e801'; }
 .icon-salud-establecimientos:before { content: '\e802'; }
 .icon-salud-camas:before { content: '\e803'; }
 .icon-infraestructura-red-de-gas:before { content: '\e804'; }
@@ -196,11 +196,12 @@ educacion-alumnos
 .icon-educacion-analfabetismo:before { content: '\e80c'; }
 .icon-educacion-alumnos:before { content: '\e80d'; }
 .icon-arrow:before { content: '\e80e'; }
+.icon-cancel:before { content: '\e80f'; }
 .icon-instagram:before { content: '\e810'; }
-.icon-twitter-squared:before { content: '\e811'; } 
+.icon-twitter-squared:before { content: '\e811'; }
 .icon-github-squared:before { content: '\e812'; }
 .icon-facebook-squared:before { content: '\e813'; }
-.icon-mail-squared:before { content: '\e814'; } 
+.icon-mail-squared:before { content: '\e814'; }
 
 [class*=" icon-salud"] {
   color: $salud;
@@ -659,6 +660,8 @@ button:focus {
 .meta {
   // font-size: 0.765em;
   text-align: left;
+  position: absolute;
+  bottom: 20px;
 }
 
 .grid__item {
@@ -684,18 +687,12 @@ button:focus {
   display: block;
 }
 
-.grid__item {
-  &:hover .meta__indicador_a, &:focus .meta__indicador_a {
-    visibility: show;
-  }
-}
+// .grid__item {
+//   &:hover .meta__indicador_a, &:focus .meta__indicador_a {
+//     visibility: show;
+//   }
+// }
 
-.meta__arrow {
-  font-size: 1.2em;
-  display: block;
-  float: right;
-  color: #fff;
-}
 
 .meta__misc {
   display: block;
@@ -1056,7 +1053,7 @@ button:focus {
   top: 0;
   right: 0;
   font-size: 18px;
-  color: #ddd;
+  color: white;
   cursor: pointer;
   pointer-events: none;
   padding: 20px 30px;
@@ -1073,7 +1070,7 @@ button:focus {
     // display: none;
   }
   &:hover {
-    // color: #;
+    color: rgba(white,0.5)
   }
 }
 
@@ -1154,6 +1151,20 @@ Estilos d3
   fill: #996666;
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .grid__sizer,
+  .grid__item {
+    width: 100%;
+    padding: 0px;
+    &::before {
+
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+    }
+  }
+}
 
 /* Viewport sizes based on column number and sidebar */
 /* 1 column */
@@ -1191,8 +1202,20 @@ Estilos d3
   }
   .content__item {
     font-size: 1em;
+    .category--full {
+      width: 65%;
+      font-size: 0.76em;
+      margin: 30px 0 20px 0;
+    }
+    .title {
+      width: 75%;
+      margin: 20px 50px 0 0;
+    }
   }
-  /* 2 columns */
+  .meta__indicador_a, .meta__indicador_b , .meta__indicador_c {
+    font-size: 3.2em;
+  }
+  /* 1 columns */
   .grid__sizer,
   .grid__item {
     width: 100%;
@@ -1202,6 +1225,30 @@ Estilos d3
       right: 15px;
       bottom: 10px;
       left: 5px;
+    }
+  }
+  .content__item {
+    padding: 0px 20px 0px 0px;
+  }
+  .tabs-navigation {
+    a {
+      font-size: 0.55em;
+      position: relative;
+      display: block;
+      height: 50px;
+      width: 50px;
+      text-overflow: ellipsis;
+      padding: 10px 10px;
+      &:hover {
+        font-size: 0.8em;
+        position: relative;
+        overflow: visible;
+        width: 250px;
+      }
+      &.active {
+        font-size: 0.8em;
+        width: 200px;          
+      }
     }
   }
 }
@@ -1379,6 +1426,21 @@ Estilos d3
       left: 5px;
     }
   }
+  .meta__indicador_a, .meta__indicador_b , .meta__indicador_c {
+    font-size: 3.5em;
+  }
+  .content__item {
+    padding: 40px 5px 40px;
+    .category--full {
+      width: 100%;
+      font-size: 0.5em;
+      margin: 0px 5px 10px 0;
+    }
+    .title {
+      width: 100%;
+      margin: 10px 5px 0 5px;
+    }
+  }
   .sidebar {
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
@@ -1409,7 +1471,7 @@ Estilos d3
     font-size: 2em;
   }
   .content__item {
-    padding: 80px 5px 40px;
+    padding: 50px 0px 0px;
   }
   .content .close-button {
     padding: 10px 20px;
@@ -1430,19 +1492,7 @@ Estilos d3
     height: 60vh;
   }
 }
-// @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-//   .grid__sizer,
-//   .grid__item {
-//     width: 100%;
-//     padding: 0px;
-//     &::before {
-//       top: 0px;
-//       right: 0px;
-//       bottom: 0px;
-//       left: 0px;
-//     }
-//   }
-// }
+
 @media screen and (max-width: 599px) {
   border: 2px solid aqua
 }
@@ -1462,6 +1512,7 @@ Estilos d3
     border: 2px solid yellow
   }
 }
+
 @media screen and (min-width: 1500px) {
   body {
     border: 2px solid violet

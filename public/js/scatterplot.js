@@ -3,6 +3,9 @@ var radioDefault = 8; //el radio por default si no hay dato de radio
 var svg;
 var temp;
 
+// From Nadieh Bremer, quick fix for resizing some things for mobile-ish viewers
+var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
+
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
 var columnaX = 1;
@@ -79,7 +82,7 @@ function addGraph() {
         .range([height - padding, padding]);
 
     rScale = d3.scale.sqrt()
-        .range([5,15])
+        .range([mobileScreen ? 1 : 3, mobileScreen ? 5 : 15])
         .domain([0, d3.max(dataset, function(d) {
             return d[3];
         })]);
@@ -91,7 +94,7 @@ function addGraph() {
 
     yAxis = d3.svg.axis()
         .scale(yScale)
-        .orient("right")
+        .orient("left")
         .ticks(8);
 
     svg = d3.select(objectGraph).append("svg")
@@ -175,7 +178,7 @@ function updateGraph() {
     })]);
 
     rScale = d3.scale.sqrt()
-        .range([5,15])
+        .range([mobileScreen ? 1 : 3, mobileScreen ? 5 : 15])
         .domain([0, d3.max(dataset, function(d) {
             return d[3];
         })]);
