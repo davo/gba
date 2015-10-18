@@ -165,8 +165,18 @@
             var listItem;
             var dataValue1 = 'data-columnax=' + cardsContentNav[cardContent[i]][10] + ' ';
             var dataValue2 = 'data-columnay=' + cardsContentNav[cardContent[i]][11] + ' ';
-            var dataValue3 = 'data-radio=' + cardsContentNav[cardContent[i]][12] + ' ';
+            if (cardsContentNav[cardContent[i]][12] > 0) {
+              var dataValue3 = 'data-radio=' + cardsContentNav[cardContent[i]][12] + ' ';
+            } else {
+              var dataValue3 = 'data-radio=\"\"';
+            }
             var dataValue4 = 'data-filtro=\"' + cardsContentNav[cardContent[i]][7] + '\"';
+
+            console.log(dataValue4);
+
+            // dataValue4 = unescape(dataValue4);
+
+            console.log(dataValue4);
 
             listItem = '<li class=\"card\">';
             listItem += '<a href=\"#\"';
@@ -175,12 +185,6 @@
             }
             listItem += dataValue1 + dataValue2 + dataValue3 + dataValue4 + '>' + cardsContentNav[cardContent[i]][9] + '</a></li>';
             $(listItem).appendTo(list);
-
-            $(listItem).on({
-                mouseenter: function() {
-                    console.log('Binded!')
-                }
-            });
 
             window.columnaX = cardsContentNav[cardContent[i]][10];
             window.columnaY = cardsContentNav[cardContent[i]][11];
