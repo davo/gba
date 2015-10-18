@@ -4,21 +4,26 @@ var svg;
 
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
-var columnaX = 0;
-var columnaY = 0;
+var columnaX = 1;
+var columnaY = 2;
 var radio = 0;
 var filtro = "";
-
+var height = "";
+var width = "";
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
 // Param: @object = datos del spreadsheet  
 function updateKeys() {
+    //saco medidas para recalcular el grafico (RES)
+    height = $(".grafico").height();
+    width = $(".grafico").width();
+
+    //estas variables deben popularse al seleccionar una historia o tarjeta
     columnaX = Math.floor((Math.random() * 32) + 1);
     columnaY = Math.floor((Math.random() * 32) + 1);
-    radio = 0;
+    radio = Math.floor((Math.random() * 32) + 1);
     filtro = "";
-    return true;
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
@@ -31,13 +36,14 @@ function cambioDataset(datos) {
         var nombrePartido = datos[i][0];
         var dato1TMP = +datos[i][columnaX];
         var dato2TMP = +datos[i][columnaY];
-        var radioTMP = function() {
-            if (radio < 0) {
-                return +datos[i][radio];
-            } else {
-                return 0;
-            }
-        };
+        if (radio > 0) {
+            radioTMP = +datos[i][radio];
+        } else {
+            radioTMP = +radioDefault;
+        }
+
+
+        radioTMP = +radioDefault;
         array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP]);
     }
 
@@ -47,20 +53,19 @@ function cambioDataset(datos) {
 // Abstract: Crea el scatterplot
 // Param: @Array = datos  
 function addGraph() {
-
     var dataset = cambioDataset(datosTotales);
 
     var padding = 50;
 
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
-            return d[columnaX];
+            return d[1];
         })])
         .range([padding, width - padding]);
 
     yScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
-            return d[columnaY];
+            return d[2];
         })])
         .range([height - padding, padding]);
 
@@ -86,10 +91,10 @@ function addGraph() {
         .append("circle")
         .attr("class", "circulo")
         .attr("cx", function(d) {
-            return xScale()/2;
+            return xScale(d[1]);
         })
         .attr("cy", function(d) {
-            return yScale()/2;
+            return yScale(d[2]);
         })
         .attr("r", function(d) {
             if (radio) {
@@ -97,7 +102,6 @@ function addGraph() {
             } else {
                 return radioDefault;
             }
-
         })
         .attr("value", function(d) {
             return d[0]
@@ -171,8 +175,8 @@ function updateGraph() {
             .transition()
             .duration(200)
             .attr("r", function(d) {
-                if (radio < 0) {
-                    console.log(d[3]);
+                if (radio > 0) {
+                    console.log (d[3]);
                     return d[3];
                 } else {
                     return radioDefault;
@@ -202,7 +206,6 @@ function removeGraph() {
 // si NO existe lo genera
 function manageGraph() {
     updateKeys();
-
     if ($(objectGraph + " svg").length > 0) {
         updateGraph();
     } else {

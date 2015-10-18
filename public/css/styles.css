@@ -981,13 +981,13 @@ button:focus {
 /*****
 Estilos d3
 *****/
-#grafico {
+.grafico {
   background-color: transparent;
   border: 0px;
   margin: 0 auto;
   padding: 0;
   width: 100%;
-  height: 70vh; }
+  height: 60vh; }
 
 #info {
   text-align: center;
