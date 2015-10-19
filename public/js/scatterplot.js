@@ -4,7 +4,7 @@ var svg;
 var temp;
 
 // From Nadieh Bremer, quick fix for resizing some things for mobile-ish viewers
-var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
+var mobileScreen = ($(window).innerWidth() < 500 ? true : false);
 
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
@@ -39,7 +39,7 @@ function cambioDataset(datos) {
     labelX = datos[0][1];
     labelY = datos[0][2];
 
-    for (var i = 1; i < datos.length ; i++) {
+    for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
         var dato1TMP = +datos[i][columnaX];
         var dato2TMP = +datos[i][columnaY];
@@ -90,7 +90,7 @@ function addGraph() {
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(8);
+        .ticks(8, "s");
 
 
     svg = d3.select(objectGraph).append("svg")
@@ -126,21 +126,23 @@ function addGraph() {
         });
 
     svg.selectAll("text")
-       .data(dataset)
-       .enter()
-       .append("text")
-       .text(function(d) {
-               return d[0];
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .text(function(d) {
+            return d[0];
         })
-       .attr("x", function(d) {
-           return xScale(d[1]) + 20;  // Returns scaled location of x
-       })
-       // .attr("text-anchor","middle")
-       .attr("y", function(d) {
-           return yScale(d[2])+2;  // Returns scaled circle y
-       })
-       .attr("font-size", "9px")
-       .attr("fill", "white");
+        .attr("x", function(d) {
+            return xScale(d[1]) + 20; // Returns scaled location of x
+        })
+        // .attr("text-anchor","middle")
+        .attr("y", function(d) {
+            return yScale(d[2]) + 2; // Returns scaled circle y
+        })
+        .attr("font-size", "10px")
+        .attr("text-anchor", "start")
+        .attr("fill", "white");
 
     svg.append("g")
         .attr("class", "x axis")
@@ -152,8 +154,8 @@ function addGraph() {
         .append('text')
         .attr("id", "labelX")
         .attr('text-anchor', 'end')
-        .attr("transform", "translate("+(width - padding)+", -10)")
-        .text(labelX);        
+        .attr("transform", "translate(" + (width - padding) + ", -10)")
+        .text(labelX);
 
 
     svg.append("g")
@@ -167,7 +169,7 @@ function addGraph() {
         .attr("id", "labelY")
         .attr('text-anchor', 'end')
         .attr("transform", "translate(20,50) rotate(-90)")
-        .text(labelY);        
+        .text(labelY);
 
     d3.select(".content__item--show #cambiador")
         .on("change", function() {
@@ -181,7 +183,7 @@ function updateGraph() {
 
     var dataset = cambioDataset(datosTotales);
 
-    console.log (dataset);
+    console.log(dataset);
 
     xScale.domain([0, d3.max(dataset, function(d) {
         return d[1];
@@ -202,20 +204,20 @@ function updateGraph() {
         .duration(500)
         .each("start", function() {
             d3.select(this)
-            .attr("class", function(d, i) {
-                var filtros;
-                try {
-                    filtros = filtro.split(",");
-                    for (var i = 0; i < filtros.length; i++) {
-                        if (!filtros[i].trim().indexOf(d[0])) {
-                            return "circulo";
+                .attr("class", function(d, i) {
+                    var filtros;
+                    try {
+                        filtros = filtro.split(",");
+                        for (var i = 0; i < filtros.length; i++) {
+                            if (!filtros[i].trim().indexOf(d[0])) {
+                                return "circulo";
+                            }
                         }
+                    } catch (err) {
+                        return "circulo";
                     }
-                } catch (err) {
-                    return "circulo";
-                }
-                return "circuloDim";
-            });
+                    return "circuloDim";
+                });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -254,7 +256,7 @@ function updateGraph() {
         .call(yAxis);
 
     svg.select("#labelX")
-        .text(labelX);        
+        .text(labelX);
     svg.select("#labelY")
         .text(labelY);
 
@@ -271,11 +273,49 @@ function removeGraph() {
 // si NO existe lo genera
 function manageGraph() {
     updateKeys();
+
     if ($(objectGraph + " svg").length > 0) {
         updateGraph();
     } else {
         addGraph();
         updateGraph();
+        arrangeLabels();
     }
 
+}
+
+
+function arrangeLabels() {
+    var move = 1;
+    while (move > 0) {
+        move = 0;
+        svg.selectAll(".label")
+            .each(function() {
+                var that = this,
+                    a = this.getBoundingClientRect();
+                svg.selectAll(".label")
+                    .each(function() {
+                        if (this != that) {
+                            var b = this.getBoundingClientRect();
+                            if ((Math.abs(a.left - b.left) * 2 < (a.width + b.width)) &&
+                                (Math.abs(a.top - b.top) * 2 < (a.height + b.height))) {
+                                // overlap, move labels
+                                var dx = (Math.max(0, a.right - b.left) +
+                                        Math.min(0, a.left - b.right)) * 0.01,
+                                    dy = (Math.max(0, a.bottom - b.top) +
+                                        Math.min(0, a.top - b.bottom)) * 0.02,
+                                    tt = d3.transform(d3.select(this).attr("transform")),
+                                    to = d3.transform(d3.select(that).attr("transform"));
+                                move += Math.abs(dx) + Math.abs(dy);
+
+                                to.translate = [to.translate[0] + dx, to.translate[1] + dy];
+                                tt.translate = [tt.translate[0] - dx, tt.translate[1] - dy];
+                                d3.select(this).attr("transform", "translate(" + tt.translate + ")");
+                                d3.select(that).attr("transform", "translate(" + to.translate + ")");
+                                a = this.getBoundingClientRect();
+                            }
+                        }
+                    });
+            });
+    }
 }

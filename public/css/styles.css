@@ -885,8 +885,7 @@ button:focus {
       font-size: .9em;
       position: relative;
       overflow: visible;
-      width: 400px;
-      transform: translate3d(0, -5px, 0); }
+      width: 400px; }
       .tabs-navigation a.activo:hover {
         font-size: .9em;
         width: 400px; }

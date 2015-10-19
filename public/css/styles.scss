@@ -1033,7 +1033,7 @@ button:focus {
       position: relative;
       overflow: visible;
       width: 400px;
-      transform: translate3d(0, -5px, 0);
+      // transform: translate3d(0, -5px, 0);
       &:hover {
         font-size: .9em;
         width: 400px;
@@ -1247,7 +1247,7 @@ Estilos d3
       }
       &.active {
         font-size: 0.8em;
-        width: 200px;          
+        width: 200px;        
       }
     }
   }
