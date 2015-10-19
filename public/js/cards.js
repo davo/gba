@@ -195,6 +195,8 @@
             //item.('click'
 
             $(list).find('a').bind("click", function(e) {
+                $(list).find('.active').removeClass('activo');
+                $(this).addClass('activo');
                 var values = e.currentTarget;
                 columnaX = values.attributes["data-columnax"].value;
                 columnaY = values.attributes["data-columnaY"].value;
@@ -275,7 +277,7 @@
             isResizeBound: true,
             itemSelector: '.grid__item',
             percentPosition: false,
-            sortBy: 'prioridad',
+            // sortBy: 'prioridad',
             masonry: {
                 columnWidth: '.grid__sizer'
             },

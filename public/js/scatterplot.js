@@ -67,6 +67,8 @@ function addGraph() {
 
     var padding = 50;
 
+    console.table(dataset);
+
 
 
     xScale = d3.scale.linear()
