@@ -133,7 +133,10 @@ function addGraph() {
         })
         .attr("value", function(d) {
             return d[0]
-        });
+        })
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+
 
     svg.selectAll("text")
        .data(dataset)
@@ -182,27 +185,27 @@ function addGraph() {
         .style("font-size", (mobileScreen ? 7 : 12) + "px")
         .call(yAxis);
 
-    var voronoi = d3.geom.voronoi()
-        .x(function(d) { return xScale(d[1]); })
-        .y(function(d) { return yScale(d[2]); })
-        .clipExtent([[0, 0], [width, height]]);
+    // var voronoi = d3.geom.voronoi()
+    //     .x(function(d) { return xScale(d[1]); })
+    //     .y(function(d) { return yScale(d[2]); })
+    //     .clipExtent([[0, 0], [width, height]]);
 
-    var voronoiGroup = svg.append("g")
-        .attr("class", "voronoiWrapper");
+    // var voronoiGroup = svg.append("g")
+    //     .attr("class", "voronoiWrapper");
 
-    voronoiGroup.selectAll("path")
-        .data(voronoi(dataset)) //Use vononoi() with your dataset inside
-        .enter().append("path")
-        .attr("d", function(d, i) { return "M" + d.join("L") + "Z"; })
-        .datum(function(d, i) { return d.point; })
-        //Give each cell a unique class where the unique part corresponds to the circle classes
-        // .attr("class", function(d,i) { return "voronoi " + d.CountryCode; })
-        .style("stroke", "white") //I use this to look at how the cells are dispersed as a check
-        .style("stroke-opacity", 0.5)
-        .style("fill", "none")
-        .style("pointer-events", "all")
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
+    // voronoiGroup.selectAll("path")
+    //     .data(voronoi(dataset)) //Use vononoi() with your dataset inside
+    //     .enter().append("path")
+    //     .attr("d", function(d, i) { return "M" + d.join("L") + "Z"; })
+    //     .datum(function(d, i) { return d.point; })
+    //     //Give each cell a unique class where the unique part corresponds to the circle classes
+    //     // .attr("class", function(d,i) { return "voronoi " + d.CountryCode; })
+    //     .style("stroke", "white") //I use this to look at how the cells are dispersed as a check
+    //     .style("stroke-opacity", 0.5)
+    //     .style("fill", "none")
+    //     .style("pointer-events", "all");
+        // .on('mouseover', tip.show)
+        // .on('mouseout', tip.hide);
 };
 
 // Abstract: Cambia la posicion de los puntos del scatterplot
