@@ -42,7 +42,7 @@ function updateKeys() {
 function cambioDataset(datos) {
     var array_de_datos = [];
 
-    for (var i = 1; i < datos.length - 1; i++) {
+    for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
         var dato1TMP = +datos[i][columnaX];
         var dato2TMP = +datos[i][columnaY];
