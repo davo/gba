@@ -945,14 +945,23 @@ Estilos d3
 .salud .circulo {
   fill: #2bfda6; }
 
+.salud .circuloDim {
+  fill: #2bfda6;
+  opacity: 0.5; }
+
 .educacion .circulo {
   fill: #88ffff; }
+
+.educacion .circuloDim {
+  fill: #88ffff;
+  opacity: 0.5; }
 
 .infraestructura .circulo {
   fill: #cca2fc; }
 
-.circuloDim {
-  opacity: 0.3; }
+.infraestructura .circuloDim {
+  fill: #cca2fc;
+  opacity: 0.5; }
 
 .axis path, .axis line {
   fill: none;

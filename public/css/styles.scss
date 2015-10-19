@@ -1116,16 +1116,16 @@ Estilos d3
      .circulo {
        fill: $color;
      }
-     // &:hover, &:focus {
-     //     background-color: rgba($color, 1);
-     // }
+     .circuloDim{
+       fill: $color;
+       opacity: 0.5;
+     }
    }
 }
 
 
-.circuloDim{
-  opacity:0.3;
-}
+
+
 
 .axis path , .axis line {
   fill: none;

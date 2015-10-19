@@ -459,8 +459,8 @@
                 ];
                 if (index === 0) {
                     console.log('Skipping header!');
-                } else if (index === 1) {
-                    console.log('Skipping zero value!');
+                // } else if (index === 1) {
+                //     console.log('Skipping zero value!');
                 } else {
                     cardsContentNav.push(fila);
                 }
