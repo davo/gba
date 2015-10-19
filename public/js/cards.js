@@ -195,7 +195,7 @@
             //item.('click'
 
             $(list).find('a').bind("click", function(e) {
-                $(list).find('.active').removeClass('activo');
+                $(list).find('.activo').removeClass('activo');
                 $(this).addClass('activo');
                 var values = e.currentTarget;
                 columnaX = values.attributes["data-columnax"].value;

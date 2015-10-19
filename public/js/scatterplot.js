@@ -97,7 +97,7 @@ function addGraph() {
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(8);
+        .ticks(8, "s");
 
     svg = d3.select(objectGraph).append("svg")
         .attr("width", "100%")
@@ -135,6 +135,7 @@ function addGraph() {
        .data(dataset)
        .enter()
        .append("text")
+       .attr("class", "label")
        .text(function(d) {
                return d[0];
         })
@@ -145,7 +146,8 @@ function addGraph() {
        .attr("y", function(d) {
            return yScale(d[2])+2;  // Returns scaled circle y
        })
-       .attr("font-size", "9px")
+       .attr("font-size", "10px")
+       .attr("text-anchor", "start")
        .attr("fill", "white");
 
     svg.append("g")
@@ -254,11 +256,49 @@ function removeGraph() {
 // si NO existe lo genera
 function manageGraph() {
     updateKeys();
+
     if ($(objectGraph + " svg").length > 0) {
         updateGraph();
     } else {
         addGraph();
         updateGraph();
+        arrangeLabels();
     }
 
+}
+
+
+function arrangeLabels() {
+  var move = 1;
+  while(move > 0) {
+    move = 0;
+    svg.selectAll(".label")
+       .each(function() {
+         var that = this,
+             a = this.getBoundingClientRect();
+         svg.selectAll(".label")
+            .each(function() {
+              if(this != that) {
+                var b = this.getBoundingClientRect();
+                if((Math.abs(a.left - b.left) * 2 < (a.width + b.width)) &&
+                   (Math.abs(a.top - b.top) * 2 < (a.height + b.height))) {
+                  // overlap, move labels
+                  var dx = (Math.max(0, a.right - b.left) +
+                           Math.min(0, a.left - b.right)) * 0.01,
+                      dy = (Math.max(0, a.bottom - b.top) +
+                           Math.min(0, a.top - b.bottom)) * 0.02,
+                      tt = d3.transform(d3.select(this).attr("transform")),
+                      to = d3.transform(d3.select(that).attr("transform"));
+                  move += Math.abs(dx) + Math.abs(dy);
+                
+                  to.translate = [ to.translate[0] + dx, to.translate[1] + dy ];
+                  tt.translate = [ tt.translate[0] - dx, tt.translate[1] - dy ];
+                  d3.select(this).attr("transform", "translate(" + tt.translate + ")");
+                  d3.select(that).attr("transform", "translate(" + to.translate + ")");
+                  a = this.getBoundingClientRect();
+                }
+              }
+            });
+       });
+  }
 }
