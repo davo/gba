@@ -932,24 +932,24 @@ Estilos d3
   width: 99%;
   height: 60vh; }
 
+.labelOn {
+  visibility: visible; }
+
+.labelOff {
+  visibility: hidden; }
+
 #info {
   text-align: center;
   width: 500px; }
 
 .salud .circulo {
-  fill: #2bfda6;
-  stroke: white;
-  stroke-width: 1.5; }
+  fill: #2bfda6; }
 
 .educacion .circulo {
-  fill: #88ffff;
-  stroke: white;
-  stroke-width: 1.5; }
+  fill: #88ffff; }
 
 .infraestructura .circulo {
-  fill: #cca2fc;
-  stroke: white;
-  stroke-width: 1.5; }
+  fill: #cca2fc; }
 
 .circuloDim {
   opacity: 0.3; }
@@ -957,12 +957,39 @@ Estilos d3
 .axis path, .axis line {
   fill: none;
   stroke: white;
-  shape-rendering: crispEdges; }
+  shape-rendering: crispEdges;
+  stroke-width: 1px; }
 
 .axis text {
-  fill: white;
-  font-family: sans-serif;
-  font-size: 11px; }
+  fill: white; }
+
+.d3-tip {
+  z-index: 100;
+  line-height: 1;
+  font-size: .8em;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px; }
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center; }
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -2px 0 0 0;
+  top: 100%;
+  left: 0; }
 
 #mapa {
   fill: #c0c0c0;

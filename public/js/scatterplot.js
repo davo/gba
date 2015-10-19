@@ -92,12 +92,18 @@ function addGraph() {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(8);
+        .ticks(mobileScreen ? 4 : 8);
 
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(8, "s");
+        .ticks(mobileScreen ? 4 : 6, "s");
+
+
+    /* Initialize tooltip */
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d[0]; });
+
+
 
     svg = d3.select(objectGraph).append("svg")
         .attr("width", "100%")
@@ -105,6 +111,7 @@ function addGraph() {
         .attr('viewBox', '0 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
         .attr('preserveAspectRatio', 'xMinYMin');
 
+    svg.call(tip);
 
     svg.selectAll("circle")
         .data(dataset)
@@ -127,9 +134,8 @@ function addGraph() {
         .attr("value", function(d) {
             return d[0]
         })
-        .on("mouseover", function(d) {
-            //console.log(d[0]);
-        });
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
 
     svg.selectAll("text")
        .data(dataset)
@@ -140,32 +146,43 @@ function addGraph() {
                return d[0];
         })
        .attr("x", function(d) {
-           return xScale(d[1]) + 20;  // Returns scaled location of x
+           return xScale(d[1]) + 15;  // Returns scaled location of x
        })
        // .attr("text-anchor","middle")
        .attr("y", function(d) {
-           return yScale(d[2])+2;  // Returns scaled circle y
+           return yScale(d[2])+3;  // Returns scaled circle y
        })
-       .attr("font-size", "10px")
+       .style("font-size", (mobileScreen ? 8 : 11) + "px")
        .attr("text-anchor", "start")
+       .attr("class", function (d,i) {
+            var filtros;
+            try {
+                filtros = filtro.split(",");
+                for (var i = 0; i < filtros.length; i++) {
+                    if (!filtros[i].trim().indexOf(d[0])) {
+                        return "labelOn";
+                    }
+                }
+            } catch (err) {
+                return "circulo";
+            }
+            return "labelOff";
+       })
        .attr("fill", "white");
 
     svg.append("g")
         .attr("class", "x axis")
         .attr("id", "xAxis")
         .attr("transform", "translate(0," + (height - padding) + ")")
+        .style("font-size", (mobileScreen ? 7 : 12) + "px")
         .call(xAxis);
 
     svg.append("g")
         .attr("class", "y axis")
         .attr("id", "yAxis")
         .attr("transform", "translate(" + padding + ",0)")
+        .style("font-size", (mobileScreen ? 7 : 12) + "px")
         .call(yAxis);
-
-    d3.select(".content__item--show #cambiador")
-        .on("change", function() {
-            updateGraph();
-        });
 };
 
 // Abstract: Cambia la posicion de los puntos del scatterplot
@@ -186,6 +203,29 @@ function updateGraph() {
         .domain([0, d3.max(dataset, function(d) {
             return d[3];
         })]);
+
+    svg.selectAll("text")
+        .data(dataset)
+        .transition()
+        .duration(500)
+        .each("start", function(){
+            d3.select(this)
+            .attr("class", function (d,i) {
+                 var filtros;
+                 try {
+                     filtros = filtro.split(",");
+                     for (var i = 0; i < filtros.length; i++) {
+                         if (!filtros[i].trim().indexOf(d[0])) {
+                             return "labelOn";
+                         }
+                     }
+                 } catch (err) {
+                     return "circulo";
+                 }
+                 return "labelOff";
+            })
+        })
+        .call(arrangeLabels);
 
     svg.selectAll("circle")
         .data(dataset)
@@ -267,6 +307,7 @@ function manageGraph() {
 
 }
 
+// From http://bl.ocks.org/larskotthoff/11406992
 
 function arrangeLabels() {
   var move = 1;
