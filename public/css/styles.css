@@ -947,21 +947,21 @@ Estilos d3
 
 .salud .circuloDim {
   fill: #2bfda6;
-  opacity: 0.5; }
+  opacity: 0.4; }
 
 .educacion .circulo {
   fill: #88ffff; }
 
 .educacion .circuloDim {
   fill: #88ffff;
-  opacity: 0.5; }
+  opacity: 0.4; }
 
 .infraestructura .circulo {
   fill: #cca2fc; }
 
 .infraestructura .circuloDim {
   fill: #cca2fc;
-  opacity: 0.5; }
+  opacity: 0.4; }
 
 .axis path, .axis line {
   fill: none;
