@@ -172,11 +172,8 @@
             }
             var dataValue4 = 'data-filtro=\"' + cardsContentNav[cardContent[i]][7] + '\"';
 
-            console.log(dataValue4);
-
             // dataValue4 = unescape(dataValue4);
 
-            console.log(dataValue4);
 
             listItem = '<li class=\"card\">';
             listItem += '<a href=\"#\"';

@@ -14,6 +14,8 @@ var radio = 0;
 var filtro = "";
 var height = "";
 var width = "";
+var labelX = "";
+var labelY = "";
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
@@ -26,14 +28,6 @@ function updateKeys() {
     columnaX = parseInt(window.columnaX);
     columnaY = parseInt(window.columnaY);
     radio = parseInt(window.radio);
-
-    //console.log(radio);
-
-    //estas variables deben popularse al seleccionar una historia o tarjeta
-    // columnaX = Math.floor((Math.random() * 32) + 1);
-    // columnaY = Math.floor((Math.random() * 32) + 1);
-    // radio = Math.floor((Math.random() * 32) + 1);
-    // filtro = "";
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
@@ -42,7 +36,10 @@ function updateKeys() {
 function cambioDataset(datos) {
     var array_de_datos = [];
 
-    for (var i = 1; i < datos.length - 1; i++) {
+    labelX = datos[0][1];
+    labelY = datos[0][2];
+
+    for (var i = 1; i < datos.length ; i++) {
         var nombrePartido = datos[i][0];
         var dato1TMP = +datos[i][columnaX];
         var dato2TMP = +datos[i][columnaY];
@@ -66,8 +63,6 @@ function addGraph() {
     var dataset = cambioDataset(datosTotales);
 
     var padding = 50;
-
-
 
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
@@ -96,6 +91,7 @@ function addGraph() {
         .scale(yScale)
         .orient("left")
         .ticks(8);
+
 
     svg = d3.select(objectGraph).append("svg")
         .attr("width", "100%")
@@ -152,11 +148,26 @@ function addGraph() {
         .attr("transform", "translate(0," + (height - padding) + ")")
         .call(xAxis);
 
+    svg.select("#xAxis")
+        .append('text')
+        .attr("id", "labelX")
+        .attr('text-anchor', 'end')
+        .attr("transform", "translate("+(width - padding)+", -10)")
+        .text(labelX);        
+
+
     svg.append("g")
         .attr("class", "y axis")
         .attr("id", "yAxis")
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
+
+    svg.select("#yAxis")
+        .append('text')
+        .attr("id", "labelY")
+        .attr('text-anchor', 'end')
+        .attr("transform", "translate(20,50) rotate(-90)")
+        .text(labelY);        
 
     d3.select(".content__item--show #cambiador")
         .on("change", function() {
@@ -169,6 +180,8 @@ function addGraph() {
 function updateGraph() {
 
     var dataset = cambioDataset(datosTotales);
+
+    console.log (dataset);
 
     xScale.domain([0, d3.max(dataset, function(d) {
         return d[1];
@@ -239,6 +252,12 @@ function updateGraph() {
         .transition()
         .duration(800)
         .call(yAxis);
+
+    svg.select("#labelX")
+        .text(labelX);        
+    svg.select("#labelY")
+        .text(labelY);
+
 };
 
 // da de baja el grafico
