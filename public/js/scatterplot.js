@@ -41,6 +41,8 @@ function updateKeys() {
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var array_de_datos = [];
+    labelX = datos[0][columnaX];
+    labelY = datos[0][columnaY];
 
     for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
@@ -52,10 +54,10 @@ function cambioDataset(datos) {
             radioTMP = +radioDefault;
         }
         var dato3TMP = +datos[i][filtro];
-
         // radioTMP = +radioDefault;
         array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP]);
     }
+
 
     return array_de_datos;
 }
@@ -66,10 +68,6 @@ function addGraph() {
     var dataset = cambioDataset(datosTotales);
 
     var padding = 50;
-
-    console.table(dataset);
-
-
 
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
@@ -184,6 +182,21 @@ function addGraph() {
         .attr("transform", "translate(" + padding + ",0)")
         .style("font-size", (mobileScreen ? 7 : 12) + "px")
         .call(yAxis);
+
+    svg.select("#xAxis")
+        .append('text')
+        .attr("id", "labelX")
+        .attr('text-anchor', 'end')
+        .attr("transform", "translate(" + (width - padding) + ", -10)")
+        .text(labelX);
+
+    svg.select("#yAxis")
+        .append('text')
+        .attr("id", "labelY")
+        .attr('text-anchor', 'end')
+        .attr("transform", "translate(20,50) rotate(-90)")
+        .text(labelY);
+
 
     // var voronoi = d3.geom.voronoi()
     //     .x(function(d) { return xScale(d[1]); })
@@ -306,6 +319,13 @@ function updateGraph() {
         .transition()
         .duration(800)
         .call(yAxis);
+
+    svg.select("#labelX")
+        .text(labelX);
+
+    svg.select("#labelY")
+        .text(labelY);
+
 };
 
 // da de baja el grafico
