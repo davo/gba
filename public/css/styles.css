@@ -328,20 +328,22 @@ button:focus {
 
 /* Filter/dropdown dummy on the right */
 .filter span {
+  display: block;
   font-size: .75em;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  padding-bottom: 15px; }
 
 .filter__item {
   display: block;
   cursor: pointer;
+  text-align: left;
   color: #333333;
-  background-color: #262626;
+  background-color: transparent;
   border: none;
   text-transform: uppercase;
   font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
-  padding: 12px 15px;
-  margin-bottom: 5px;
+  padding: 10px 0px 10px 0px;
   text-decoration: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -350,46 +352,60 @@ button:focus {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px; }
+  border-top-left-radius: 4px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
   .filter__item:active {
     position: relative;
     top: 1px; }
   .filter__item.salud {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border: none;
-    background-color: rgba(43, 253, 166, 0.9); }
+    color: #2bfda6; }
     .filter__item.salud:hover, .filter__item.salud:focus {
-      background-color: #2bfda6; }
+      color: rgba(43, 253, 166, 0.5); }
   .filter__item.educacion {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border: none;
-    background-color: rgba(136, 255, 255, 0.9); }
+    color: #88ffff; }
     .filter__item.educacion:hover, .filter__item.educacion:focus {
-      background-color: #88ffff; }
+      color: rgba(136, 255, 255, 0.5); }
   .filter__item.infraestructura {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border: none;
-    background-color: rgba(204, 162, 252, 0.9); }
+    color: #cca2fc; }
     .filter__item.infraestructura:hover, .filter__item.infraestructura:focus {
-      background-color: #cca2fc; }
+      color: rgba(204, 162, 252, 0.5); }
 
 .filter__reset {
   color: white; }
+  .filter__reset.filter__item--selected {
+    color: rgba(255, 255, 255, 0); }
 
 .filter__item--selected.salud {
   border: none;
-  background-color: #77fec6; }
+  color: #77fec6; }
   .filter__item--selected.salud:hover, .filter__item--selected.salud:focus {
-    background-color: rgba(119, 254, 198, 0.5); }
+    color: rgba(119, 254, 198, 0.5); }
 
 .filter__item--selected.educacion {
   border: none;
-  background-color: #d4ffff; }
+  color: #d4ffff; }
   .filter__item--selected.educacion:hover, .filter__item--selected.educacion:focus {
-    background-color: rgba(212, 255, 255, 0.5); }
+    color: rgba(212, 255, 255, 0.5); }
 
 .filter__item--selected.infraestructura {
   border: none;
-  background-color: #f5ecfe; }
+  color: #f5ecfe; }
   .filter__item--selected.infraestructura:hover, .filter__item--selected.infraestructura:focus {
-    background-color: rgba(245, 236, 254, 0.5); }
+    color: rgba(245, 236, 254, 0.5); }
 
 .filter__hide {
   display: none; }
@@ -912,7 +928,7 @@ button:focus {
   color: white;
   cursor: pointer;
   pointer-events: none;
-  padding: 15px 10px;
+  padding: 15px 20px;
   opacity: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1298,30 +1314,3 @@ Estilos d3
   .grafico {
     width: 100%;
     height: 60vh; } }
-
-@media screen and (max-width: 599px) {
-  border: 2px solid aqua; }
-
-@media screen and (min-width: 600px) {
-  body {
-    border: 2px solid red; } }
-
-@media screen and (min-width: 900px) {
-  body {
-    border: 2px solid blue; } }
-
-@media screen and (min-width: 1200px) {
-  body {
-    border: 2px solid yellow; } }
-
-@media screen and (min-width: 1500px) {
-  body {
-    border: 2px solid violet; } }
-
-@media screen and (min-width: 1800px) {
-  body {
-    border: 2px solid lightblue; } }
-
-@media screen and (min-width: 2100px) {
-  body {
-    border: 2px solid orange; } }

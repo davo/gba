@@ -384,27 +384,30 @@ button:focus {
 
 .filter {
   span {
+    display: block;
     font-size: .75em;
     text-transform: uppercase;
+    padding-bottom: 15px;
   }
 }
 
 .filter__item {
   display: block;
   cursor: pointer;
+  text-align: left;
   color: $gris;
-  background-color: darken(#333,5);
+  background-color: transparent;
   border: none;
   text-transform: uppercase;
   font-family: $fontset-regular;
   font-size: 1em;
-  padding: 12px 15px;
-  margin-bottom: 5px;
+  padding: 10px 0px 10px 0px;
   text-decoration: none;
   @include border-top-radius(4px);
   @include border-right-radius(4px);
   @include border-bottom-radius(4px);
   @include border-left-radius(4px);
+  @include transition(all 0.5s ease-in-out);
   &:hover {
   }
   &:active {
@@ -413,27 +416,31 @@ button:focus {
   }
   @each $eje, $color in $ejes {
     &.#{$eje} {
+      @include transition(all 0.2s ease-in-out);
       border: none;
-      background-color: rgba($color, .9);
+      color: rgba($color, 1);
       &:hover, &:focus {
-          background-color: rgba($color, 1);
+          color: rgba($color, .5);
+          
       }
     }
   }
 }
 
 .filter__reset {
-  color: white;
+  color: rgba(white,1);
+  &.filter__item--selected {
+    color: rgba(white,0);
+  }
 }
 
 .filter__item--selected {
-  // color: #5c5edc;
   @each $eje, $color in $ejes {
     &.#{$eje} {
       border: none;
-      background-color: rgba(lighten($color,15), 1);
+      color: rgba(lighten($color,15), 1);
       &:hover, &:focus {
-          background-color: rgba(lighten($color,15), .5);
+          color: rgba(lighten($color,15), .5);
       }
     }
   }
@@ -1069,7 +1076,7 @@ button:focus {
   color: white;
   cursor: pointer;
   pointer-events: none;
-  padding: 15px 10px;
+  padding: 15px 20px;
   opacity: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1569,38 +1576,38 @@ Estilos d3
   }
 }
 
-@media screen and (max-width: 599px) {
-  border: 2px solid aqua
-}
+// @media screen and (max-width: 599px) {
+//   border: 2px solid aqua
+// }
 
-@media screen and (min-width: 600px) {
-  body {
-    border: 2px solid red
-  }
-} 
-@media screen and (min-width: 900px) {
-  body {
-    border: 2px solid blue
-  }
-}
-@media screen and (min-width: 1200px) {
-  body {
-    border: 2px solid yellow
-  }
-}
+// @media screen and (min-width: 600px) {
+//   body {
+//     border: 2px solid red
+//   }
+// } 
+// @media screen and (min-width: 900px) {
+//   body {
+//     border: 2px solid blue
+//   }
+// }
+// @media screen and (min-width: 1200px) {
+//   body {
+//     border: 2px solid yellow
+//   }
+// }
 
-@media screen and (min-width: 1500px) {
-  body {
-    border: 2px solid violet
-  }
-}
-@media screen and (min-width: 1800px) {
-  body {
-    border: 2px solid lightblue
-  }
-}
-@media screen and (min-width: 2100px) {
-  body {
-    border: 2px solid orange
-  }
-}
+// @media screen and (min-width: 1500px) {
+//   body {
+//     border: 2px solid violet
+//   }
+// }
+// @media screen and (min-width: 1800px) {
+//   body {
+//     border: 2px solid lightblue
+//   }
+// }
+// @media screen and (min-width: 2100px) {
+//   body {
+//     border: 2px solid orange
+//   }
+// }
