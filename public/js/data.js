@@ -8,8 +8,9 @@ var urlSpreadsheet = "https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhE
     datosTotales = [],
     centroides = [],
     mapaDatos,
-    ejeActual = "";
-
+    ejeActual = "",
+    labelX = "",
+    labelY = "";
 
 // Abstract: Cargo datos de un spreadsheet y hace
 // un callback que pasa esos datos a un array

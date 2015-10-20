@@ -35,32 +35,34 @@
             [10, 3],
             [11, 3],
             [12, 4],
-            [13, 5],
+            [13, 4],
             [14, 5],
             [15, 5],
-            [16, 6],
+            [16, 5],
             [17, 6],
             [18, 6],
-            [19, 7],
+            [19, 6],
             [20, 7],
-            [21, 8],
-            [22, 8],
+            [21, 7],
+            [22, 7],
             [23, 8],
-            [24, 9],
-            [25, 9],
-            [26, 10],
-            [27, 10],
-            [28, 11],
-            [29, 11],
+            [24, 8],
+            [25, 8],
+            [26, 9],
+            [27, 9],
+            [28, 10],
+            [29, 10],
             [30, 11],
             [31, 11],
             [32, 11],
-            [33, 12],
-            [34, 12],
+            [33, 11],
+            [34, 11],
             [35, 12],
-            [36, 13],
-            [37, 13],
-            [38, 13]
+            [36, 12],
+            [37, 12],
+            [38, 13],
+            [39, 13],
+            [40, 13]
         ],
         bodyEl = document.body,
         docElem = window.document.documentElement,
@@ -172,8 +174,11 @@
             }
             var dataValue4 = 'data-filtro=\"' + cardsContentNav[cardContent[i]][7] + '\"';
 
+            console.log(dataValue4);
+
             // dataValue4 = unescape(dataValue4);
 
+            console.log(dataValue4);
 
             listItem = '<li class=\"card\">';
             listItem += '<a href=\"#\"';
@@ -267,6 +272,12 @@
 
 
     function initEvents() {
+
+
+        // classie.add(sidebarEl, 'sidebar--open');
+
+        // $('filter__reset')
+        
         iso = new Isotope(gridItemsContainer, {
             getSortData: {
                 prioridad: '[data-prioridad]'
@@ -456,8 +467,8 @@
                 ];
                 if (index === 0) {
                     console.log('Skipping header!');
-                } else if (index === 1) {
-                    console.log('Skipping zero value!');
+                // } else if (index === 1) {
+                //     console.log('Skipping zero value!');
                 } else {
                     cardsContentNav.push(fila);
                 }

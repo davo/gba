@@ -4,7 +4,7 @@ var svg;
 var temp;
 
 // From Nadieh Bremer, quick fix for resizing some things for mobile-ish viewers
-var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
+var mobileScreen = ($(window).innerWidth() < 500 ? true : false);
 
 // globales que usa el grafico para armarse
 // deben updatearse antes de llamar un grafico o updatearlo
@@ -14,6 +14,8 @@ var radio = 0;
 var filtro = "";
 var height = "";
 var width = "";
+var labelX = "";
+var labelY = "";
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
@@ -26,14 +28,6 @@ function updateKeys() {
     columnaX = parseInt(window.columnaX);
     columnaY = parseInt(window.columnaY);
     radio = parseInt(window.radio);
-
-    //console.log(radio);
-
-    //estas variables deben popularse al seleccionar una historia o tarjeta
-    // columnaX = Math.floor((Math.random() * 32) + 1);
-    // columnaY = Math.floor((Math.random() * 32) + 1);
-    // radio = Math.floor((Math.random() * 32) + 1);
-    // filtro = "";
 }
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
@@ -41,8 +35,9 @@ function updateKeys() {
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var array_de_datos = [];
-    labelX = datos[0][columnaX];
-    labelY = datos[0][columnaY];
+
+    labelX = datos[0][1];
+    labelY = datos[0][2];
 
     for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
@@ -54,10 +49,10 @@ function cambioDataset(datos) {
             radioTMP = +radioDefault;
         }
         var dato3TMP = +datos[i][filtro];
+
         // radioTMP = +radioDefault;
         array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP]);
     }
-
 
     return array_de_datos;
 }
@@ -90,17 +85,12 @@ function addGraph() {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(mobileScreen ? 4 : 8);
+        .ticks(8);
 
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(mobileScreen ? 4 : 6, "s");
-
-
-    /* Initialize tooltip */
-    tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d[0]; });
-
+        .ticks(8, "s");
 
 
     svg = d3.select(objectGraph).append("svg")
@@ -109,7 +99,6 @@ function addGraph() {
         .attr('viewBox', '0 0 ' + Math.max(width, height) + ' ' + Math.min(width, height))
         .attr('preserveAspectRatio', 'xMinYMin');
 
-    svg.call(tip);
 
     svg.selectAll("circle")
         .data(dataset)
@@ -132,56 +121,34 @@ function addGraph() {
         .attr("value", function(d) {
             return d[0]
         })
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
-
+        .on("mouseover", function(d) {
+            //console.log(d[0]);
+        });
 
     svg.selectAll("text")
-       .data(dataset)
-       .enter()
-       .append("text")
-       .attr("class", "label")
-       .text(function(d) {
-               return d[0];
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .text(function(d) {
+            return d[0];
         })
-       .attr("x", function(d) {
-           return xScale(d[1]) + 15;  // Returns scaled location of x
-       })
-       // .attr("text-anchor","middle")
-       .attr("y", function(d) {
-           return yScale(d[2])+3;  // Returns scaled circle y
-       })
-       .style("font-size", (mobileScreen ? 8 : 11) + "px")
-       .attr("text-anchor", "start")
-       .attr("class", function (d,i) {
-            var filtros;
-            try {
-                filtros = filtro.split(",");
-                for (var i = 0; i < filtros.length; i++) {
-                    if (!filtros[i].trim().indexOf(d[0])) {
-                        return "labelOn";
-                    }
-                }
-            } catch (err) {
-                return "circulo";
-            }
-            return "labelOff";
-       })
-       .attr("fill", "white");
+        .attr("x", function(d) {
+            return xScale(d[1]) + 20; // Returns scaled location of x
+        })
+        // .attr("text-anchor","middle")
+        .attr("y", function(d) {
+            return yScale(d[2]) + 2; // Returns scaled circle y
+        })
+        .attr("font-size", "10px")
+        .attr("text-anchor", "start")
+        .attr("fill", "white");
 
     svg.append("g")
         .attr("class", "x axis")
         .attr("id", "xAxis")
         .attr("transform", "translate(0," + (height - padding) + ")")
-        .style("font-size", (mobileScreen ? 7 : 12) + "px")
         .call(xAxis);
-
-    svg.append("g")
-        .attr("class", "y axis")
-        .attr("id", "yAxis")
-        .attr("transform", "translate(" + padding + ",0)")
-        .style("font-size", (mobileScreen ? 7 : 12) + "px")
-        .call(yAxis);
 
     svg.select("#xAxis")
         .append('text')
@@ -190,6 +157,13 @@ function addGraph() {
         .attr("transform", "translate(" + (width - padding) + ", -10)")
         .text(labelX);
 
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("id", "yAxis")
+        .attr("transform", "translate(" + padding + ",0)")
+        .call(yAxis);
+
     svg.select("#yAxis")
         .append('text')
         .attr("id", "labelY")
@@ -197,28 +171,10 @@ function addGraph() {
         .attr("transform", "translate(20,50) rotate(-90)")
         .text(labelY);
 
-
-    // var voronoi = d3.geom.voronoi()
-    //     .x(function(d) { return xScale(d[1]); })
-    //     .y(function(d) { return yScale(d[2]); })
-    //     .clipExtent([[0, 0], [width, height]]);
-
-    // var voronoiGroup = svg.append("g")
-    //     .attr("class", "voronoiWrapper");
-
-    // voronoiGroup.selectAll("path")
-    //     .data(voronoi(dataset)) //Use vononoi() with your dataset inside
-    //     .enter().append("path")
-    //     .attr("d", function(d, i) { return "M" + d.join("L") + "Z"; })
-    //     .datum(function(d, i) { return d.point; })
-    //     //Give each cell a unique class where the unique part corresponds to the circle classes
-    //     // .attr("class", function(d,i) { return "voronoi " + d.CountryCode; })
-    //     .style("stroke", "white") //I use this to look at how the cells are dispersed as a check
-    //     .style("stroke-opacity", 0.5)
-    //     .style("fill", "none")
-    //     .style("pointer-events", "all");
-        // .on('mouseover', tip.show)
-        // .on('mouseout', tip.hide);
+    d3.select(".content__item--show #cambiador")
+        .on("change", function() {
+            updateGraph();
+        });
 };
 
 // Abstract: Cambia la posicion de los puntos del scatterplot
@@ -226,6 +182,8 @@ function addGraph() {
 function updateGraph() {
 
     var dataset = cambioDataset(datosTotales);
+
+    console.log(dataset);
 
     xScale.domain([0, d3.max(dataset, function(d) {
         return d[1];
@@ -240,49 +198,26 @@ function updateGraph() {
             return d[3];
         })]);
 
-    svg.selectAll("text")
-        .data(dataset)
-        .transition()
-        .duration(500)
-        .each("start", function(){
-            d3.select(this)
-            .attr("class", function (d,i) {
-                 var filtros;
-                 try {
-                     filtros = filtro.split(",");
-                     for (var i = 0; i < filtros.length; i++) {
-                         if (!filtros[i].trim().indexOf(d[0])) {
-                             return "labelOn";
-                         }
-                     }
-                 } catch (err) {
-                     return "circulo";
-                 }
-                 return "labelOff";
-            })
-        })
-        .call(arrangeLabels);
-
     svg.selectAll("circle")
         .data(dataset)
         .transition()
         .duration(500)
         .each("start", function() {
             d3.select(this)
-            .attr("class", function(d, i) {
-                var filtros;
-                try {
-                    filtros = filtro.split(",");
-                    for (var i = 0; i < filtros.length; i++) {
-                        if (!filtros[i].trim().indexOf(d[0])) {
-                            return "circulo";
+                .attr("class", function(d, i) {
+                    var filtros;
+                    try {
+                        filtros = filtro.split(",");
+                        for (var i = 0; i < filtros.length; i++) {
+                            if (!filtros[i].trim().indexOf(d[0])) {
+                                return "circulo";
+                            }
                         }
+                    } catch (err) {
+                        return "circulo";
                     }
-                } catch (err) {
-                    return "circulo";
-                }
-                return "circuloDim";
-            });
+                    return "circuloDim";
+                });
         })
         .delay(function(d, i) {
             return i / dataset.length * 10;
@@ -322,7 +257,6 @@ function updateGraph() {
 
     svg.select("#labelX")
         .text(labelX);
-
     svg.select("#labelY")
         .text(labelY);
 
@@ -350,39 +284,38 @@ function manageGraph() {
 
 }
 
-// From http://bl.ocks.org/larskotthoff/11406992
 
 function arrangeLabels() {
-  var move = 1;
-  while(move > 0) {
-    move = 0;
-    svg.selectAll(".label")
-       .each(function() {
-         var that = this,
-             a = this.getBoundingClientRect();
-         svg.selectAll(".label")
+    var move = 1;
+    while (move > 0) {
+        move = 0;
+        svg.selectAll(".label")
             .each(function() {
-              if(this != that) {
-                var b = this.getBoundingClientRect();
-                if((Math.abs(a.left - b.left) * 2 < (a.width + b.width)) &&
-                   (Math.abs(a.top - b.top) * 2 < (a.height + b.height))) {
-                  // overlap, move labels
-                  var dx = (Math.max(0, a.right - b.left) +
-                           Math.min(0, a.left - b.right)) * 0.01,
-                      dy = (Math.max(0, a.bottom - b.top) +
-                           Math.min(0, a.top - b.bottom)) * 0.02,
-                      tt = d3.transform(d3.select(this).attr("transform")),
-                      to = d3.transform(d3.select(that).attr("transform"));
-                  move += Math.abs(dx) + Math.abs(dy);
-                
-                  to.translate = [ to.translate[0] + dx, to.translate[1] + dy ];
-                  tt.translate = [ tt.translate[0] - dx, tt.translate[1] - dy ];
-                  d3.select(this).attr("transform", "translate(" + tt.translate + ")");
-                  d3.select(that).attr("transform", "translate(" + to.translate + ")");
-                  a = this.getBoundingClientRect();
-                }
-              }
+                var that = this,
+                    a = this.getBoundingClientRect();
+                svg.selectAll(".label")
+                    .each(function() {
+                        if (this != that) {
+                            var b = this.getBoundingClientRect();
+                            if ((Math.abs(a.left - b.left) * 2 < (a.width + b.width)) &&
+                                (Math.abs(a.top - b.top) * 2 < (a.height + b.height))) {
+                                // overlap, move labels
+                                var dx = (Math.max(0, a.right - b.left) +
+                                        Math.min(0, a.left - b.right)) * 0.01,
+                                    dy = (Math.max(0, a.bottom - b.top) +
+                                        Math.min(0, a.top - b.bottom)) * 0.02,
+                                    tt = d3.transform(d3.select(this).attr("transform")),
+                                    to = d3.transform(d3.select(that).attr("transform"));
+                                move += Math.abs(dx) + Math.abs(dy);
+
+                                to.translate = [to.translate[0] + dx, to.translate[1] + dy];
+                                tt.translate = [tt.translate[0] - dx, tt.translate[1] - dy];
+                                d3.select(this).attr("transform", "translate(" + tt.translate + ")");
+                                d3.select(that).attr("transform", "translate(" + to.translate + ")");
+                                a = this.getBoundingClientRect();
+                            }
+                        }
+                    });
             });
-       });
-  }
+    }
 }

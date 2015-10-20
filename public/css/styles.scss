@@ -335,10 +335,10 @@ button:focus {
   position: fixed;
   z-index: 100;
   display: block;
-  width: 25px;
+  width: 20px;
   height: 25px;
-  top: 14px;
-  left: 14px;
+  top: 18px;
+  left: 15px;
   cursor: pointer;
   background: none;
   border: none;
@@ -351,7 +351,7 @@ button:focus {
     display: block;
     width: 100%;
     height: 3px;
-    background-color: white;
+    background-color: rgba(255,255,255,0.8);
     font-size: 0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -364,7 +364,7 @@ button:focus {
       left: 0;
       width: 100%;
       height: 100%;
-      background: white;
+      background: rgba(255,255,255,0.8);
       content: '';
     }
     &:before {
@@ -382,15 +382,24 @@ button:focus {
 
 // /* Filter */
 
+.filter {
+  span {
+    font-size: .75em;
+    text-transform: uppercase;
+  }
+}
+
 .filter__item {
   display: block;
   cursor: pointer;
   color: $gris;
+  background-color: darken(#333,5);
+  border: none;
   text-transform: uppercase;
   font-family: $fontset-regular;
   font-size: 1em;
-  padding: 9px 15px;
-  margin-bottom: 4px;
+  padding: 12px 15px;
+  margin-bottom: 5px;
   text-decoration: none;
   @include border-top-radius(4px);
   @include border-right-radius(4px);
@@ -411,6 +420,10 @@ button:focus {
       }
     }
   }
+}
+
+.filter__reset {
+  color: white;
 }
 
 .filter__item--selected {
@@ -1056,7 +1069,7 @@ button:focus {
   color: white;
   cursor: pointer;
   pointer-events: none;
-  padding: 20px 30px;
+  padding: 15px 10px;
   opacity: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -1095,11 +1108,19 @@ Estilos d3
   height: 60vh;
 }
 
+.labelOn {
+  visibility: visible;
+}
+
+.labelOff {
+  visibility: hidden;
+}
+
 #info{
   text-align: center;
   width: 500px;
 }
-.circulo{
+.circulo {
   // fill: black;
   // stroke: white;
  }
@@ -1107,30 +1128,58 @@ Estilos d3
    .#{$eje} {
      .circulo {
        fill: $color;
-       stroke: lighten($color, 70);
-       stroke-width: 1.5;
      }
-     // &:hover, &:focus {
-     //     background-color: rgba($color, 1);
-     // }
+     .circuloDim{
+       fill: $color;
+       opacity: 0.4;
+     }
    }
 }
 
 
-.circuloDim{
-  opacity:0.3;
-}
+
+
 
 .axis path , .axis line {
   fill: none;
   stroke: white;
   shape-rendering: crispEdges;
+  stroke-width: 1px;
 }
 
 .axis text {
   fill: white;
-  font-family: sans-serif;
-  font-size: 11px;
+}
+
+.d3-tip {
+  z-index: 100;
+  line-height: 1;
+  font-size: .8em;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -2px 0 0 0;
+  top: 100%;
+  left: 0;
 }
 
 #mapa{
@@ -1433,7 +1482,7 @@ Estilos d3
     padding: 40px 5px 40px;
     .category--full {
       width: 100%;
-      font-size: 0.5em;
+      font-size: 0.8em;
       margin: 0px 5px 10px 0;
     }
     .title {
@@ -1442,10 +1491,27 @@ Estilos d3
     }
   }
   .sidebar {
+    padding: 1em;
+    width: 100%;
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
     -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
+    .icon-logo {
+      padding-right: 10px;
+    }
+    .logo {
+      padding-bottom: 80px;
+    }
+    h1 {
+      font-size: 1em;
+      line-height: 2.4em;
+    }
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: .8em;
+      font-weight: 500;
+    }
     &.sidebar--open {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
@@ -1455,7 +1521,17 @@ Estilos d3
     }
   }
   .top-bar {
-    padding: 22px 15px 10px 60px;
+    padding: 5px 0px 0px 0px;
+  }
+  .fiter {
+    span {
+      margin-bottom: 5px;
+    }
+  }
+  .filter__item {
+    width: 100%;
+    padding: 10px 0px 6px 0px;
+    margin-bottom: 5px;
   }
   .tabs-navigation {
     display: none;
