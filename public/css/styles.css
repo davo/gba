@@ -1062,6 +1062,7 @@ button:focus {
 .tabs-navigation {
   width: 100%;
   list-style: none;
+  padding: 0;
   margin: 0; }
   .tabs-navigation::after {
     clear: both;
@@ -1493,8 +1494,11 @@ Estilos d3
     width: 100%;
     padding: 10px 0px 6px 0px;
     margin-bottom: 5px; }
-  .tabs-navigation {
+  .tabs-navigation .card a {
     display: none; }
+  .tabs-navigation .card .activo {
+    display: block;
+    width: 100%; }
   .menu-toggle {
     display: inline-block; }
   .sidebar .close-button {
