@@ -13,6 +13,39 @@
 
     'use strict';
 
+    $('.landing').find('.ingresar').bind("click", function(e) {
+        $(this).parents('.landing').fadeOut("normal", function() {
+            $(this).hide();
+        });
+        e.preventDefault();
+    });
+
+    $('.contenido').find('.close-button').bind("click", function(e) {
+        $(this).parents('.contenido').parent().fadeOut("normal", function() {
+            $(this).hide();
+        });
+        e.preventDefault();
+    });
+
+
+    $('#metodologia-btn').bind("click", function(e) {
+        $('#metodologia').css({"visibility": "visible", "display": "block"});
+        e.preventDefault();
+    });
+
+    $('#fuentes-btn').bind("click", function(e) {
+        $('#fuentes').css({"visibility": "visible", "display": "block"});
+        e.preventDefault();
+    });
+
+    $('#creditos-btn').bind("click", function(e) {
+        $('#creditos').css({"visibility": "visible", "display": "block"});
+        e.preventDefault();
+    });
+    
+    // 'referencias-btn'
+    // 'creditos-btn'
+
     //variables
     var CardTemplate = Handlebars.compile($('#card-template').html()),
         StoryTemplate = Handlebars.compile($('#story-template').html()),

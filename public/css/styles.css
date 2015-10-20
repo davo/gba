@@ -192,6 +192,7 @@ educacion-alumnos
 
 /* '' */
 .icon-educacion-unidades-educativas:before,
+.icon-educacion-total-unidades-educativas:before,
 .icon-educacion-cantidad-unidades-educativas-cada-10000:before,
 .icon-educacion-porcentaje-asistencia-unidades-educativas-estatales:before,
 .icon-educacion-unidades-educativas-privadas:before,
@@ -257,6 +258,125 @@ a {
 button:focus {
   outline: none; }
 
+#metodologia, #fuentes, #creditos {
+  visibility: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  resize: both;
+  overflow: auto;
+  background-color: #333;
+  z-index: 1000; }
+
+.contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  text-align: left;
+  background-color: rgba(51, 51, 51, 0.98); }
+  .contenido a {
+    display: block;
+    color: white;
+    text-decoration: underline; }
+    .contenido a:hover {
+      text-decoration: none; }
+  .contenido .close-button {
+    position: absolute;
+    border: none;
+    background: none;
+    margin: 0;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    font-size: 2em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 15px 20px;
+    opacity: 1;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    z-index: 1000; }
+
+.landing {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  resize: both;
+  overflow: auto;
+  background-color: rgba(51, 51, 51, 0.98);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000; }
+
+.introduccion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  text-align: center; }
+  .introduccion .logo {
+    display: block; }
+  .introduccion .icon-logo {
+    margin: 0 auto;
+    display: block;
+    font-size: 4em; }
+  .introduccion h1 {
+    font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 auto;
+    font-size: 1.5em;
+    line-height: 2.1em;
+    text-transform: uppercase;
+    margin-bottom: 30px; }
+  .introduccion h2 {
+    font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 auto;
+    font-size: 1.5em;
+    line-height: 3;
+    font-weight: 300;
+    text-transform: uppercase; }
+  .introduccion h3 {
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto;
+    font-family: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    letter-spacing: .1em;
+    width: 65%; }
+  .introduccion .ingresar {
+    display: block;
+    padding: 30px 0;
+    font-size: 1.2em;
+    color: white;
+    font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .introduccion .ingresar:hover {
+      color: rgba(255, 255, 255, 0.5); }
+    .introduccion .ingresar .icon-arrow {
+      margin-top: 2em; }
+  .introduccion ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 20px 0 0 0; }
+    .introduccion ul li {
+      font-size: 2.7em;
+      text-align: center;
+      display: inline-block;
+      margin: 0 auto; }
+
 /* Sidebar */
 .sidebar {
   text-align: left;
@@ -269,7 +389,8 @@ button:focus {
   height: 100vh;
   top: 0;
   left: 0;
-  padding: 2em 1em; }
+  padding: 2em 1em;
+  z-index: 100; }
   .sidebar .logo {
     display: block;
     padding-bottom: 100px; }
@@ -598,7 +719,7 @@ button:focus {
   .category.infraestructura {
     color: #cca2fc; }
 
-.title--preview, .loader, .category, .card--text {
+.title--preview, .loader, .category, .card--text, .bar {
   -webkit-transition: -webkit-transform 0.25s, opacity 0.25s;
   transition: transform 0.25s, opacity 0.25s;
   -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
@@ -646,6 +767,13 @@ button:focus {
   -webkit-transform: translate3d(0, -40px, 0);
   transform: translate3d(0, -40px, 0); }
 
+.grid__item--animate .bar {
+  -webkit-transition-delay: 0.25s;
+  transition-delay: 0.25s;
+  opacity: 0;
+  -webkit-transform: translate3d(0, -300px, 0);
+  transform: translate3d(0, -300px, 0); }
+
 .meta {
   text-align: left;
   position: absolute;
@@ -656,17 +784,17 @@ button:focus {
   filter: none; }
 
 .meta__indicador_a {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block; }
 
 .meta__indicador_b {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block; }
 
 .meta__indicador_c {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block; }
 
@@ -976,8 +1104,9 @@ button:focus {
   z-index: 100;
   top: 0;
   right: 0;
-  font-size: 18px;
-  color: white;
+  font-size: 2em;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   pointer-events: none;
   padding: 15px 20px;
@@ -991,7 +1120,7 @@ button:focus {
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s; }
   .close-button:hover {
-    color: rgba(255, 255, 255, 0.5); }
+    color: white; }
 
 /* show class for content close button */
 .close-button--show {
@@ -1284,6 +1413,8 @@ Estilos d3
 
 /* small screen changes for sidebar (it becomes an off-canvas menu) */
 @media screen and (max-width: 599px) {
+  .landing {
+    display: none; }
   .grid {
     margin-top: 50px; }
   .view-single .grid {
@@ -1331,6 +1462,8 @@ Estilos d3
       margin: 0 0 10px 0;
       font-size: .8em;
       font-weight: 500; }
+    .sidebar .menu {
+      display: none; }
     .sidebar.sidebar--open {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0); }

@@ -196,6 +196,7 @@ educacion-alumnos
 .icon-indicador-poblacion:before { content: '\e809'; } /* '' */
 .icon-educacion-uso-de-pc:before { content: '\e80a'; } /* '' */
 .icon-educacion-unidades-educativas:before,
+.icon-educacion-total-unidades-educativas:before,
 .icon-educacion-cantidad-unidades-educativas-cada-10000:before,
 .icon-educacion-porcentaje-asistencia-unidades-educativas-estatales:before,
 .icon-educacion-unidades-educativas-privadas:before,
@@ -241,6 +242,146 @@ button:focus {
   outline: none;
 }
 
+#metodologia, #fuentes, #creditos {
+  visibility: hidden;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  resize: both;
+  overflow: auto;
+  background-color: #333;
+  z-index: 1000;
+}
+
+.contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  text-align: left;
+  background-color: rgba(#333,0.98);
+  a {
+    display: block;
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .close-button {
+      position: absolute;
+      border: none;
+      background: none;
+      margin: 0;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      font-size: 2em;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      pointer-events: auto;
+      padding: 15px 20px;
+      opacity: 1;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+} 
+.landing {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  resize: both;
+  overflow: auto;
+  background-color: rgba(#333,0.98);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+.introduccion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  text-align: center;
+  .logo {
+    display: block;
+  }
+  .icon-logo {
+    margin: 0 auto;
+    display: block;
+    font-size: 4em;
+  }
+  h1 {
+    font-family: $fontset-medium;
+    margin: 0 auto;
+    font-size: 1.5em;
+    line-height: 2.1em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  h2 {
+    font-family: $fontset-regular;
+    margin: 0 auto;
+    font-size: 1.5em;
+    line-height: 3;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto;
+    font-family: $fontset-thin;
+    font-size: 1.1em;
+    letter-spacing: .1em;
+    width: 65%;
+  }
+  .ingresar {
+    display: block;
+    padding: 30px 0;
+    font-size: 1.2em;
+    color: white;
+    font-family: $fontset-medium;
+    &:hover {
+      color: rgba(white,0.5)
+    }
+    .icon-arrow {
+      margin-top: 2em;
+    }
+  }
+  ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 20px 0 0 0;
+    li {
+      font-size: 2.7em;
+      text-align: center;
+      display: inline-block;
+      margin: 0 auto;
+      @each $eje, $color in $ejes {
+        &.intro-#{$eje} {
+          // border: none;
+          // color: $color;
+        }
+      }
+    } 
+  }
+}
+
 /* Sidebar */
 
 .sidebar {
@@ -255,6 +396,7 @@ button:focus {
   top: 0;
   left: 0;
   padding: 2em 1em;
+  z-index: 100;
   .logo {
     display: block;
     padding-bottom: 100px;
@@ -648,7 +790,7 @@ button:focus {
   }
 }
 
-.title--preview, .loader, .category, .card--text {
+.title--preview, .loader, .category, .card--text, .bar {
   -webkit-transition: -webkit-transform 0.25s, opacity 0.25s;
   transition: transform 0.25s, opacity 0.25s;
   -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
@@ -703,6 +845,13 @@ button:focus {
     -webkit-transform: translate3d(0, -40px, 0);
     transform: translate3d(0, -40px, 0);    
   }
+  .bar {
+    -webkit-transition-delay: 0.25s;
+    transition-delay: 0.25s;
+    opacity: 0;
+    -webkit-transform: translate3d(0, -300px, 0);
+    transform: translate3d(0, -300px, 0);    
+  }
 }
 
 .meta {
@@ -720,17 +869,17 @@ button:focus {
 }
 
 .meta__indicador_a {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block;
 }
 .meta__indicador_b {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block;
 }
 .meta__indicador_c {
-  font-size: 2em;
+  font-size: 2.5em;
   float: left;
   display: block;
 }
@@ -1100,8 +1249,9 @@ button:focus {
   z-index: 100;
   top: 0;
   right: 0;
-  font-size: 18px;
-  color: white;
+  font-size: 2em;
+  font-weight: 300;
+  color: rgba(white,0.5);
   cursor: pointer;
   pointer-events: none;
   padding: 15px 20px;
@@ -1114,11 +1264,8 @@ button:focus {
   user-select: none;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
-  span {
-    // display: none;
-  }
   &:hover {
-    color: rgba(white,0.5)
+    color: white;
   }
 }
 
@@ -1491,6 +1638,9 @@ Estilos d3
 
 /* small screen changes for sidebar (it becomes an off-canvas menu) */
 @media screen and (max-width: 599px) {
+  .landing {
+    display: none;
+  }
   .grid {
     margin-top: 50px;
   }
@@ -1551,6 +1701,9 @@ Estilos d3
       margin: 0 0 10px 0;
       font-size: .8em;
       font-weight: 500;
+    }
+    .menu{
+      display: none;
     }
     &.sidebar--open {
       -webkit-transform: translate3d(0, 0, 0);
