@@ -14,7 +14,7 @@ gulp.task('livereload', function() {
 });
 
 var server = {
-  host: '0.0.0.0',
+  host: '127.0.0.1', //0.0.0.0 no anda en win
   port: '8001'
 }
 
