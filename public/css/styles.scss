@@ -206,10 +206,10 @@ educacion-alumnos
 .icon-arrow:before { content: '\e80e'; } /* '' */
 .icon-cancel:before { content: '\e80f'; } /* '' */
 .icon-instagram:before { content: '\e810'; } /* '' */
-.icon-twitter-squared:before { content: '\e811'; } /* '' */
-.icon-github-squared:before { content: '\e812'; } /* '' */
-.icon-facebook-squared:before { content: '\e813'; } /* '' */
-.icon-mail-squared:before { content: '\e814'; } /* '' */
+.icon-twitter:before { content: '\e811'; } /* '' */
+.icon-github:before { content: '\e812'; } /* '' */
+.icon-facebook:before { content: '\e813'; } /* '' */
+.icon-mail:before { content: '\e814'; } /* '' */
 
 
 [class*=" icon-salud"] {
@@ -426,6 +426,27 @@ button:focus {
 
     span {
       display: block;
+    }
+  }
+}
+
+.social {
+  position: absolute;
+  bottom: 50px;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    display: inline-block;
+    a {
+      color: white;
+      font-size: 1.5em;
+      padding-right: 10px;
+      &:hover, &:focus, &:active {
+        text-decoration: none;
+        color: lighten(#333, 20);    
+      }
     }
   }
 }
@@ -692,8 +713,8 @@ button:focus {
 /* grid item element and full content element styles */
 
 .title {
-  margin: 40px 0 0 0;
-  font-family: $fontset-medium;
+  margin: 30px 0 0 0;
+  font-family: $fontset-bold;
   font-size: 0.95em;
   // text-transform: uppercase;
   text-align: left;
@@ -725,12 +746,9 @@ button:focus {
 .card--text {
   font-family: $fontset-regular;
   text-align: left;
-  font-size: 1.4em;
-  line-height: 1.3em;
+  font-size: 1.35em;
+  line-height: 1.4em;
   padding: 0px;
-  // white-space: pre-line;
-  // @extend .title--preview;
-
 }
 
 .loader {

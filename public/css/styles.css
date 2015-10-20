@@ -220,19 +220,19 @@ educacion-alumnos
   content: '\e810'; }
 
 /* '' */
-.icon-twitter-squared:before {
+.icon-twitter:before {
   content: '\e811'; }
 
 /* '' */
-.icon-github-squared:before {
+.icon-github:before {
   content: '\e812'; }
 
 /* '' */
-.icon-facebook-squared:before {
+.icon-facebook:before {
   content: '\e813'; }
 
 /* '' */
-.icon-mail-squared:before {
+.icon-mail:before {
   content: '\e814'; }
 
 /* '' */
@@ -416,6 +416,22 @@ button:focus {
     text-transform: uppercase; }
     .sidebar h2 span {
       display: block; }
+
+.social {
+  position: absolute;
+  bottom: 50px; }
+  .social ul {
+    padding: 0;
+    margin: 0; }
+  .social li {
+    display: inline-block; }
+    .social li a {
+      color: white;
+      font-size: 1.5em;
+      padding-right: 10px; }
+      .social li a:hover, .social li a:focus, .social li a:active {
+        text-decoration: none;
+        color: #666666; }
 
 /* Main content */
 .main {
@@ -652,8 +668,8 @@ button:focus {
 /* Grid item "border" */
 /* grid item element and full content element styles */
 .title, .content__item .title {
-  margin: 40px 0 0 0;
-  font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 30px 0 0 0;
+  font-family: "DIN Display Pro Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.95em;
   text-align: left;
   width: 100%;
@@ -663,8 +679,8 @@ button:focus {
 .card--text {
   font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
-  font-size: 1.4em;
-  line-height: 1.3em;
+  font-size: 1.35em;
+  line-height: 1.4em;
   padding: 0px; }
 
 .loader {

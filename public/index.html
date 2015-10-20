@@ -117,8 +117,20 @@
                         <a href="" id="creditos-btn">Créditos</a>
                 </div>
             </div>
-
         </header>
+        <div class="social">
+              <ul>
+                <li class="facebook">
+                  <a href="http://facebook.com/datoscopio/" target="_blank" class="icon-facebook"></a>
+                </li>
+                <li class="twitter">
+                  <a href="http://twitter.com/datoscopio/" target="_blank" class="icon-twitter"></a>
+                </li>
+                <li class="instagram">
+                  <a href="http://instagram.com/datoscopio/" target="_blank" class="icon-instagram"></a>
+                </li>
+              </ul>
+            </div>
     </div>
     <div id="theGrid" class="main">
 
@@ -129,7 +141,7 @@
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}" data-orden="{{cells.orden}}" data-viz="{{cells.dataviz_key}}">
-                    <span class="category {{cells.eje_key}}">{{cells.eje}} / {{cells.orden}}</span>
+                    <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
                     <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
                     <div class="card--text">
                         <p>{{cells.contenido}}</p>
@@ -152,7 +164,7 @@
             <div class="scroll-wrap">
                 <script id="story-template" type="text/x-handlebars-template">
                     <article class="content__item">
-                        <span class="category category--full {{cells.eje_key}}">{{cells.eje}} / {{cells.titulo}} / {{cells.cards}} - {{cells.dataviz_key}}</span>
+                        <span class="category category--full {{cells.eje_key}}">{{cells.eje}} / {{cells.titulo}}</span>
                         <h2 class="title title--full">{{cells.leer_mas}}</h2>
 
                         <div class="meta meta--full">

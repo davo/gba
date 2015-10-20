@@ -166,16 +166,6 @@
     }
 
 
-    // Abstract: Selecciona el navegador creado por StoryTemplate
-    // y extrae los valores de los cards internos. Luego convierte
-    // en Array.
-    // cardContent, array donde arrojaremos el contenido de los cards que corresponden.
-
-    var cambiarVisualizacion = function(item) {
-        var value1 = item.data('columnax');
-        return console.log(value1);
-    }
-
     function currentNav() {
 
         // El criterio para crear esta funcion fue el siguiente:
@@ -206,12 +196,6 @@
               var dataValue3 = 'data-radio=\"\"';
             }
             var dataValue4 = 'data-filtro=\"' + cardsContentNav[cardContent[i]][7] + '\"';
-
-            console.log(dataValue4);
-
-            // dataValue4 = unescape(dataValue4);
-
-            console.log(dataValue4);
 
             listItem = '<li class=\"card\">';
             listItem += '<a href=\"#\"';
@@ -247,7 +231,7 @@
         if (selectedNav === 12) {
             // Alerta, bug en el Card 12 que es una card que no comparte Full Story.
             //Rompe el patron. Revisar y corregir.
-            console.log('No comma!');
+            // console.log('No comma!');
             // Crear return de objeto para el menu.
             cardContent.push(12);
             createNav(0);
@@ -499,7 +483,7 @@
 
                 ];
                 if (index === 0) {
-                    console.log('Skipping header!');
+                    // console.log('Skipping header!');
                 // } else if (index === 1) {
                 //     console.log('Skipping zero value!');
                 } else {
