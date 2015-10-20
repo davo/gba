@@ -41,8 +41,10 @@ function updateKeys() {
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
     var array_de_datos = [];
-    labelX = datos[0][columnaX];
-    labelY = datos[0][columnaY];
+
+
+    labelX = reemplazar[datos[0][columnaX]].value;
+    labelY = reemplazar[datos[0][columnaY]].value;
 
     for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
