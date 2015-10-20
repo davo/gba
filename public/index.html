@@ -31,7 +31,6 @@
         </div>
         <h2>Radiografía del Conurbano Bonaerense</h2>
         <header class="top-bar">
-            <h2 class="top-bar__headline"></h2>
             <div class="bar">
                 <div class="filter">
                         <span>Filtrar historias por indicador:</span>
@@ -59,7 +58,7 @@
             <div class="grid__sizer"></div>
             <script id="card-template" type="text/x-handlebars-template">
                 <a class="grid__item {{cells.eje_key}}" href="#" data-prioridad="{{cells.prioridad}}" data-orden="{{cells.orden}}" data-viz="{{cells.dataviz_key}}">
-                    <span class="category {{cells.eje_key}}">{{cells.eje}}</span>
+                    <span class="category {{cells.eje_key}}">{{cells.eje}} / {{cells.orden}}</span>
                     <h2 class="title title--preview {{cells.eje_key}}">{{cells.titulo}}</h2>
                     <div class="card--text">
                         <p>{{cells.contenido}}</p>

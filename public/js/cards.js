@@ -285,7 +285,7 @@
             isResizeBound: true,
             itemSelector: '.grid__item',
             percentPosition: false,
-            // sortBy: 'prioridad',
+            sortBy: 'prioridad',
             masonry: {
                 columnWidth: '.grid__sizer'
             },

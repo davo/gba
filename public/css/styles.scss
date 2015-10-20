@@ -184,17 +184,22 @@ educacion-alumnos
 */
 
 .icon-logo:before { content: '\e800'; } /* '' */
-.icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before { content: '\e801'; } /* '' */
-.icon-salud-establecimientos:before { content: '\e802'; } /* '' */
-.icon-salud-camas:before { content: '\e803'; } /* '' */
-.icon-infraestructura-red-de-gas:before { content: '\e804'; } /* '' */
-.icon-infraestructura-red-de-cloacas:before { content: '\e805'; } /* '' */
-.icon-infraestructura-red-de-agua:before { content: '\e806'; } /* '' */
+.icon-salud-mortalidad-infantil:before, .icon-salud-tasa-mortalidad-infantil:before { content: '\e801'; } /* '' */
+.icon-salud-establecimientos:before, .icon-salud-establecimientos-10000:before, .icon-salud-establecimientos-KM:before { content: '\e802'; } /* '' */
+.icon-salud-camas:before, .icon-salud-camas-1000:before { content: '\e803'; } /* '' */
+.icon-infraestructura-red-de-gas:before, .icon-infraestrtuctura-red-de-gas-porcentaje:before { content: '\e804'; } /* '' */
+.icon-infraestructura-red-de-cloacas:before, .icon-infraestructura-red-de-cloacas-porcentaje:before { content: '\e805'; } /* '' */
+.icon-infraestructura-red-de-agua:before, .icon-infraestructura-red-de-agua-porcentaje:before { content: '\e806'; } /* '' */
+.icon-indicador-hogares:before { content: '\e815'; } /* '' */
 .icon-indicador-superficie:before { content: '\e807'; } /* '' */
 .icon-indicador-presupuesto-per-capita:before { content: '\e808'; } /* '' */
 .icon-indicador-poblacion:before { content: '\e809'; } /* '' */
 .icon-educacion-uso-de-pc:before { content: '\e80a'; } /* '' */
-.icon-educacion-unidades-educativas:before { content: '\e80b'; } /* '' */
+.icon-educacion-unidades-educativas:before,
+.icon-educacion-cantidad-unidades-educativas-cada-10000:before,
+.icon-educacion-porcentaje-asistencia-unidades-educativas-estatales:before,
+.icon-educacion-unidades-educativas-privadas:before,
+.icon-educacion-porcentaje-asistencia-unidades-educativas-privadas:before { content: '\e80b'; } /* '' */
 .icon-educacion-analfabetismo:before { content: '\e80c'; } /* '' */
 .icon-educacion-alumnos:before { content: '\e80d'; } /* '' */
 .icon-arrow:before { content: '\e80e'; } /* '' */
@@ -204,7 +209,7 @@ educacion-alumnos
 .icon-github-squared:before { content: '\e812'; } /* '' */
 .icon-facebook-squared:before { content: '\e813'; } /* '' */
 .icon-mail-squared:before { content: '\e814'; } /* '' */
-.icon-indicador-hogares:before { content: '\e815'; } /* '' */
+
 
 [class*=" icon-salud"] {
   color: $salud;
@@ -1416,7 +1421,7 @@ Estilos d3
       display: block;
     }
     h2 {
-      margin: 0.75em 0 0;
+      margin: 0.75em 0 20px 0;
       font-size: 1.5em;
     }
   }

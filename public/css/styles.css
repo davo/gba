@@ -147,30 +147,34 @@ educacion-alumnos
   content: '\e800'; }
 
 /* '' */
-.icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before {
+.icon-salud-mortalidad-infantil:before, .icon-salud-tasa-mortalidad-infantil:before {
   content: '\e801'; }
 
 /* '' */
-.icon-salud-establecimientos:before {
+.icon-salud-establecimientos:before, .icon-salud-establecimientos-10000:before, .icon-salud-establecimientos-KM:before {
   content: '\e802'; }
 
 /* '' */
-.icon-salud-camas:before {
+.icon-salud-camas:before, .icon-salud-camas-1000:before {
   content: '\e803'; }
 
 /* '' */
-.icon-infraestructura-red-de-gas:before {
+.icon-infraestructura-red-de-gas:before, .icon-infraestrtuctura-red-de-gas-porcentaje:before {
   content: '\e804'; }
 
 /* '' */
-.icon-infraestructura-red-de-cloacas:before {
+.icon-infraestructura-red-de-cloacas:before, .icon-infraestructura-red-de-cloacas-porcentaje:before {
   content: '\e805'; }
 
 /* '' */
-.icon-infraestructura-red-de-agua:before {
+.icon-infraestructura-red-de-agua:before, .icon-infraestructura-red-de-agua-porcentaje:before {
   content: '\e806'; }
 
 /* '' */
+.icon-indicador-hogares:before {
+  content: '\e815'; }
+
+/* '' */
 .icon-indicador-superficie:before {
   content: '\e807'; }
 
@@ -187,7 +191,11 @@ educacion-alumnos
   content: '\e80a'; }
 
 /* '' */
-.icon-educacion-unidades-educativas:before {
+.icon-educacion-unidades-educativas:before,
+.icon-educacion-cantidad-unidades-educativas-cada-10000:before,
+.icon-educacion-porcentaje-asistencia-unidades-educativas-estatales:before,
+.icon-educacion-unidades-educativas-privadas:before,
+.icon-educacion-porcentaje-asistencia-unidades-educativas-privadas:before {
   content: '\e80b'; }
 
 /* '' */
@@ -227,10 +235,6 @@ educacion-alumnos
   content: '\e814'; }
 
 /* '' */
-.icon-indicador-hogares:before {
-  content: '\e815'; }
-
-/* '' */
 [class*=" icon-salud"] {
   color: #2bfda6; }
 
@@ -1229,7 +1233,7 @@ Estilos d3
     .sidebar h1 {
       display: block; }
     .sidebar h2 {
-      margin: 0.75em 0 0;
+      margin: 0.75em 0 20px 0;
       font-size: 1.5em; }
   /* 3 columns */
   .grid__sizer,
