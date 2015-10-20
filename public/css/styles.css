@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Datoscopio";
   font-style: normal;
@@ -16,10 +17,16 @@ pfdindisplaypro-xthin
 
 */
 @font-face {
+  font-family: "DIN Display Pro Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/pfdindisplaypro-med.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-med.woff") format("woff"), url("../fonts/pfdindisplaypro-med.ttf") format("truetype"), url("../fonts/pfdindisplaypro-med.svg#DIN Display Pro Bold") format("svg"); }
+
+@font-face {
   font-family: "DIN Display Pro Medium";
   font-style: normal;
   font-weight: normal;
-  src: url("../fonts/pfdindisplaypro-med.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-med.woff") format("woff"), url("../fonts/pfdindisplaypro-med.ttf") format("truetype"), url("../fonts/pfdindisplaypro-med.svg#DIN Display Pro Medium") format("svg"); }
+  src: url("../fonts/pfdindisplaypro-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/pfdindisplaypro-bold.woff") format("woff"), url("../fonts/pfdindisplaypro-bold.ttf") format("truetype"), url("../fonts/pfdindisplaypro-bold.svg#DIN Display Pro Medium") format("svg"); }
 
 @font-face {
   font-family: "DIN Display Pro Regular";
@@ -139,66 +146,91 @@ educacion-alumnos
 .icon-logo:before {
   content: '\e800'; }
 
+/* '' */
 .icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before {
   content: '\e801'; }
 
+/* '' */
 .icon-salud-establecimientos:before {
   content: '\e802'; }
 
+/* '' */
 .icon-salud-camas:before {
   content: '\e803'; }
 
+/* '' */
 .icon-infraestructura-red-de-gas:before {
   content: '\e804'; }
 
+/* '' */
 .icon-infraestructura-red-de-cloacas:before {
   content: '\e805'; }
 
+/* '' */
 .icon-infraestructura-red-de-agua:before {
   content: '\e806'; }
 
+/* '' */
 .icon-indicador-superficie:before {
   content: '\e807'; }
 
+/* '' */
 .icon-indicador-presupuesto-per-capita:before {
   content: '\e808'; }
 
+/* '' */
 .icon-indicador-poblacion:before {
   content: '\e809'; }
 
+/* '' */
 .icon-educacion-uso-de-pc:before {
   content: '\e80a'; }
 
+/* '' */
 .icon-educacion-unidades-educativas:before {
   content: '\e80b'; }
 
+/* '' */
 .icon-educacion-analfabetismo:before {
   content: '\e80c'; }
 
+/* '' */
 .icon-educacion-alumnos:before {
   content: '\e80d'; }
 
+/* '' */
 .icon-arrow:before {
   content: '\e80e'; }
 
+/* '' */
 .icon-cancel:before {
   content: '\e80f'; }
 
+/* '' */
 .icon-instagram:before {
   content: '\e810'; }
 
+/* '' */
 .icon-twitter-squared:before {
   content: '\e811'; }
 
+/* '' */
 .icon-github-squared:before {
   content: '\e812'; }
 
+/* '' */
 .icon-facebook-squared:before {
   content: '\e813'; }
 
+/* '' */
 .icon-mail-squared:before {
   content: '\e814'; }
 
+/* '' */
+.icon-indicador-hogares:before {
+  content: '\e815'; }
+
+/* '' */
 [class*=" icon-salud"] {
   color: #2bfda6; }
 
@@ -242,14 +274,17 @@ button:focus {
     font-size: 3em;
     padding-right: 15px; }
   .sidebar h1 {
+    font-family: "DIN Display Pro Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
     float: left;
     font-size: 1.2em;
     line-height: 2.1em;
     font-weight: 500;
     text-transform: uppercase; }
   .sidebar h2 {
+    width: 70%;
+    font-family: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0.75em 0 0;
-    font-size: 1.5em;
+    font-size: 1.3em;
     line-height: 1;
     font-weight: 300;
     text-align: left;
@@ -409,6 +444,19 @@ button:focus {
 
 .filter__hide {
   display: none; }
+
+.menu {
+  font-size: .8em; }
+  .menu span {
+    display: block;
+    line-height: 1.5em; }
+  .menu a {
+    display: block;
+    color: white;
+    line-height: 2.5em;
+    text-transform: uppercase; }
+    .menu a:hover, .menu a:active {
+      color: #6d6e70; }
 
 .salud {
   border: none;
@@ -905,7 +953,7 @@ button:focus {
     .tabs-navigation a:hover {
       position: relative;
       overflow: visible;
-      width: 400px; }
+      width: 300px; }
     .tabs-navigation a.activo {
       font-size: .9em;
       position: relative;

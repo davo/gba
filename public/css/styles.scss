@@ -20,7 +20,8 @@ pfdindisplaypro-xthin
 
 */
 
-@include font-face('DIN Display Pro Medium', '../fonts/pfdindisplaypro-med', $file-formats: eot svg woff ttf);
+@include font-face('DIN Display Pro Bold', '../fonts/pfdindisplaypro-med', $file-formats: eot svg woff ttf);
+@include font-face('DIN Display Pro Medium', '../fonts/pfdindisplaypro-bold', $file-formats: eot svg woff ttf);
 @include font-face('DIN Display Pro Regular', '../fonts/pfdindisplaypro-reg', $file-formats: eot svg woff ttf);
 @include font-face('DIN Display Pro Thin', '../fonts/pfdindisplaypro-thin', $file-formats: eot svg woff ttf);
 
@@ -28,6 +29,7 @@ pfdindisplaypro-xthin
    Fuentes
    ######## */
 
+$fontset-bold: "DIN Display Pro Bold", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-medium: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-regular: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-thin: "DIN Display Pro Thin", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
@@ -181,27 +183,28 @@ educacion-alumnos
 
 */
 
-.icon-logo:before { content: '\e800'; }
-.icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before { content: '\e801'; }
-.icon-salud-establecimientos:before { content: '\e802'; }
-.icon-salud-camas:before { content: '\e803'; }
-.icon-infraestructura-red-de-gas:before { content: '\e804'; }
-.icon-infraestructura-red-de-cloacas:before { content: '\e805'; }
-.icon-infraestructura-red-de-agua:before { content: '\e806'; }
-.icon-indicador-superficie:before { content: '\e807'; }
-.icon-indicador-presupuesto-per-capita:before { content: '\e808'; }
-.icon-indicador-poblacion:before { content: '\e809'; }
-.icon-educacion-uso-de-pc:before { content: '\e80a'; }
-.icon-educacion-unidades-educativas:before { content: '\e80b'; }
-.icon-educacion-analfabetismo:before { content: '\e80c'; }
-.icon-educacion-alumnos:before { content: '\e80d'; }
-.icon-arrow:before { content: '\e80e'; }
-.icon-cancel:before { content: '\e80f'; }
-.icon-instagram:before { content: '\e810'; }
-.icon-twitter-squared:before { content: '\e811'; }
-.icon-github-squared:before { content: '\e812'; }
-.icon-facebook-squared:before { content: '\e813'; }
-.icon-mail-squared:before { content: '\e814'; }
+.icon-logo:before { content: '\e800'; } /* '' */
+.icon-datoscopio.eot datoscopio.svg datoscopio.ttf datoscopio.woff:before { content: '\e801'; } /* '' */
+.icon-salud-establecimientos:before { content: '\e802'; } /* '' */
+.icon-salud-camas:before { content: '\e803'; } /* '' */
+.icon-infraestructura-red-de-gas:before { content: '\e804'; } /* '' */
+.icon-infraestructura-red-de-cloacas:before { content: '\e805'; } /* '' */
+.icon-infraestructura-red-de-agua:before { content: '\e806'; } /* '' */
+.icon-indicador-superficie:before { content: '\e807'; } /* '' */
+.icon-indicador-presupuesto-per-capita:before { content: '\e808'; } /* '' */
+.icon-indicador-poblacion:before { content: '\e809'; } /* '' */
+.icon-educacion-uso-de-pc:before { content: '\e80a'; } /* '' */
+.icon-educacion-unidades-educativas:before { content: '\e80b'; } /* '' */
+.icon-educacion-analfabetismo:before { content: '\e80c'; } /* '' */
+.icon-educacion-alumnos:before { content: '\e80d'; } /* '' */
+.icon-arrow:before { content: '\e80e'; } /* '' */
+.icon-cancel:before { content: '\e80f'; } /* '' */
+.icon-instagram:before { content: '\e810'; } /* '' */
+.icon-twitter-squared:before { content: '\e811'; } /* '' */
+.icon-github-squared:before { content: '\e812'; } /* '' */
+.icon-facebook-squared:before { content: '\e813'; } /* '' */
+.icon-mail-squared:before { content: '\e814'; } /* '' */
+.icon-indicador-hogares:before { content: '\e815'; } /* '' */
 
 [class*=" icon-salud"] {
   color: $salud;
@@ -257,6 +260,7 @@ button:focus {
     padding-right: 15px;
   }
   h1 {
+    font-family: $fontset-bold;
     float: left;
     font-size: 1.2em;
     line-height: 2.1em;
@@ -264,13 +268,15 @@ button:focus {
     text-transform: uppercase;
   }
   h2 {
+    width: 70%;
+    font-family: $fontset-thin;
     margin: 0.75em 0 0;
-    font-size: 1.5em;
+    font-size: 1.3em;
     line-height: 1;
     font-weight: 300;
     text-align: left;
     text-transform: uppercase;
-    // font-family: "Playfair Display", serif;
+
     span {
       display: block;
     }
@@ -450,6 +456,23 @@ button:focus {
   display: none;
 }
 
+.menu {
+  font-size: .8em;
+  span {
+    display: block;
+    line-height: 1.5em;
+  }
+  a {
+    display: block;
+    color: white;
+    line-height: 2.5em;
+    text-transform: uppercase;
+    &:hover, &:active {
+      color: #6d6e70;
+    }
+  }
+
+}
 
 
 @each $eje, $color in $ejes {
@@ -1046,7 +1069,7 @@ button:focus {
     &:hover {
       position: relative;
       overflow: visible;
-      width: 400px;
+      width: 300px;
     }
     &.activo {
       font-size: .9em;
