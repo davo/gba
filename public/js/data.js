@@ -22,7 +22,7 @@ var reemplazar = {
     "salud_establecimientos_1000" : { "value" : "Establecimientos de salud"},
     "salud_establecimientos_10000" : { "value" : "Establecimientos de salud cada 10.000 habitantes"},
     "salud_camas_1000" : { "value" : "Camas de internación en establecimientos públicos cada 1.000 habitantes"},
-    "salud_establecimientos_KM" : { "value" : "Establecimientos de salud x Km2"},
+    "salud_establecimientos_KM" : { "value" : "Establecimientos de salud x KM²"},
     "salud_tasa_mortalidad_infantil" : { "value" : "Tasa de mortalidad infantil"},
     "infraestructura_red_de_agua" : { "value" : "Hogares sin acceso a la red de agua potable"},
     "infraestructura_red_de_agua_porcentaje" : { "value" : "% hogares sin acceso a la red de agua potable"},
@@ -42,7 +42,7 @@ var reemplazar = {
     "educacion_porcentaje_asistencia_unidades_educativas_privadas" : { "value" : "% alumnos unidades educativas privadas"},
     "educacion_porcentaje_poblacion_asistencia_unidad_educativa" : { "value" : "% alumnos totales"},
     "educacion_cantidad_unidades_educativas_cada_10000" : { "value" : "Unidades educativas x 10.000 hab."},
-    "educacion_cantidad_unidades_educativas_por_km2" : { "value" : "Unidades educativas x Km2"},
+    "educacion_cantidad_unidades_educativas_por_km2" : { "value" : "Unidades educativas x KM²"},
     "educacion_porcentaje_poblacion_edad3_uso_pc" : { "value" : "% población uso PC"},
     "educacion_analfabetismo_poblacion_edad10mas" : { "value" : "% analfabetismo"},
     "educacion_analfabetismo_nominal" : { "value" : "Analfabetismo (nominal)"}

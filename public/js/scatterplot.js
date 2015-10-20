@@ -69,7 +69,12 @@ function cambioDataset(datos) {
 function addGraph() {
     var dataset = cambioDataset(datosTotales);
 
-    var padding = 50;
+    if (!mobileScreen) {
+        var padding = 50;
+    } else {
+        var padding = 30;
+    }
+    
 
     xScale = d3.scale.linear()
         .domain([0, d3.max(dataset, function(d) {
@@ -196,7 +201,8 @@ function addGraph() {
         .append('text')
         .attr("id", "labelY")
         .attr('text-anchor', 'end')
-        .attr("transform", "translate(20,50) rotate(-90)")
+        .attr("transform", "translate("+(mobileScreen ? 15 : 20)+","+(mobileScreen ? 30 : 50)+") rotate(-90)")        
+//        .attr("transform", "translate(20,50) rotate(-90)")
         .text(labelY);
 
 

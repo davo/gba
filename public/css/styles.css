@@ -1122,7 +1122,7 @@ Estilos d3
       display: none; }
     .sidebar h2 {
       font-size: 1.2em;
-      margin: 1.75em 0 0; }
+      margin: 1.75em 0 20px 0; }
   .grid {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1302,13 +1302,17 @@ Estilos d3
     font-size: 3.5em; }
   .content__item {
     padding: 40px 5px 40px; }
+    .content__item .category {
+      padding: 0; }
     .content__item .category--full {
-      width: 100%;
+      width: 80%;
+      letter-spacing: 0;
       font-size: 0.8em;
-      margin: 0px 5px 10px 0; }
+      margin: 10px 0px 10px 15px; }
     .content__item .title {
-      width: 100%;
-      margin: 10px 5px 0 5px; }
+      width: 80%;
+      font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 10px 0px 0 15px; }
   .sidebar {
     padding: 1em;
     width: 100%;
@@ -1352,7 +1356,7 @@ Estilos d3
   .content__item {
     padding: 50px 0px 0px; }
   .content .close-button {
-    padding: 10px 20px; }
+    padding: 18px 10px; }
     .content .close-button::before {
       content: '';
       position: absolute;
