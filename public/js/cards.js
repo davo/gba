@@ -272,6 +272,12 @@
 
 
     function initEvents() {
+
+
+        // classie.add(sidebarEl, 'sidebar--open');
+
+        // $('filter__reset')
+        
         iso = new Isotope(gridItemsContainer, {
             getSortData: {
                 prioridad: '[data-prioridad]'
