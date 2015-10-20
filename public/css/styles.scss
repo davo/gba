@@ -1224,8 +1224,8 @@ button:focus {
     float: left;
   }
   a {
-    font-family: $fontset-medium;
-    font-size: 0.8em;
+    font-family: $fontset-regular;
+    font-size: 0.9em;
     color: $gris;
     position: relative;
     display: block;
@@ -1245,7 +1245,7 @@ button:focus {
       width: 300px;
     }
     &.activo {
-      font-size: .9em;
+      font-size: 1em;
       position: relative;
       overflow: visible;
       width: 400px;
@@ -1754,6 +1754,7 @@ Estilos d3
       .activo {
         display: block;
         width: 100%;
+        height: 80px;
       }
     }
   }

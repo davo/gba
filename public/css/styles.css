@@ -1083,8 +1083,8 @@ button:focus {
   .tabs-navigation li {
     float: left; }
   .tabs-navigation a {
-    font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.8em;
+    font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.9em;
     color: #333333;
     position: relative;
     display: block;
@@ -1104,7 +1104,7 @@ button:focus {
       overflow: visible;
       width: 300px; }
     .tabs-navigation a.activo {
-      font-size: .9em;
+      font-size: 1em;
       position: relative;
       overflow: visible;
       width: 400px; }
@@ -1498,7 +1498,8 @@ Estilos d3
     display: none; }
   .tabs-navigation .card .activo {
     display: block;
-    width: 100%; }
+    width: 100%;
+    height: 80px; }
   .menu-toggle {
     display: inline-block; }
   .sidebar .close-button {
