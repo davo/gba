@@ -1069,6 +1069,7 @@ button:focus {
     -webkit-transition: opacity 0.6s;
     transition: opacity 0.6s;
   }
+  
 }
 
 /* content elements */
@@ -1086,6 +1087,11 @@ button:focus {
 
 .title--full {
   font-size: 3.25em;
+}
+
+.content--full {
+  display: none;
+  visibility: hidden;
 }
 
 .meta--full {

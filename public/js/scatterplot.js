@@ -106,7 +106,16 @@ function addGraph() {
 
 
     /* Initialize tooltip */
-    tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d[0]; });
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+
+        var content = "Partido: <strong>" + d[0] +"</strong>";
+            content += "<br>"+ labelX +": <strong>" + d[1] +"</strong>";
+            content += "<br>"+ labelY +": <strong>" + d[2] +"</strong>";
+
+        return content;
+
+        // return  + '<br>'+labelX + '<br>'+labelY;
+    });
 
 
 

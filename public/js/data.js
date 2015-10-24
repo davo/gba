@@ -21,7 +21,7 @@ var reemplazar = {
     "salud_camas" : { "value" : "Camas de internación"},
     "salud_establecimientos_1000" : { "value" : "Establecimientos de salud"},
     "salud_establecimientos_10000" : { "value" : "Establecimientos de salud cada 10.000 habitantes"},
-    "salud_camas_1000" : { "value" : "Camas de internación en establecimientos públicos cada 1.000 habitantes"},
+    "salud_camas_1000" : { "value" : "Camas de internación x 1.000 habitantes"},
     "salud_establecimientos_KM" : { "value" : "Establecimientos de salud x KM²"},
     "salud_tasa_mortalidad_infantil" : { "value" : "Tasa de mortalidad infantil"},
     "infraestructura_red_de_agua" : { "value" : "Hogares sin acceso a la red de agua potable"},

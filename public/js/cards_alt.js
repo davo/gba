@@ -52,7 +52,7 @@
         cardContent = [],
         nav,
         list,
-        cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=710258766',
+        cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=1405131747',
         stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563',
         cardsToStories = [
             [0, 0],
@@ -302,7 +302,7 @@
             isResizeBound: true,
             itemSelector: '.grid__item',
             percentPosition: false,
-            //sortBy: 'prioridad',
+            // sortBy: 'prioridad',
             masonry: {
                 columnWidth: '.grid__sizer'
             },

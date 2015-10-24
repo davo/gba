@@ -961,6 +961,10 @@ button:focus {
 .title--full {
   font-size: 3.25em; }
 
+.content--full {
+  display: none;
+  visibility: hidden; }
+
 .meta--full {
   font-size: 1em;
   margin: 0 auto 2em;
