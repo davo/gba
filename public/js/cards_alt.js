@@ -52,7 +52,7 @@
         cardContent = [],
         nav,
         list,
-        cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=1405131747',
+        cards = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=385936479',
         stories = 'https://docs.google.com/spreadsheets/d/1I990DgoSP3UBLnkq5YFOlkZsGcx8s3wWh2shXWfTrnU/edit#gid=725026563',
         cardsToStories = [
             [0, 0],
@@ -197,21 +197,40 @@
             }
             var dataValue4 = 'data-filtro=\"' + cardsContentNav[cardContent[i]][7] + '\"';
 
+            if (cardsContentNav[cardContent[i]][13] > 0) {
+              var dataValue5 = 'data-tasa=' + cardsContentNav[cardContent[i]][13] + ' ';
+            } else {
+              var dataValue5 = 'data-tasa=\"\"';
+              // console.log("No imprimo tasa");
+            }
+
+            if (cardsContentNav[cardContent[i]][14] > 0) {
+              var dataValue6 = 'data-porcentaje=' + cardsContentNav[cardContent[i]][14] + ' ';
+            } else {
+              var dataValue6 = 'data-porcentaje=\"\"';
+              // console.log("No imprimo tasa");
+            }
+
+            // console.log(cardsContentNav[cardContent[i]][13])
+
+
             listItem = '<li class=\"card\">';
             listItem += '<a href=\"#\"';
             if (currentCard == cardsContentNav[cardContent[i]][0]) {
                 listItem += 'class=\"activo\"';
             }
-            listItem += dataValue1 + dataValue2 + dataValue3 + dataValue4 + '>' + cardsContentNav[cardContent[i]][9] + '</a></li>';
+            listItem += dataValue1 + dataValue2 + dataValue3 + dataValue4 + dataValue5 + dataValue6 + '>' + cardsContentNav[cardContent[i]][9] + '</a></li>';
             $(listItem).appendTo(list);
+
 
             window.columnaX = cardsContentNav[cardContent[i]][10];
             window.columnaY = cardsContentNav[cardContent[i]][11];
             window.filtro = cardsContentNav[cardContent[i]][7];
             window.radio = cardsContentNav[cardContent[i]][12];
+            window.tasa = cardsContentNav[cardContent[i]][13];
+            window.porcentaje = cardsContentNav[cardContent[i]][14];
 
-
-            //item.('click'
+            // console.log(window.tasa);
 
             $(list).find('a').bind("click", function(e) {
                 $(list).find('.activo').removeClass('activo');
@@ -220,6 +239,8 @@
                 columnaX = values.attributes["data-columnax"].value;
                 columnaY = values.attributes["data-columnaY"].value;
                 radio = values.attributes["data-radio"].value;
+                tasa = values.attributes["data-tasa"].value;
+                tasaAlt = values.attributes["data-porcentaje"].value;
                 // Check, if empty, breaks.
                 filtro = values.attributes["data-filtro"].value;
                 updateGraph();
@@ -252,6 +273,8 @@
         columnaY = $(".activo").data()["columnay"];
         radio = $(".activo").data()["radio"];
         filtro = $(".activo").data()["filtro"];
+        tasa = $(".activo").data()["tasa"];
+        porcentaje = $(".activo").data()["porcentaje"];
         updateGraph();
     }
 
@@ -442,6 +465,9 @@
 
     function init() {
         cargaDatosNav();
+
+        // console.table(cardsContentNav);
+
         // Instancio y ejecuto las full stories desde el 2do. spreadsheet gestionado por sheetrock, concateno con funciones . Luego se ejecuta isotope
         $('.scroll-wrap').sheetrock({
             url: stories,
@@ -456,7 +482,7 @@
         var archivo = sheetrock({
             url: cards,
             headers: 1,
-            query: "select A,B,D,E,F,G,H,I,K,M,O,P,Q",
+            query: "select A,B,D,E,F,G,H,I,K,M,O,P,Q,R,S",
             callback: cargarCardsEnArray
         });
     }
@@ -479,7 +505,9 @@
                     value.cells.contenido,
                     value.cells.indicador_1,
                     value.cells.indicador_2,
-                    value.cells.indicador_3
+                    value.cells.indicador_3,
+                    value.cells.indicador_4,
+                    value.cells.indicador_5
 
                 ];
                 if (index === 0) {

@@ -12,8 +12,15 @@ var columnaX = 1;
 var columnaY = 2;
 var radio = 0;
 var filtro = "";
+var tasa = "";
+var porcentaje = "";
 var height = "";
 var width = "";
+
+
+var miles = d3.format(",d");
+
+// console.log(tasa)
 
 // Abstract: Cambio el array de datos a dibujar en el gráfico
 // dependiendo los valores que estan en el select
@@ -26,8 +33,10 @@ function updateKeys() {
     columnaX = parseInt(window.columnaX);
     columnaY = parseInt(window.columnaY);
     radio = parseInt(window.radio);
+    tasa = parseInt(window.tasa);
+    porcentaje = parseInt(window.porcentaje);
 
-    //console.log(radio);
+    // console.log(tasa)
 
     //estas variables deben popularse al seleccionar una historia o tarjeta
     // columnaX = Math.floor((Math.random() * 32) + 1);
@@ -40,11 +49,19 @@ function updateKeys() {
 // dependiendo los valores que estan en el select
 // Param: @object = datos del spreadsheet  
 function cambioDataset(datos) {
-    var array_de_datos = [];
 
+    var array_de_datos = [];
 
     labelX = reemplazar[datos[0][columnaX]].value;
     labelY = reemplazar[datos[0][columnaY]].value;
+    if (tasa > 0) { 
+        labelTasa = reemplazar[datos[0][tasa]].value;
+    }
+    if (porcentaje > 0) { 
+        labelPorcentaje = reemplazar[datos[0][porcentaje]].value;
+    }
+    // console.log(reemplazar[datos[0][tasa]].value)
+
 
     for (var i = 1; i < datos.length; i++) {
         var nombrePartido = datos[i][0];
@@ -56,8 +73,22 @@ function cambioDataset(datos) {
             radioTMP = +radioDefault;
         }
         var dato3TMP = +datos[i][filtro];
-        // radioTMP = +radioDefault;
-        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP]);
+
+        if (tasa > 0) {
+            dato4TMP = +datos[i][tasa];
+        } else {
+            dato4TMP = 0;
+        }
+
+        if (porcentaje > 0) {
+            dato5TMP = +datos[i][porcentaje];
+        } else {
+            dato5TMP = 0;
+        }
+
+
+        array_de_datos.push([nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP, dato4TMP, dato5TMP]);
+        // console.log(nombrePartido, dato1TMP, dato2TMP, radioTMP, dato3TMP, dato4TMP, dato5TMP)
     }
 
 
@@ -68,6 +99,8 @@ function cambioDataset(datos) {
 // Param: @Array = datos  
 function addGraph() {
     var dataset = cambioDataset(datosTotales);
+
+    console.table(dataset);
 
     if (!mobileScreen) {
         var padding = 50;
@@ -104,13 +137,25 @@ function addGraph() {
         .orient("left")
         .ticks(mobileScreen ? 4 : 6, "s");
 
-
     /* Initialize tooltip */
     tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
 
+
+
         var content = "Partido: <strong>" + d[0] +"</strong>";
-            content += "<br>"+ labelX +": <strong>" + d[1] +"</strong>";
-            content += "<br>"+ labelY +": <strong>" + d[2] +"</strong>";
+
+            content += "<br>"+ labelX +": <strong>" + miles(d[1]) +"</strong>";
+            content += "<br>"+ labelY +": <strong>" + d[2] +"</strong><br>";
+            if (radio) {
+                content += "Presupuesto per capita: <strong>" + miles(Math.floor(d[3])) +"</strong><br>";
+            }
+            if (tasa) {
+                content += labelTasa +": <strong>" + d[5] +"</strong><br>";
+            }
+            if (porcentaje) {
+                content += labelPorcentaje +": <strong>" + d[6] +"</strong>";
+            }
+            
 
         return content;
 

@@ -10,7 +10,9 @@ var urlSpreadsheet = "https://docs.google.com/spreadsheets/d/1DmE7yv8JmUIpQQ1lhE
     mapaDatos,
     ejeActual = "",
     labelX = "",
-    labelY = "";
+    labelY = "",
+    labelTasa = "",
+    labelPorcentaje = "";
 
 var reemplazar = {
     "indicador_poblacion" : { "value" : "Población"},
