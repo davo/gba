@@ -981,7 +981,9 @@ button:focus {
   font-size: 1.3em;
   height: 100%;
   background-color: #333333;
-  padding: 20px 150px 0 0; }
+  padding: 20px 150px 0 0;
+  display: none;
+  visibility: hidden; }
 
 .meta--full {
   font-size: 1em;
