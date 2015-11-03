@@ -314,23 +314,32 @@ button:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 80%;
   text-align: center;
   .logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: block;
+    margin: 0 auto;
+    padding-bottom: 100px;
   }
   .icon-logo {
-    margin: 0 auto;
-    display: block;
+    
+    float: left;
+    // display: block;
     font-size: 4em;
+    padding-right: 15px;
   }
   h1 {
     font-family: $fontset-medium;
     margin: 0 auto;
     font-size: 1.5em;
-    line-height: 2.1em;
+    line-height: 3em;
     text-transform: uppercase;
     margin-bottom: 30px;
+    float: left;
   }
   h2 {
     font-family: $fontset-regular;
@@ -1088,10 +1097,22 @@ button:focus {
 .title--full {
   font-size: 3.25em;
 }
-
+.view-more {
+  display: inline-block;
+  color: white; 
+}
 .content--full {
-  display: none;
-  visibility: hidden;
+  position: absolute;
+  top: 140px;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  font-size: 1.3em;
+  height: 100%;
+  background-color: #333333;
+  padding: 20px 150px 0 0;
+  // display: none;
+  // visibility: hidden;
 }
 
 .meta--full {
@@ -1494,6 +1515,41 @@ Estilos d3
       position: relative;
       display: block;
       height: 50px;
+      width: 50px;
+      text-overflow: ellipsis;
+      padding: 10px 10px;
+      &:hover {
+        font-size: 0.8em;
+        position: relative;
+        overflow: visible;
+        width: 250px;
+      }
+      &.active {
+        font-size: 0.8em;
+        width: 200px;        
+      }
+    }
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .introduccion {
+    width: 70%;
+    
+    h2 {
+
+    }
+    h3 {
+      width: 90%;
+    }
+    
+  }
+    .tabs-navigation {
+    a {
+      font-size: 0.55em;
+      position: relative;
+      display: block;
+      height: 120px;
       width: 50px;
       text-overflow: ellipsis;
       padding: 10px 10px;

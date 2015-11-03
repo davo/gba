@@ -326,21 +326,28 @@ button:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 80%;
   text-align: center; }
   .introduccion .logo {
-    display: block; }
-  .introduccion .icon-logo {
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: block;
-    font-size: 4em; }
+    margin: 0 auto;
+    padding-bottom: 100px; }
+  .introduccion .icon-logo {
+    float: left;
+    font-size: 4em;
+    padding-right: 15px; }
   .introduccion h1 {
     font-family: "DIN Display Pro Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0 auto;
     font-size: 1.5em;
-    line-height: 2.1em;
+    line-height: 3em;
     text-transform: uppercase;
-    margin-bottom: 30px; }
+    margin-bottom: 30px;
+    float: left; }
   .introduccion h2 {
     font-family: "DIN Display Pro Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0 auto;
@@ -961,9 +968,20 @@ button:focus {
 .title--full {
   font-size: 3.25em; }
 
+.view-more {
+  display: inline-block;
+  color: white; }
+
 .content--full {
-  display: none;
-  visibility: hidden; }
+  position: absolute;
+  top: 140px;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  font-size: 1.3em;
+  height: 100%;
+  background-color: #333333;
+  padding: 20px 150px 0 0; }
 
 .meta--full {
   font-size: 1em;
@@ -1316,6 +1334,28 @@ Estilos d3
     position: relative;
     display: block;
     height: 50px;
+    width: 50px;
+    text-overflow: ellipsis;
+    padding: 10px 10px; }
+    .tabs-navigation a:hover {
+      font-size: 0.8em;
+      position: relative;
+      overflow: visible;
+      width: 250px; }
+    .tabs-navigation a.active {
+      font-size: 0.8em;
+      width: 200px; } }
+
+@media screen and (min-device-width: 768px) {
+  .introduccion {
+    width: 70%; }
+    .introduccion h3 {
+      width: 90%; }
+  .tabs-navigation a {
+    font-size: 0.55em;
+    position: relative;
+    display: block;
+    height: 120px;
     width: 50px;
     text-overflow: ellipsis;
     padding: 10px 10px; }

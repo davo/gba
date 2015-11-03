@@ -257,6 +257,7 @@
 
     // @Abstract: carga el contenido de la card animandolo lockeando el scroll del body
     function loadContent(item) {
+        // top-bar
         var dummy = document.createElement('div');
         dummy.className = 'placeholder';
         dummy.style.WebkitTransform = 'translate3d(' + (item.offsetLeft - 5) + 'px, ' + (item.offsetTop - 5) + 'px, 0px) scale3d(' + item.offsetWidth / gridItemsContainer.offsetWidth + ',' + item.offsetHeight / getViewport('y') + ',1)';

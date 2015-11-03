@@ -170,8 +170,11 @@
                 <script id="story-template" type="text/x-handlebars-template">
                     <article class="content__item">
                         <span class="category category--full {{cells.eje_key}}">{{cells.eje}} / {{cells.titulo}}</span>
-                        <h2 class="title title--full">{{cells.leer_mas}}</h2>
-                        <h2 class="content--full">{{cells.contenido}}</h2>
+                        <h2 class="title title--full">{{cells.leer_mas}}
+                            
+                        </h2>
+                        <span class="view-more">Leer más</span>
+                        <p class="content--full">{{cells.contenido}}</p>
 
                         <div class="meta meta--full">
                         </div>
@@ -192,7 +195,7 @@
 </div><!-- /container -->
 <!-- /view -->
     <script src="components/classie/classie.js"></script>
-    <script src="js/cards_alt.js"></script>
+    <script src="js/cards.js"></script>
     <script src="js/scatterplot.js"></script>
     <script>
     (function(i, s, o, g, r, a, m) {
